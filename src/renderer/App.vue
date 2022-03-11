@@ -1,18 +1,18 @@
 <template>
   <div id="app">
-    <hello></hello>
+    <plugin-management></plugin-management>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import Hello from './components/Hello.vue'
+import PluginManagement from './components/PluginManagement.vue'
 import { ipcRenderer } from './electron'
 
 export default defineComponent({
   name: 'app',
   components: {
-    Hello,
+    PluginManagement,
   },
   setup() {
     ipcRenderer.send('message', 'Hello from App.vue!');
