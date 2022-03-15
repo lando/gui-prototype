@@ -22,7 +22,14 @@ const config = defineConfig({
         alias: {
             '@': Path.join(__dirname, '..', 'src', 'renderer')
         }
-    }
+    },
+    css: {
+        preprocessorOptions: {
+            scss: {
+                additionalData: `@import "../src/renderer/public/styles/index.scss";`
+            }
+        }
+    },
 });
 
 module.exports = config;
