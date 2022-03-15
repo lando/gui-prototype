@@ -1,6 +1,6 @@
 <template>
-  <div id="app">
-    <sidebar-menu></sidebar-menu>
+  <sidebar-menu></sidebar-menu>
+  <div id="app-inner">
     <updates></updates>
   </div>
 </template>
@@ -22,3 +22,9 @@ export default defineComponent({
   },
 })
 </script>
+
+<style lang="scss">
+  #app-inner {
+    margin-left: 4rem;
+  }
+</style>
