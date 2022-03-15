@@ -1,5 +1,5 @@
 {
-  "name": "electron-vue-template",
+  "name": "@lando/gui-prototype",
   "version": "0.1.0",
   "description": "A minimal Electron + Vue application",
   "main": "build/main/main.js",
@@ -10,7 +10,7 @@
     "build:mac": "node scripts/build.js && electron-builder -c config/electron-builder.json --mac",
     "build:linux": "node scripts/build.js && electron-builder -c config/electron-builder.json --linux"
   },
-  "repository": "https://github.com/deluze/electron-vue-template",
+  "repository": "https://github.com/lando/gui-prototype",
   "author": {
     "name": "Deluze",
     "url": "https://github.com/Deluze"
