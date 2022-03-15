@@ -6,45 +6,38 @@
     @open="handleOpen"
     @close="handleClose"
   >
-    <el-sub-menu index="1">
-      <template #title>
-        <el-icon><location /></el-icon>
-        <span>Navigator One</span>
-      </template>
-      <el-menu-item-group>
-        <template #title><span>Group One</span></template>
-        <el-menu-item index="1-1">item one</el-menu-item>
-        <el-menu-item index="1-2">item two</el-menu-item>
-      </el-menu-item-group>
-      <el-menu-item-group title="Group Two">
-        <el-menu-item index="1-3">item three</el-menu-item>
-      </el-menu-item-group>
-      <el-sub-menu index="1-4">
-        <template #title><span>item four</span></template>
-        <el-menu-item index="1-4-1">item one</el-menu-item>
-      </el-sub-menu>
-    </el-sub-menu>
+    <el-menu-item index="1">
+      <el-icon><grid /></el-icon>
+      <template #title>Plugins</template>
+    </el-menu-item>
     <el-menu-item index="2">
-      <el-icon><icon-menu /></el-icon>
-      <template #title>Navigator Two</template>
+      <el-icon><lock /></el-icon>
+      <template #title>Secrets</template>
     </el-menu-item>
-    <el-menu-item index="3" disabled>
-      <el-icon><document /></el-icon>
-      <template #title>Navigator Three</template>
+    <el-menu-item index="3">
+      <el-icon><mostly-cloudy /></el-icon>
+      <template #title>Cloud Projects</template>
     </el-menu-item>
-    <el-menu-item index="4">
-      <el-icon><setting /></el-icon>
-      <template #title>Navigator Four</template>
-    </el-menu-item>
+    <div class="bottom-menu">
+      <el-menu-item index="4">
+        <el-icon><avatar /></el-icon>
+        <template #title>Account</template>
+      </el-menu-item>
+      <el-menu-item index="5">
+        <el-icon><setting /></el-icon>
+        <template #title>Config</template>
+      </el-menu-item>
+    </div>
   </el-menu>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
 import {
-  Location,
-  Document,
-  Menu as IconMenu,
+  Grid,
+  Lock,
+  MostlyCloudy,
+  Avatar,
   Setting,
 } from '@element-plus/icons-vue'
 
@@ -66,5 +59,14 @@ const handleClose = (key: string, keyPath: string[]) => {
 .el-menu {
   height: 100vh;
   float: left;
+  display: flex;
+  flex-direction: column;
+  .bottom-menu {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+  }
 }
 </style>
