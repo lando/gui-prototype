@@ -61,6 +61,8 @@ const handleClose = (key: string, keyPath: string[]) => {
   float: left;
   display: flex;
   flex-direction: column;
+  position: fixed;
+  font: "Lexend";
   .bottom-menu {
     flex-grow: 1;
     display: flex;
@@ -68,5 +70,9 @@ const handleClose = (key: string, keyPath: string[]) => {
     justify-content: flex-end;
     margin-bottom: 1rem;
   }
+}
+
+.el-popper {
+  font-family: "Lexend";
 }
 </style>
