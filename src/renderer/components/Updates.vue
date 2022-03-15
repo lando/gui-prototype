@@ -1,6 +1,6 @@
 <template>
   <div class="plugins">
-    <h1>Plugins</h1> 
+    <h1>Updates</h1> 
     <div class="plugins-section">
       <h2>Needs Update</h2>
       <div v-for="(plugin, index) in updatePlugins" :key="index" class="plugin needs-update">
@@ -9,14 +9,15 @@
         <a class="plugin-update button" href="">Update</a>
         <a class="plugin-relate-notes" :href="plugin.releaseNotes">Release Notes</a>
       </div>
+      <a class="button">Update All</a>
     </div>
     
     <div class="plugins-section">
-      <h2>Installed</h2>
+      <h2>Recently Updated</h2>
       <div v-for="(plugin, index) in installedPlugins" :key="index" class="plugin installed">
-        <div class="plugin-name">{{ plugin.name }}</div>
+        <a :href="plugin.readme" class="plugin-name">{{ plugin.name }}</a>
         <div class="plugin-version"> {{ plugin.installedVersion }}</div>
-        <a class="plugin-info" :href="plugin.readme">Info</a>
+        <a class="plugin-info" :href="plugin.readme">Docs</a>
       </div>
     </div>
 
@@ -51,6 +52,7 @@ export default {
     updatePlugins: {
       type: Array,
       default: () => ([
+        {name: "Lando CLI", installedVersion: "v3.6.3", newVersion: "v3.6.4", releaseNotes: "someURL"},
         {name: "PHP", installedVersion: "v0.5.2", newVersion: "v0.5.3", releaseNotes: "someURL"},
         {name: "Drupal", installedVersion: "v0.5.1", newVersion: "v0.5.4", releaseNotes: "someURL"},
         {name: "Laravel", installedVersion: "v0.5.0", newVersion: "v0.5.3", releaseNotes: "someURL"},
@@ -95,6 +97,21 @@ html {
     color: $text-dark;
   }
 }
+
+  .button {
+    padding: 0rem 2rem;
+    border-radius: 42px;
+    background: $pink;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    display: inline-block;
+    line-height: 2rem;
+    height: 2rem;
+    margin: 0rem;
+    border: none;
+    text-decoration: none;
+  }
 
 .plugins-config {
   display: flex;
@@ -183,20 +200,7 @@ input:checked + .slider:before {
     .plugin-name {
       width: 5rem;
     }
-    .button {
-        padding: 0rem 2rem;
-        border-radius: 42px;
-        background: $pink;
-        color: #fff;
-        font-size: 1rem;
-        font-weight: bold;
-        display: inline-block;
-        line-height: 2rem;
-        height: 2rem;
-        margin: 0rem;
-        border: none;
-        text-decoration: none;
-    }
+   
     .plugin-info {
       justify-content: flex-end;
       flex-basis: 18rem;
