@@ -1,6 +1,7 @@
 import { createWebHistory, createRouter } from "vue-router";
 import Config from './views/Config.vue';
 import Home from "./views/Home.vue";
+import Plugins from "./views/Plugins.vue";
 import Updates from './views/Updates.vue';
 
 const routes = [
@@ -8,6 +9,11 @@ const routes = [
     path: "/",
     name: "Home",
     component: Home,
+  },
+  {
+    path: "/plugins",
+    name: "Plugins",
+    component: Plugins,
   },
   {
     path: "/updates",
