@@ -1,24 +1,24 @@
 <template>
-  <sidebar-menu></sidebar-menu>
+  <sidebar-menu />
   <div id="app-inner">
-    <router-view></router-view>
+    <router-view />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import SidebarMenu from './components/SidebarMenu.vue'
-import { ipcRenderer } from './electron'
+import {defineComponent} from 'vue';
+import SidebarMenu from './components/SidebarMenu.vue';
+import {ipcRenderer} from './electron';
 
 export default defineComponent({
-  name: 'app',
+  name: 'App',
   components: {
-    SidebarMenu
+    SidebarMenu,
   },
   setup() {
     ipcRenderer.send('message', 'Hello from App.vue!');
   },
-})
+});
 </script>
 
 <style lang="scss">

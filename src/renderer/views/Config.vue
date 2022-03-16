@@ -6,16 +6,22 @@
       <div class="config-option">
         Automatic Patch Updates
         <label class="switch">
-          <input v-model="config.patchUpdates" type="checkbox">
-          <span  class="slider round"></span>
+          <input
+            v-model="config.patchUpdates"
+            type="checkbox"
+          >
+          <span class="slider round" />
         </label>
       </div>
 
       <div class="config-option">
         Update Notifications
         <label class="switch">
-          <input v-model="config.updateNotifications" type="checkbox">
-          <span class="slider round"></span>
+          <input
+            v-model="config.updateNotifications"
+            type="checkbox"
+          >
+          <span class="slider round" />
         </label>
       </div>
     </div>
@@ -31,11 +37,11 @@ export default {
       type: Object,
       default: () => ({
         patchUpdates: true,
-        updateNotifications: true
-      })
-    }
-  }
-}
+        updateNotifications: true,
+      }),
+    },
+  },
+};
 
 </script>
 
