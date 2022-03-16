@@ -1,4 +1,4 @@
-name: Ship Linux Installer
+name: Ship MacOS Installer
 
 on:
   pull_request:
