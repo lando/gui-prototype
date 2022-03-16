@@ -39,7 +39,7 @@ const config = defineConfig({
     css: {
         preprocessorOptions: {
             scss: {
-                additionalData: `@import "@/public/styles/index.scss";`
+                additionalData: `@import "./src/renderer/public/styles/index.scss";`
             }
         }
     },
