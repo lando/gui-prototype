@@ -1,50 +1,39 @@
 <template>
   <h1>Config</h1>
-  <div class="plugins-section">
-    <h2>Update Options</h2>
-    <div class="plugins-config">
+  <el-tabs v-model="activeName" class="config-tabs" @tab-click="handleClick">
+    <el-tab-pane label="Updates" name="first">
       <div class="config-option">
-        Automatic Patch Updates
-        <label class="switch">
-          <input v-model="config.patchUpdates" type="checkbox">
-          <span  class="slider round"></span>
-        </label>
+        <label>Automatic Patch Updates</label>
+        <el-switch v-model="config.patchUpdates" />
       </div>
 
       <div class="config-option">
-        Update Notifications
-        <label class="switch">
-          <input v-model="config.updateNotifications" type="checkbox">
-          <span class="slider round"></span>
-        </label>
+        <label>Update Notifications</label>
+        <el-switch v-model="config.updateNotifications" />
       </div>
-    </div>
-  </div>
+    </el-tab-pane>
+  </el-tabs>
 </template>
 
-<script>
-import {defineComponent} from 'vue';
+<script setup>
+import { ref } from 'vue';
 
-export default {
-  props: {
-    config: {
-      type: Object,
-      default: () => ({
-        patchUpdates: true,
-        updateNotifications: true
-      })
-    }
-  }
-}
+const config = ref({
+  patchUpdates: true,
+  updateNotifications: true
+});
 
+const activeName = ref('first');
 </script>
 
 <style lang="scss">
-  .plugins-config {
+  .config-option {
+    margin: 1rem;
     display: flex;
     align-items: center;
-    .config-option {
-      margin: 1rem;
+    gap: 1rem;
+    label {
+      width: 14rem;
     }
   }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="plugins">
     <h1>Updates</h1>
-    <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
+    <el-tabs v-model="activeName" class="plugin-tabs" @tab-click="handleClick">
       <el-tab-pane label="Updates Available" name="first">
         <div v-for="(plugin, index) in updatePlugins" :key="index" class="plugin needs-update">
           <el-link class="plugin-name">{{ plugin.name }}</el-link>
@@ -59,7 +59,6 @@ export default {
 <style lang="scss">
 
 .plugins {
-  padding: 2rem;
   font-family: 'Lexend';
   h2 {
     border-bottom: 4px solid rgba(238, 237, 239, 0.3);
