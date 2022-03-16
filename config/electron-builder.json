@@ -27,7 +27,7 @@
     "artifactName": "${name}-${arch}-v${version}.${ext}",
     "target": [
       {
-        "target": "default",
+        "target": "dmg",
         "arch": [
           "x64",
           "arm64"
