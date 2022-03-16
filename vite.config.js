@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite';
+import {defineConfig} from 'vite';
 import vuePlugin from '@vitejs/plugin-vue';
 import Path from 'path';
 
@@ -17,19 +17,19 @@ const config = defineConfig({
     emptyOutDir: true,
   },
   plugins: [
-    vuePlugin()
+    vuePlugin(),
   ],
   resolve: {
     alias: {
-      '@': Path.join(__dirname, 'src', 'renderer')
-    }
+      '@': Path.join(__dirname, 'src', 'renderer'),
+    },
   },
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `@import "@/public/styles/index.scss";`
-      }
-    }
+        additionalData: `@import "@/public/styles/index.scss";`,
+      },
+    },
   },
 });
 

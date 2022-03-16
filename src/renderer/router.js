@@ -1,28 +1,28 @@
-import { createWebHistory, createRouter } from "vue-router";
+import {createWebHistory, createRouter} from 'vue-router';
 import Config from './views/Config.vue';
-import Home from "./views/Home.vue";
-import Plugins from "./views/Plugins.vue";
+import Home from './views/Home.vue';
+import Plugins from './views/Plugins.vue';
 import Updates from './views/Updates.vue';
 
 const routes = [
   {
-    path: "/",
-    name: "Home",
+    path: '/',
+    name: 'Home',
     component: Home,
   },
   {
-    path: "/plugins",
-    name: "Plugins",
+    path: '/plugins',
+    name: 'Plugins',
     component: Plugins,
   },
   {
-    path: "/updates",
-    name: "Updates",
+    path: '/updates',
+    name: 'Updates',
     component: Updates,
   },
   {
-    path: "/config",
-    name: "Config",
+    path: '/config',
+    name: 'Config',
     component: Config,
   },
 ];
