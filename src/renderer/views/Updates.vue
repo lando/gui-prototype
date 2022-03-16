@@ -66,9 +66,8 @@
 </template>
 
 <script>
-import {defineComponent} from 'vue';
-import {Upload} from '@element-plus/icons-vue';
-
+// import {defineComponent} from 'vue';
+// import {Upload} from '@element-plus/icons-vue';
 
 export default {
   props: {

@@ -1,7 +1,9 @@
 <template>
-  <sidebar-menu />
-  <div id="app-inner">
-    <router-view />
+  <div>
+    <sidebar-menu />
+    <div id="app-inner">
+      <router-view />
+    </div>
   </div>
 </template>
 
