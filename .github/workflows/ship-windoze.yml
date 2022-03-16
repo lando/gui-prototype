@@ -1,0 +1,75 @@
+name: Ship Windoze Installer
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - 'preview/**'
+    tags:
+      - test*
+      - v*
+
+jobs:
+  ship-windows-installer:
+    runs-on: ${{ matrix.os }}
+    env:
+      TERM: xterm
+    strategy:
+      matrix:
+        os:
+          - windows-2019
+        node-version:
+          - '14'
+
+    steps:
+      # Install deps and cache
+      # Eventually it would be great if these steps could live in a separate YAML file
+      # that could be included in line to avoid code duplication
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Set other variables
+        id: vars
+        run: |
+          # Set generic source ref vars
+          echo "::set-output name=SOURCE_NAME::${GITHUB_REF#refs/*/}"
+          echo "::set-output name=SOURCE_BRANCH::${GITHUB_REF#refs/heads/}"
+          echo "::set-output name=SOURCE_TAG::${GITHUB_REF#refs/tags/}"
+          # Unset vars if it makes sense to do so
+          if [ "$GITHUB_REF" == "${GITHUB_REF#refs/tags/}" ]; then echo "::set-output name=SOURCE_TAG::"; fi
+          if [ "$GITHUB_REF" == "${GITHUB_REF#refs/heads/}" ]; then echo "::set-output name=SOURCE_BRANCH::"; fi
+      - name: Test user defined variables
+        run: |
+          echo "The SOURCE_NAME is ${{ steps.vars.outputs.SOURCE_NAME }}"
+          echo "The SOURCE_BRANCH is ${{ steps.vars.outputs.SOURCE_BRANCH }}"
+          echo "The SOURCE_TAG is ${{ steps.vars.outputs.SOURCE_TAG }}"
+      - name: Install node ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Get Yarn cache directory
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: Use Yarn cache
+        uses: actions/cache@v2
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ matrix.node-version }}-${{ hashFiles('**/yarn.lock') }}
+      - name: Install Yarn dependencies
+        run: yarn install --prefer-offline --frozen-lockfile
+
+      # Build out our release packages
+      - name: Build Linux Releases
+        run: yarn build:win
+      # Upload releases to GitHub Releases
+      - name: Upload releases to GitHub Releases
+        uses: softprops/action-gh-release@v1
+        #if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          draft: true
+          files: dist/@lando/*
