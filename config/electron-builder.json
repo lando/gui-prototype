@@ -12,7 +12,9 @@
     "shortcutName": "Electron App"
   },
   "win": {
-    "target": "nsis"
+    "target": [
+      "nsis"
+    ]
   },
   "linux": {
     "target": [
