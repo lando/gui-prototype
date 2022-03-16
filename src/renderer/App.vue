@@ -1,20 +1,18 @@
 <template>
   <sidebar-menu></sidebar-menu>
   <div id="app-inner">
-    <updates></updates>
+    <router-view></router-view>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import Updates from './components/Updates.vue'
 import SidebarMenu from './components/SidebarMenu.vue'
 import { ipcRenderer } from './electron'
 
 export default defineComponent({
   name: 'app',
   components: {
-    Updates,
     SidebarMenu
   },
   setup() {
@@ -25,6 +23,6 @@ export default defineComponent({
 
 <style lang="scss">
   #app-inner {
-    margin-left: 4rem;
+    margin-left: 12rem;
   }
 </style>

@@ -1,12 +1,10 @@
 <template>
   <el-menu
-    default-active="2"
+    default-active="/"
     class="el-menu-vertical-demo"
-    :collapse="true"
-    @open="handleOpen"
-    @close="handleClose"
+    router="true"
   >
-    <el-menu-item index="1">
+    <el-menu-item index="/">
       <el-icon><grid /></el-icon>
       <template #title>Plugins</template>
     </el-menu-item>
@@ -18,12 +16,16 @@
       <el-icon><mostly-cloudy /></el-icon>
       <template #title>Cloud Projects</template>
     </el-menu-item>
+    <el-menu-item index="/updates">
+      <el-icon><download /></el-icon>
+      <template #title>Updates</template>
+    </el-menu-item>
     <div class="bottom-menu">
       <el-menu-item index="4">
         <el-icon><avatar /></el-icon>
-        <template #title>Account</template>
+        <template #title>Login/Register</template>
       </el-menu-item>
-      <el-menu-item index="5">
+      <el-menu-item index="/config">
         <el-icon><setting /></el-icon>
         <template #title>Config</template>
       </el-menu-item>
@@ -31,23 +33,17 @@
   </el-menu>
 </template>
 
-<script lang="ts" setup>
+<script setup>
 import { ref } from 'vue'
 import {
   Grid,
   Lock,
   MostlyCloudy,
   Avatar,
+  Download,
   Setting,
 } from '@element-plus/icons-vue'
 
-const isCollapse = ref(true)
-const handleOpen = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath)
-}
-const handleClose = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath)
-}
 </script>
 
 <style lang="scss">
@@ -62,7 +58,7 @@ const handleClose = (key: string, keyPath: string[]) => {
   display: flex;
   flex-direction: column;
   position: fixed;
-  font: "Lexend";
+  font-family: "Lexend";
   .bottom-menu {
     flex-grow: 1;
     display: flex;
