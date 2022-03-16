@@ -17,6 +17,7 @@
   "linux": {
     "target": [
       "deb",
+      "pacman",
       "rpm"
     ]
   },
