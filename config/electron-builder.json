@@ -8,8 +8,12 @@
   "nsis": {
     "oneClick": false,
     "perMachine": false,
+    "differentialPackage": false,
     "allowToChangeInstallationDirectory": true,
     "shortcutName": "Electron App"
+  },
+  "dmg": {
+    "writeUpdateInfo": false
   },
   "win": {
     "target": [
