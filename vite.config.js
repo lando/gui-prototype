@@ -1,7 +1,7 @@
-import { defineConfig } from 'vite';
-import { vuePlugin } from '@vitejs/plugin-vue';
-import Path from 'path';
-//import ViteFonts from 'vite-plugin-fonts';
+const Path = require('path');
+const vuePlugin = require('@vitejs/plugin-vue')
+
+const { defineConfig } = require('vite');
 
 /**
  * https://vitejs.dev/config
