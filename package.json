@@ -6,10 +6,10 @@
   "scripts": {
     "dev": "node scripts/dev-server.js",
     "build": "yarn create-outdir && node scripts/build.js && electron-builder -c config/electron-builder.json",
-    "build:win": "yarn create-outdir && node scripts/build.js && electron-builder -c config/electron-builder.json --win",
     "build:mac": "yarn create-outdir && node scripts/build.js && electron-builder -c config/electron-builder.json --mac",
     "build:arm": "yarn create-outdir && node scripts/build.js && electron-builder -c config/electron-builder.json --arm64",
     "build:linux": "yarn create-outdir && node scripts/build.js && electron-builder -c config/electron-builder.json --linux",
+    "build:win": "mkdir dist/@lando && node scripts/build.js && electron-builder -c config/electron-builder.json --win",
     "create-outdir": "mkdir -p ./dist/@lando",
     "lint": "eslint . --ext .js,.ts,.vue"
   },
