@@ -67,6 +67,8 @@ jobs:
       # Build out our release packages
       - name: Build Linux Releases
         run: yarn build:linux
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # Upload releases to GitHub Releases
       - name: Upload releases to GitHub Releases
         uses: softprops/action-gh-release@v1

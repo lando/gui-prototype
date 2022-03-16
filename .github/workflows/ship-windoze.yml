@@ -66,6 +66,8 @@ jobs:
       - name: Build Windows Releases
         shell: bash
         run: yarn build:win
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # Upload releases to GitHub Releases
       - name: Upload releases to GitHub Releases
         uses: softprops/action-gh-release@v1
