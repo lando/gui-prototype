@@ -21,15 +21,15 @@ const config = defineConfig({
         vuePlugin(),
         ViteFonts({
             google: {
-              families: [
-                {
-                  name: 'Lexend',
-                  styles: 'wght@400;700;800',
-                  defer: false
-                }
-              ]
+                families: [
+                    {
+                        name: 'Lexend',
+                        styles: 'wght@400;700;800',
+                        defer: false
+                    }
+                ]
             },
-          })
+        })
     ],
     resolve: {
         alias: {
@@ -39,7 +39,7 @@ const config = defineConfig({
     css: {
         preprocessorOptions: {
             scss: {
-                additionalData: `@import "./src/renderer/public/styles/index.scss";`
+                additionalData: `@import "@/public/styles/index.scss";`
             }
         }
     },
