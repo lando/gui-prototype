@@ -1,7 +1,11 @@
 <template class="home-page">
   <div class="home-page">
     <el-row>
-      <img width="200" class="lando-logo" src="/images/lando-logo.svg" />
+      <img
+        width="200"
+        class="lando-logo"
+        src="/images/lando-logo.svg"
+      />
     </el-row>
     <el-row>
       <h1>Welcome Friend.</h1>
@@ -28,15 +32,15 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue';
-  
-  const status = ref({
-    docker: "success",
-    internet: "success",
-    landoProxy: "success",
-    landoCurrent: "success",
-    landoVersion: "3.6.2"
-  })
+import {ref} from 'vue';
+
+const status = ref({
+  docker: 'success',
+  internet: 'success',
+  landoProxy: 'success',
+  landoCurrent: 'success',
+  landoVersion: '3.6.2',
+});
 </script>
 
 <style lang="scss" scoped>

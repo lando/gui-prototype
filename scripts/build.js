@@ -8,7 +8,7 @@ function buildRenderer() {
 
   return Vite.build({
     base: './',
-    mode: 'production'
+    mode: 'production',
   });
 }
 
@@ -20,7 +20,7 @@ function buildMain() {
 FileSystem.rmSync(Path.join(__dirname, '..', 'build'), {
   recursive: true,
   force: true,
-})
+});
 
 console.log(Chalk.blueBright('Transpiling renderer & main...'));
 
