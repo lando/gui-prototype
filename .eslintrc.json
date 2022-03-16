@@ -1,0 +1,44 @@
+{
+  "env": {
+    "node": true,
+    "es6": true
+  },
+  "parser": "vue-eslint-parser",
+  "parserOptions": {
+    "parser": "@babel/eslint-parser",
+    "sourceType": "module",
+    "ecmaVersion": 9,
+    "allowImportExportEverywhere": true,
+    "requireConfigFile": false
+  },
+  "extends": [
+    "eslint:recommended",
+    "google",
+    "plugin:vue/recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "plugins": [
+    "vue", 
+    "@typescript-eslint"
+  ],
+  "rules": {
+    "linebreak-style": 0,
+    "arrow-parens": ["error",
+      "as-needed"
+    ],
+    "max-len": ["error", {
+      "code": 12000,
+      "ignoreComments": true
+    }],
+    "require-jsdoc": ["error", {
+      "require": {
+        "FunctionDeclaration": true,
+        "MethodDefinition": false,
+        "ClassDeclaration": false,
+        "ArrowFunctionExpression": false,
+        "FunctionExpression": false
+      }
+    }]
+  }
+}
