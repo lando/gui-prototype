@@ -5,10 +5,8 @@ const compileTs = require('./private/tsc');
 
 function buildRenderer() {
     const Vite = require('vite');
-    const viteConfig = require(Path.join(__dirname, '..', 'config', 'vite.js'));
 
     return Vite.build({
-        ...viteConfig,
         base: './',
         mode: 'production'
     });
