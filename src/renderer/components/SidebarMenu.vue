@@ -6,35 +6,47 @@
   >
     <el-menu-item index="/">
       <el-icon><grid /></el-icon>
-      <template #title>Plugins</template>
+      <template #title>
+        Plugins
+      </template>
     </el-menu-item>
     <el-menu-item index="2">
       <el-icon><lock /></el-icon>
-      <template #title>Secrets</template>
+      <template #title>
+        Secrets
+      </template>
     </el-menu-item>
     <el-menu-item index="3">
       <el-icon><mostly-cloudy /></el-icon>
-      <template #title>Cloud Projects</template>
+      <template #title>
+        Cloud Projects
+      </template>
     </el-menu-item>
     <el-menu-item index="/updates">
       <el-icon><download /></el-icon>
-      <template #title>Updates</template>
+      <template #title>
+        Updates
+      </template>
     </el-menu-item>
     <div class="bottom-menu">
       <el-menu-item index="4">
         <el-icon><avatar /></el-icon>
-        <template #title>Login/Register</template>
+        <template #title>
+          Login/Register
+        </template>
       </el-menu-item>
       <el-menu-item index="/config">
         <el-icon><setting /></el-icon>
-        <template #title>Config</template>
+        <template #title>
+          Config
+        </template>
       </el-menu-item>
     </div>
   </el-menu>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import {ref} from 'vue';
 import {
   Grid,
   Lock,
@@ -42,7 +54,7 @@ import {
   Avatar,
   Download,
   Setting,
-} from '@element-plus/icons-vue'
+} from '@element-plus/icons-vue';
 
 </script>
 

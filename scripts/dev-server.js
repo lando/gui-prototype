@@ -44,7 +44,7 @@ async function startElectron() {
 
   electronProcess.stderr.on('data', data => {
     console.log(Chalk.blueBright(`[electron] `) + Chalk.white(data.toString()));
-  })
+  });
 }
 
 function restartElectron() {
@@ -68,7 +68,7 @@ async function start() {
 
   Chokidar.watch(Path.join(__dirname, '..', 'src', 'main')).on('change', () => {
     restartElectron();
-  })
+  });
 }
 
 start();

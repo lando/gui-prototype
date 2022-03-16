@@ -8,7 +8,7 @@ function compile(directory) {
     });
 
     process.stdout.on('data', data => {
-        console.log(Chalk.yellowBright(`[tsc] `) + Chalk.white(data.toString()));
+      console.log(Chalk.yellowBright(`[tsc] `) + Chalk.white(data.toString()));
     });
 
     process.on('exit', exitCode => {
