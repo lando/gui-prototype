@@ -65,37 +65,24 @@
   </div>
 </template>
 
-<script>
-// import {defineComponent} from 'vue';
-// import {Upload} from '@element-plus/icons-vue';
+<script setup>
+import {ref} from 'vue';
 
-export default {
-  props: {
-    updatePlugins: {
-      type: Array,
-      default: () => ([
-        {name: 'Lando CLI', installedVersion: 'v3.6.3', newVersion: 'v3.6.4', releaseNotes: 'someURL'},
-        {name: 'PHP', installedVersion: 'v0.5.2', newVersion: 'v0.5.3', releaseNotes: 'someURL'},
-        {name: 'Drupal', installedVersion: 'v0.5.1', newVersion: 'v0.5.4', releaseNotes: 'someURL'},
-        {name: 'Laravel', installedVersion: 'v0.5.0', newVersion: 'v0.5.3', releaseNotes: 'someURL'},
-      ]),
-    },
-    installedPlugins: {
-      type: Array,
-      default: () => ([
-        {name: 'LAMP', installedVersion: 'v0.5.2', readme: 'someURL'},
-        {name: 'Postgres', installedVersion: 'v0.5.1', readme: 'someURL'},
-        {name: 'MariaDB', installedVersion: 'v0.5.0', readme: 'someURL'},
-        {name: 'WordPress', installedVersion: 'v0.5.0', readme: 'someURL'},
-      ]),
-    },
-    activeName: {
-      type: String,
-      default: 'first',
-    },
-  },
-};
+const updatePlugins = ref([
+  {name: 'Lando CLI', installedVersion: 'v3.6.3', newVersion: 'v3.6.4', releaseNotes: 'someURL'},
+  {name: 'PHP', installedVersion: 'v0.5.2', newVersion: 'v0.5.3', releaseNotes: 'someURL'},
+  {name: 'Drupal', installedVersion: 'v0.5.1', newVersion: 'v0.5.4', releaseNotes: 'someURL'},
+  {name: 'Laravel', installedVersion: 'v0.5.0', newVersion: 'v0.5.3', releaseNotes: 'someURL'},
+]);
 
+const installedPlugins = ref([
+  {name: 'LAMP', installedVersion: 'v0.5.2', readme: 'someURL'},
+  {name: 'Postgres', installedVersion: 'v0.5.1', readme: 'someURL'},
+  {name: 'MariaDB', installedVersion: 'v0.5.0', readme: 'someURL'},
+  {name: 'WordPress', installedVersion: 'v0.5.0', readme: 'someURL'},
+]);
+
+const activeName = ref('first');
 </script>
 
 <style lang="scss">
