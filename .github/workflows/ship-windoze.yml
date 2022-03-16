@@ -64,6 +64,7 @@ jobs:
 
       # Build out our release packages
       - name: Build Windows Releases
+        shell: bash
         run: yarn build:win
       # Upload releases to GitHub Releases
       - name: Upload releases to GitHub Releases
