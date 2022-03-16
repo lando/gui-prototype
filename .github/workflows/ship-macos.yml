@@ -1,4 +1,4 @@
-name: Ship Windoze Installer
+name: Ship Linux Installer
 
 on:
   pull_request:
@@ -11,14 +11,14 @@ on:
       - v*
 
 jobs:
-  ship-windows-installer:
+  ship-linux-installer:
     runs-on: ${{ matrix.os }}
     env:
       TERM: xterm
     strategy:
       matrix:
         os:
-          - windows-2019
+          - ubuntu-20.04
         node-version:
           - '14'
 
@@ -32,7 +32,6 @@ jobs:
           fetch-depth: 0
       - name: Set other variables
         id: vars
-        shell: bash
         run: |
           # Set generic source ref vars
           echo "::set-output name=SOURCE_NAME::${GITHUB_REF#refs/*/}"
@@ -62,9 +61,12 @@ jobs:
       - name: Install Yarn dependencies
         run: yarn install --prefer-offline --frozen-lockfile
 
+      # Need to add a couple extra deps.
+      - name: Install Additional Dependencies
+        run: sudo apt-get install -y libarchive-tools rpm
       # Build out our release packages
-      - name: Build Windows Releases
-        run: yarn build:win
+      - name: Build MacOS Releases
+        run: yarn build:mac
       # Upload releases to GitHub Releases
       - name: Upload releases to GitHub Releases
         uses: softprops/action-gh-release@v1
