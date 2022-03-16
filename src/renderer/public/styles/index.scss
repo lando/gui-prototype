@@ -1,9 +1,37 @@
+// Font loading
+@font-face {
+  font-family: 'Lexend';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lexend'),
+       url('@/public/fonts/lexend-regular.woff2') format('woff2'),
+       url('@/public/fonts/lexend-regular.woff') format('woff');
+}
+@font-face {
+  font-family: 'Lexend';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lexend'),
+       url('@/public/fonts/lexend-700.woff2') format('woff2'),
+       url('@/public/fonts/lexend-700.woff') format('woff');
+}
+@font-face {
+  font-family: 'Lexend';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: local('Lexend'),
+       url('@/public/fonts/lexend-800.woff2') format('woff2'),
+       url('@/public/fonts/lexend-800.woff') format('woff');
+}
+
 // More things
 $pink: #ed3f7a;
 $background-dark: #261D2D;
 $background-light: #fff;
 $text-dark: #eeedef;
-
 
 $space-grey: #49424E;
 html {
@@ -13,6 +41,7 @@ html {
     //color: $text-dark;
   }
   body {
+    font-family: 'Lexend', serif;
     margin: 0px;
   }
 }

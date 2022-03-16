@@ -12,63 +12,63 @@ let electronProcess = null;
 let rendererPort = 0;
 
 async function startRenderer() {
-    const server = await Vite.createServer({
-        mode: 'development',
-    });
+  const server = await Vite.createServer({
+    mode: 'development',
+  });
 
-    return server.listen();
+  return server.listen();
 }
 
 async function startElectron() {
-    if (electronProcess) { // single instance lock
-        return;
-    }
+  if (electronProcess) { // single instance lock
+    return;
+  }
 
-    try {
-        await compileTs(Path.join(__dirname, '..', 'src', 'main'));
-    } catch {
-        console.log(Chalk.redBright('Could not start Electron because of the above typescript error(s).'));
+  try {
+    await compileTs(Path.join(__dirname, '..', 'src', 'main'));
+  } catch {
+    console.log(Chalk.redBright('Could not start Electron because of the above typescript error(s).'));
 
-        return;
-    }
+    return;
+  }
 
-    const args = [
-        Path.join(__dirname, '..', 'build', 'main', 'main.js'),
-        rendererPort,
-    ];
-    electronProcess = ChildProcess.spawn(Electron, args);
+  const args = [
+    Path.join(__dirname, '..', 'build', 'main', 'main.js'),
+    rendererPort,
+  ];
+  electronProcess = ChildProcess.spawn(Electron, args);
 
-    electronProcess.stdout.on('data', data => {
-        console.log(Chalk.blueBright(`[elecron] `) + Chalk.white(data.toString()));
-    });
+  electronProcess.stdout.on('data', data => {
+    console.log(Chalk.blueBright(`[elecron] `) + Chalk.white(data.toString()));
+  });
 
-    electronProcess.stderr.on('data', data => {
-        console.log(Chalk.blueBright(`[electron] `) + Chalk.white(data.toString()));
-    })
+  electronProcess.stderr.on('data', data => {
+    console.log(Chalk.blueBright(`[electron] `) + Chalk.white(data.toString()));
+  })
 }
 
 function restartElectron() {
-    if (electronProcess) {
-        electronProcess.kill();
-        electronProcess = null;
-    }
+  if (electronProcess) {
+    electronProcess.kill();
+    electronProcess = null;
+  }
 
-    startElectron();
+  startElectron();
 }
 
 async function start() {
-    console.log(`${Chalk.blueBright('===============================')}`);
-    console.log(`${Chalk.blueBright('Starting Electron + Vite Dev Server...')}`);
-    console.log(`${Chalk.blueBright('===============================')}`);
+  console.log(`${Chalk.blueBright('===============================')}`);
+  console.log(`${Chalk.blueBright('Starting Electron + Vite Dev Server...')}`);
+  console.log(`${Chalk.blueBright('===============================')}`);
 
-    const devServer = await startRenderer();
-    rendererPort = devServer.config.server.port;
+  const devServer = await startRenderer();
+  rendererPort = devServer.config.server.port;
 
-    startElectron();
+  startElectron();
 
-    Chokidar.watch(Path.join(__dirname, '..', 'src', 'main')).on('change', () => {
-        restartElectron();
-    })
+  Chokidar.watch(Path.join(__dirname, '..', 'src', 'main')).on('change', () => {
+    restartElectron();
+  })
 }
 
 start();
