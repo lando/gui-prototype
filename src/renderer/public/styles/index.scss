@@ -27,14 +27,20 @@
        url('@/public/fonts/lexend-800.woff') format('woff');
 }
 
+
 // More things
 $pink: #ed3f7a;
 $background-dark: #261D2D;
 $background-light: #fff;
 $text-dark: #eeedef;
-
 $space-grey: #49424E;
+
 html {
+  .el-result {
+    --el-result-padding: 0rem;
+    --el-result-icon-font-size: 2rem;
+    --el-result-title-margin-top: 0rem;
+  }
   font-family: 'Lexend';
   //color: $text-dark;
   a {
