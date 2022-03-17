@@ -29,6 +29,7 @@ jobs:
 
     steps:
       - name: check
+        shell: bash
         run: echo "${{ env.TMP }} AND ${env.TMP}
       # Install deps and cache
       # Eventually it would be great if these steps could live in a separate YAML file
