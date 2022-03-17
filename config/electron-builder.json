@@ -5,6 +5,7 @@
   "directories": {
     "output": "dist"
   },
+  "afterSign": "scripts/notarize.js",
   "nsis": {
     "oneClick": false,
     "perMachine": false,
@@ -39,7 +40,9 @@
     ],
     "darkModeSupport": true,
     "hardenedRuntime": true,
-    "gatekeeperAssess": true
+    "gatekeeperAssess": true,
+    "entitlements": "config/entitlements.mac.plist",
+    "entitlementsInherit": "config/entitlements.mac.plist"
   },
   "files": [
     "build/main/**/*",

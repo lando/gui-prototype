@@ -16,7 +16,7 @@
   "repository": "https://github.com/lando/gui-prototype",
   "author": {
     "name": "Lando Team",
-    "email" : "sales@lando.dev",
+    "email": "sales@lando.dev",
     "url": "https://github.com/lando"
   },
   "devDependencies": {
@@ -30,6 +30,8 @@
     "chokidar": "^3.5.3",
     "electron": "^17.1.0",
     "electron-builder": "^22.14.13",
+    "electron-notarize": "^1.1.1",
+    "electron-osx-sign": "^0.6.0",
     "eslint": "^8.11.0",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-vue": "^8.5.0",
