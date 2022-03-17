@@ -19,6 +19,8 @@ jobs:
       APPLE_NOTARY_PASSWORD: ${{ secrets.APPLE_NOTARY_PASSWORD }}
       APPLE_NOTARY_USER: ${{ secrets.APPLE_NOTARY_USER }}
       APPLE_TEAM_ID: FY8GAUX282
+      CSC_KEY_PASSWORD: ${{ secrets.APPLE_CERT_PASSWORD }}
+      CSC_LINK: /tmp/certs.p12
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       TERM: xterm
     strategy:

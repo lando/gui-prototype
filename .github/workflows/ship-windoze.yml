@@ -27,11 +27,6 @@ jobs:
           - '14'
 
     steps:
-      - name: Set CSC_LINK Env Var
-        run: echo "CSC_LINK=$env:TMP\lando.windoze.p12" >> $env:GITHUB_ENV
-      - name: Check
-        shell: bash
-        run: echo ${{ env.CSC_LINK }}
       # Install deps and cache
       # Eventually it would be great if these steps could live in a separate YAML file
       # that could be included in line to avoid code duplication
@@ -75,6 +70,9 @@ jobs:
       - name: Import and verify certs
         shell: powershell
         run: scripts/import-win-certs.ps1
+      # We set the CSC_LINK here due to Windows weird tmp dir.
+      - name: Set CSC_LINK Env Var
+        run: echo "CSC_LINK=$env:TMP\lando.windoze.p12" >> $env:GITHUB_ENV
       # Build out our release packages
       - name: Build Windows Releases
         shell: bash
