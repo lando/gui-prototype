@@ -1,5 +1,5 @@
 {
-  "appId": "com.electron.app",
+  "appId": "lando.gui-prototype",
   "productName": "gui-prototype",
   "artifactName": "${name}-x64-v${version}.${ext}",
   "directories": {
