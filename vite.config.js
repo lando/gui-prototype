@@ -20,9 +20,11 @@ const config = defineConfig({
     vuePlugin(),
   ],
   resolve: {
-    alias: {
-      '@': Path.join(__dirname, 'src', 'renderer'),
-    },
+    alias:
+      {
+        '@': Path.join(__dirname, 'src', 'renderer'),
+        '~': Path.join(__dirname, 'node_modules'),
+      },
   },
   css: {
     preprocessorOptions: {

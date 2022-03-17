@@ -32,6 +32,8 @@ const config = ref({
   updateNotifications: true,
 });
 
+const activeName = ref('first');
+
 // const activeName = ref('first');
 </script>
 
