@@ -20,7 +20,12 @@
     "target": [
       "nsis"
     ],
-    "signAndEditExecutable": true
+    "signingHashAlgorithms": [
+      "sha256"
+    ],
+    "signAndEditExecutable": true,
+    "verifyUpdateCodeSignature": true,
+    "publisherName": "Lando"
   },
   "linux": {
     "target": [
