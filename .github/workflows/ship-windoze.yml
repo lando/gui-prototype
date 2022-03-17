@@ -14,7 +14,6 @@ jobs:
   ship-windows-installer:
     runs-on: ${{ matrix.os }}
     env:
-      #CSC_LINK: ${{ env.TMP }}\lando.windoze.p12
       CSC_KEY_PASSWORD: ${{ secrets.WINDOZE_CERT_PASSWORD }}
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       TERM: xterm
@@ -28,11 +27,11 @@ jobs:
           - '14'
 
     steps:
-      - name: Set Temp Dir
-        run: echo "TMPDIR=$env:TMP" >> $env:GITHUB_ENV
+      - name: Set CSC_LINK Env Var
+        run: echo "CSC_LINK=$env:TMP\lando.windoze.p12" >> $env:GITHUB_ENV
       - name: Check
         shell: bash
-        run: echo ${{ env.TMPDIR }}
+        run: echo ${{ env.CSC_LINK }}
       # Install deps and cache
       # Eventually it would be great if these steps could live in a separate YAML file
       # that could be included in line to avoid code duplication
