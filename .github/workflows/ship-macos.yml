@@ -75,8 +75,9 @@ jobs:
       # Build out our release packages
       - name: Build MacOS Releases
         run: yarn build:mac
-      - name: Verify DMG is Signed
+      - name: Sign and verify
         run: |
+          codesign -s "$APPLE_TEAM_ID" -v dist/@lando/gui-prototype-universal-v0.1.0.dmg
           codesign -v dist/@lando/gui-prototype-universal-v0.1.0.dmg
       # Upload releases to GitHub Releases
       - name: Upload releases to GitHub Releases
