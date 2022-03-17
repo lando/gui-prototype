@@ -29,7 +29,7 @@ jobs:
 
     steps:
       - name: check
-        run: echo ${{ env.TMP }} "AND" ${{ TMP }}
+        run: echo ${{ env.TMP }}
       # Install deps and cache
       # Eventually it would be great if these steps could live in a separate YAML file
       # that could be included in line to avoid code duplication
