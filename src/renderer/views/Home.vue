@@ -4,7 +4,7 @@
       <img
         width="200"
         class="lando-logo"
-        src="/images/lando-logo.svg"
+        src="/images/lando-icon.svg"
       />
     </el-row>
     <el-row>
