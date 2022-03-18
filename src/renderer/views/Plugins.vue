@@ -1,16 +1,25 @@
 <template>
-  <h1>Plugins</h1>
-  <template v-for="(row, index) in rows" :key="index">
-    <el-row>
-      <template v-for="plugin in row" :key="plugin.name">
-        <el-col :span="12" class="plugin" @click="goToPlugin(plugin)">
-          <img :src="plugin.image" />
-          <h3>{{plugin.name}}</h3>
-          <div class="plugin-last-updated">Last Updated: {{plugin.lastUpdated}}</div>
-        </el-col>
-      </template>
+  <div class="plugins">
+    <h1>Plugins</h1>
+    <el-row
+      v-for="(row, index) in rows"
+      :key="index"
+    >
+      <el-col
+        v-for="plugin in row"
+        :key="plugin.name"
+        :span="12"
+        class="plugin"
+        @click="goToPlugin(plugin)"
+      >
+        <img :src="plugin.image" />
+        <h3>{{ plugin.name }}</h3>
+        <div class="plugin-last-updated">
+          Last Updated: {{ plugin.lastUpdated }}
+        </div>
+      </el-col>
     </el-row>
-  </template>
+  </div>
 </template>
 
 <script setup>
@@ -37,9 +46,9 @@ const plugins = ref([
     newestVersion: '0.5.2',
     // Future
     githubStars: 304, // Ability to start the project from dashboard? Auth-ed with GitHub?
-    totalInstalls: 20303, // Get from NPM? 
+    totalInstalls: 20303, // Get from NPM?
     sponsors: [],
-    tags: ['Services', 'PHP']
+    tags: ['Services', 'PHP'],
   },
   {
     // MVP plugin.yml
@@ -59,9 +68,9 @@ const plugins = ref([
     newestVersion: '0.5.2',
     // Future
     githubStars: 304, // Ability to start the project from dashboard? Auth-ed with GitHub?
-    totalInstalls: 20303, // Get from NPM? 
+    totalInstalls: 20303, // Get from NPM?
     sponsors: [],
-    tags: ['Services', 'PHP']
+    tags: ['Services', 'PHP'],
   },
   {
     // MVP plugin.yml
@@ -81,21 +90,21 @@ const plugins = ref([
     newestVersion: '0.5.2',
     // Future
     githubStars: 304, // Ability to start the project from dashboard? Auth-ed with GitHub?
-    totalInstalls: 20303, // Get from NPM? 
+    totalInstalls: 20303, // Get from NPM?
     sponsors: [],
-    tags: ['Services', 'PHP']
+    tags: ['Services', 'PHP'],
   },
 ]);
 
 // Chunk plugins into rows.
 const rows = computed(() => {
   return _.chunk(plugins.value, 2);
-})
+});
 
-const goToPlugin = (plugin) => {
-  const url = "/plugins/" + _.camelCase(plugin.name);
+const goToPlugin = plugin => {
+  const url = '/plugins/' + _.camelCase(plugin.name);
   router.push(url);
-}
+};
 
 </script>
 
