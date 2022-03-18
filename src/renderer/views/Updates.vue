@@ -51,11 +51,11 @@
             {{ plugin.name }}
           </el-link>
           <div class="plugin-version">
-            {{ plugin.installedVersion }}
+            {{ plugin.installedVersion }} (Updated {{ plugin.lastUpdated }})
           </div>
           <el-link
             class="plugin-info"
-            :href="plugin.readme"
+            :href="plugin.repositoryUrl"
           >
             Docs
           </el-link>
@@ -67,22 +67,24 @@
 
 <script setup>
 import {ref} from 'vue';
+import {dayjs} from 'dayjs';
 
 const updatePlugins = ref([
-  {name: 'Lando CLI', installedVersion: 'v3.6.3', newVersion: 'v3.6.4', releaseNotes: 'someURL'},
-  {name: 'PHP', installedVersion: 'v0.5.2', newVersion: 'v0.5.3', releaseNotes: 'someURL'},
-  {name: 'Drupal', installedVersion: 'v0.5.1', newVersion: 'v0.5.4', releaseNotes: 'someURL'},
-  {name: 'Laravel', installedVersion: 'v0.5.0', newVersion: 'v0.5.3', releaseNotes: 'someURL'},
+  {name: 'Lando CLI', installedVersion: 'v3.6.3', newestVersion: 'v3.6.4', releaseNotesUrl: 'someURL'},
+  {name: 'PHP', installedVersion: 'v0.5.2', newestVersion: 'v0.5.3', releaseNotesUrl: 'someURL'},
+  {name: 'Drupal', installedVersion: 'v0.5.1', newestVersion: 'v0.5.4', releaseNotesUrl: 'someURL'},
+  {name: 'Laravel', installedVersion: 'v0.5.0', newestVersion: 'v0.5.3', releaseNotesUrl: 'someURL'},
 ]);
 
 const installedPlugins = ref([
-  {name: 'LAMP', installedVersion: 'v0.5.2', readme: 'someURL'},
-  {name: 'Postgres', installedVersion: 'v0.5.1', readme: 'someURL'},
-  {name: 'MariaDB', installedVersion: 'v0.5.0', readme: 'someURL'},
-  {name: 'WordPress', installedVersion: 'v0.5.0', readme: 'someURL'},
+  {name: 'LAMP', installedVersion: 'v0.5.2', repositoryUrl: 'someURL', lastUpdated: '2022-01-23T18:25:43.511Z'},
+  {name: 'Postgres', installedVersion: 'v0.5.1', repositoryUrl: 'someURL', lastUpdated: '2022-02-03T18:25:43.511Z'},
+  {name: 'MariaDB', installedVersion: 'v0.5.0', repositoryUrl: 'someURL', lastUpdated: '2022-03-09T18:25:43.511Z'},
+  {name: 'WordPress', installedVersion: 'v0.5.0', repositoryUrl: 'someURL', lastUpdated: '2022-03-09T18:25:43.511Z'},
 ]);
 
 const activeName = ref('first');
+
 </script>
 
 <style lang="scss">
