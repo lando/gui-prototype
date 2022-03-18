@@ -1,5 +1,5 @@
 <template>
-  <div class="plugins">
+  <div class="updates">
     <h1>Updates</h1>
     <el-tabs
       v-model="activeName"
@@ -87,9 +87,9 @@ const activeName = ref('first');
 
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 
-.plugins {
+.updates {
   font-family: 'Lexend';
   h2 {
     border-bottom: 4px solid rgba(238, 237, 239, 0.3);
