@@ -1,7 +1,7 @@
 {
   "appId": "lando.gui-prototype",
   "productName": "gui-prototype",
-  "artifactName": "${name}-x64-v${version}.${ext}",
+  "artifactName": "${name}-${arch}-v${version}.${ext}",
   "directories": {
     "output": "dist"
   },
@@ -35,7 +35,7 @@
     ]
   },
   "mac": {
-    "artifactName": "${name}-${arch}-v${version}.${ext}",
+    "artifactName": "${name}-v${version}.${ext}",
     "target": [
       {
         "target": "dmg",
