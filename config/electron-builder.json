@@ -29,9 +29,16 @@
   },
   "linux": {
     "target": [
-      "deb",
-      "pacman",
-      "rpm"
+      {
+        "target": [
+          "deb",
+          "pacman",
+          "rpm"
+        ],
+        "arch": [
+          "x64"
+        ]
+      }
     ]
   },
   "mac": {
@@ -46,7 +53,7 @@
     ],
     "darkModeSupport": true,
     "hardenedRuntime": true,
-    "gatekeeperAssess": false,
+    "gatekeeperAssess": true,
     "entitlements": "config/entitlements.mac.plist",
     "entitlementsInherit": "config/entitlements.mac.plist"
   },
