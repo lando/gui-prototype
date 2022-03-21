@@ -79,14 +79,14 @@ jobs:
         run: xattr -cr .
       # Build out our release packages
       - name: Build MacOS Releases
-        run: yarn build --mac ${{ matrix.flavor }}
+        run: yarn build --mac
       # Verify Stuffs
       - name: Verify Signing
         run: |
-          codesign --verify --verbose dist/mac/gui-prototype.app
+          codesign --verify --verbose dist/mac-universal/gui-prototype.app
       - name: Verify Notarization
         run: |
-          spctl -a -t exec -vvv dist/mac/gui-prototype.app
+          spctl -a -t exec -vvv dist/mac-universal/gui-prototype.app
 
       # Create and upload releases
       - name: Create releases
