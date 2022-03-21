@@ -4,16 +4,16 @@
       <img
         width="200"
         class="lando-logo"
-        src="/images/lando-logo.svg"
-      >
+        src="/images/lando-icon.svg"
+      />
     </el-row>
     <el-row>
       <h1>Welcome Friend.</h1>
     </el-row>
     <el-row>
       <el-result
-        :icon="status.docker"
-        title="Docker Status"
+        :icon="status.internet"
+        title="Internet Connection"
       />
     </el-row>
     <el-row>
@@ -24,8 +24,8 @@
     </el-row>
     <el-row>
       <el-result
-        :icon="status.docker"
-        title="Docker Status"
+        :icon="status.landoProxy"
+        title="Lando Proxy Running"
       />
     </el-row>
   </div>
@@ -54,6 +54,13 @@ const status = ref({
       text-align: center;
       margin-top: 2rem;
     }
+    .el-result {
+      font-size: 1rem;
+      flex-direction: row;
+      .el-result__icon {
+        height: 1rem;
+      }
 
+    }
   }
 </style>
