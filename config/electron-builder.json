@@ -3,7 +3,8 @@
   "productName": "gui-prototype",
   "artifactName": "${name}-${arch}-v${version}.${ext}",
   "directories": {
-    "output": "dist"
+    "output": "dist",
+    "buildResources": "src/renderer/public/images"
   },
   "afterSign": "electron-builder-notarize",
   "nsis": {
