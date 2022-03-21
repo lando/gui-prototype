@@ -83,10 +83,11 @@ jobs:
           ARCH: ${{ matrix.arch }}
         run: |
           # Create release directories
-          mkdir -p releases 
+          mkdir -p releases dev-builds
 
           # Snapshot release
-          cp -f "dist/@lando/gui-prototype-${{ matrix.arch }}-v0.1.0.${{ matrix.flavor }}" "releases/lando-gui-prototype-build-${{ github.sha }}-$ARCH.${{ matrix.flavor }}"
+          cp -f "dist/@lando/gui-prototype-${{ matrix.arch }}-v0.1.0.${{ matrix.flavor }}" "dev-builds/lando-gui-prototype-build-${{ github.sha }}-$ARCH.${{ matrix.flavor }}"
+
           # Branch releases
           if [ -z "$SOURCE_TAG" ]; then cp -f "dist/@lando/gui-prototype-${{ matrix.arch }}-v0.1.0.${{ matrix.flavor }}" "releases/lando-gui-prototype-$ARCH-$SOURCE_BRANCH-latest.${{ matrix.flavor }}"; fi
           # Latest dev release
@@ -95,9 +96,24 @@ jobs:
           if [ ! -z "$SOURCE_TAG" ]; then cp -f "dist/@lando/gui-prototype-${{ matrix.arch }}-v0.1.0.${{ matrix.flavor }}" "releases/lando-gui-prototype-$ARCH-$SOURCE_TAG.${{ matrix.flavor }}"; fi
           # Latest stable release
           if [ ! -z "$SOURCE_TAG" ]; then cp -f "dist/@lando/gui-prototype-${{ matrix.arch }}-v0.1.0.${{ matrix.flavor }}" "releases/lando-gui-prototype-$ARCH-stable.${{ matrix.flavor }}"; fi
+          
           # Print what we end up with
           ls -lsa releases
+          ls -lsa dev-builds
 
+      # Upload releases to S3
+      - name: Configure S3 Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.S3_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.S3_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+      - name: Upload releases to S3
+        run: |
+          aws s3 sync releases s3://files.lando.dev/installer --acl public-read
+          # Below is for backwards compatibility
+          aws s3 sync releases s3://files.lando.dev --acl public-read
+          
       # Upload releases to GitHub Releases
       - name: Upload releases to GitHub Releases
         uses: softprops/action-gh-release@v1
