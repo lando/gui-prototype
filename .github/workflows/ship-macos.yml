@@ -72,6 +72,8 @@ jobs:
       # Import Mac signing certs.
       - name: Import and verify certs
         run: chmod +x scripts/import-macos-certs.sh && scripts/import-macos-certs.sh
+      - name: clean up command
+        run: xattr -cr .
       # Build out our release packages
       - name: Build MacOS Releases
         run: yarn build:mac
