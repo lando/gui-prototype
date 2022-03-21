@@ -42,4 +42,4 @@ ipcMain.on('message', (event, message) => {
 
 ipcMain.on('open-external-browser', (event, url) => {
   shell.openExternal(url);
-})
+});
