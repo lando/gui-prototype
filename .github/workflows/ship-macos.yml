@@ -72,12 +72,13 @@ jobs:
       # Import Mac signing certs.
       - name: Import and verify certs
         run: chmod +x scripts/import-macos-certs.sh && scripts/import-macos-certs.sh
-      - name: clean up command
+      # Prevents signing error @see https://github.com/electron-userland/electron-builder/issues/2644#issuecomment-406653469
+      - name: Clean Up Command
         run: xattr -cr .
       # Build out our release packages
       - name: Build MacOS Releases
         run: yarn build:mac
-      - name: Sign and verify
+      - name: Verify Signing
         run: |
           codesign -v dist/@lando/gui-prototype-v0.1.0.dmg
       # Upload releases to GitHub Releases
