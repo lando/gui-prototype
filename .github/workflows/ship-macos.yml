@@ -69,11 +69,6 @@ jobs:
       - name: Install Yarn dependencies
         run: yarn install --prefer-offline --frozen-lockfile
 
-      # Update to latest XCode
-      - name: Update XCode
-        uses: maxim-lobanov/setup-xcode@v1
-        with:
-          xcode-version: latest-stable
       # Import Mac signing certs.
       - name: Import and verify certs
         run: chmod +x scripts/import-macos-certs.sh && scripts/import-macos-certs.sh
@@ -85,7 +80,7 @@ jobs:
         run: yarn build:mac
       - name: Verify Signing
         run: |
-          codesign -v dist/@lando/gui-prototype-v0.1.0.dmg
+          codesign -v dist/@lando/gui-prototype-0.1.0.dmg
       # Upload releases to GitHub Releases
       - name: Upload releases to GitHub Releases
         uses: softprops/action-gh-release@v1
