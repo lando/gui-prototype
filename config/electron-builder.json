@@ -34,6 +34,7 @@
     "publisherName": "Lando"
   },
   "linux": {
+    "category": "Development",
     "target": [
       {
         "target": "deb",
@@ -57,6 +58,7 @@
   },
   "mac": {
     "artifactName": "${name}-v${version}.${ext}",
+    "category": "public.app-category.developer-tools",
     "target": [
       {
         "target": "dmg",

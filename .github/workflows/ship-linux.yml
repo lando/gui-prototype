@@ -67,7 +67,7 @@ jobs:
         run: sudo apt-get install -y libarchive-tools rpm
       # Build out our release packages
       - name: Build Linux Releases
-        run: yarn build:linux
+        run: yarn build --linux
       # Upload releases to GitHub Releases
       - name: Upload releases to GitHub Releases
         uses: softprops/action-gh-release@v1

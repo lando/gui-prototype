@@ -77,7 +77,7 @@ jobs:
         run: xattr -cr .
       # Build out our release packages
       - name: Build MacOS Releases
-        run: yarn build:mac
+        run: yarn build --mac
       # Verify Stuffs
       - name: Verify Signing
         run: |
