@@ -86,7 +86,7 @@ jobs:
           mkdir -p releases 
 
           # Snapshot release
-          cp -f "dist/@lando/gui-prototype-${{ matrix.arch }}-v0.1.0.${{ matrix.flavor }}" "dev-builds/lando-gui-prototype-build-${{ github.sha }}-$ARCH.${{ matrix.flavor }}"
+          cp -f "dist/@lando/gui-prototype-${{ matrix.arch }}-v0.1.0.${{ matrix.flavor }}" "releases/lando-gui-prototype-build-${{ github.sha }}-$ARCH.${{ matrix.flavor }}"
           # Branch releases
           if [ -z "$SOURCE_TAG" ]; then cp -f "dist/@lando/gui-prototype-${{ matrix.arch }}-v0.1.0.${{ matrix.flavor }}" "releases/lando-gui-prototype-$ARCH-$SOURCE_BRANCH-latest.${{ matrix.flavor }}"; fi
           # Latest dev release
