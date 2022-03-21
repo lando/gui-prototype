@@ -35,6 +35,7 @@
   },
   "linux": {
     "category": "Development",
+    "artifactName": "${name}-x64-v${version}.${ext}",
     "target": [
       {
         "target": "deb",
