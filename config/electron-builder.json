@@ -4,7 +4,7 @@
   "artifactName": "${name}-${arch}-v${version}.${ext}",
   "directories": {
     "output": "dist",
-    "buildResources": "src/renderer/public/images"
+    "buildResources": "src/build-assets"
   },
   "afterSign": "electron-builder-notarize",
   "nsis": {
