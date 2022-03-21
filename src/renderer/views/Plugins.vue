@@ -12,7 +12,7 @@
         class="plugin"
         @click="goToPlugin(plugin)"
       >
-        <img :src="plugin.image" />
+        <img :src="plugin.image">
         <h3>{{ plugin.name }}</h3>
         <div class="plugin-last-updated">
           Last Updated: {{ plugin.lastUpdated }}

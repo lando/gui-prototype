@@ -5,7 +5,7 @@
   "directories": {
     "output": "dist"
   },
-  "afterSign": "scripts/notarize.js",
+  "afterSign": "electron-builder-notarize",
   "nsis": {
     "oneClick": false,
     "perMachine": false,
@@ -46,7 +46,7 @@
     ],
     "darkModeSupport": true,
     "hardenedRuntime": true,
-    "gatekeeperAssess": true,
+    "gatekeeperAssess": false,
     "entitlements": "config/entitlements.mac.plist",
     "entitlementsInherit": "config/entitlements.mac.plist"
   },
