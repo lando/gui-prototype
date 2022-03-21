@@ -18,7 +18,12 @@
   },
   "win": {
     "target": [
-      "nsis"
+      {
+        "target": "nsis",
+        "arch": [
+          "x64"
+        ]
+      }
     ],
     "signingHashAlgorithms": [
       "sha256"
@@ -30,11 +35,19 @@
   "linux": {
     "target": [
       {
-        "target": [
-          "deb",
-          "pacman",
-          "rpm"
-        ],
+        "target": "deb",
+        "arch": [
+          "x64"
+        ]
+      },
+      {
+        "target": "pacman",
+        "arch": [
+          "x64"
+        ]
+      },
+      {
+        "target": "rpm",
         "arch": [
           "x64"
         ]
