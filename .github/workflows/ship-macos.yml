@@ -11,7 +11,7 @@ on:
       - v*
 
 jobs:
-  ship-linux-installer:
+  ship-macos-installer:
     runs-on: ${{ matrix.os }}
     env:
       APPLE_CERT_DATA: ${{ secrets.APPLE_CERT_DATA }}
@@ -80,7 +80,7 @@ jobs:
         run: yarn build:mac
       - name: Verify Signing
         run: |
-          codesign --verify dist/@lando/gui-prototype-v0.1.0.dmg -vvv
+          codesign --verify dist/mac-universal/gui-prototype.app
       # Upload releases to GitHub Releases
       # - name: Upload releases to GitHub Releases
       #   uses: softprops/action-gh-release@v1
