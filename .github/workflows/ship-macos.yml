@@ -78,16 +78,15 @@ jobs:
       # Build out our release packages
       - name: Build MacOS Releases
         run: yarn build:mac
+      # Verify Stuffs
       - name: Verify Signing
         run: |
           codesign --verify --verbose dist/mac-universal/gui-prototype.app
-      - name: Verify Notarization
-        run: |
           spctl -a -t exec -vvv dist/mac-universal/gui-prototype.app
       # Upload releases to GitHub Releases
-      # - name: Upload releases to GitHub Releases
-      #   uses: softprops/action-gh-release@v1
-      #   #if: startsWith(github.ref, 'refs/tags/')
-      #   with:
-      #     draft: true
-      #     files: dist/@lando/*
+      - name: Upload releases to GitHub Releases
+        uses: softprops/action-gh-release@v1
+        #if: startsWith(github.ref, 'refs/tags/')
+        with:
+          draft: true
+          files: dist/@lando/*
