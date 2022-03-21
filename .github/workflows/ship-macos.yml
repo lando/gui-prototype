@@ -78,15 +78,9 @@ jobs:
       # Build out our release packages
       - name: Build MacOS Releases
         run: yarn build:mac
-      - name: check dist mac-universal
+      - name: Verify Signing
         run: |
-          ls -lsa dist/mac-universal
-      - name: check dist @lando
-        run: |
-          ls -lsa dist/@lando
-      # - name: Verify Signing
-      #   run: |
-      #     codesign -v dist/@lando/gui-prototype-v0.1.0.dmg
+          codesign --verify dist/@lando/gui-prototype-v0.1.0.dmg -vvv
       # Upload releases to GitHub Releases
       # - name: Upload releases to GitHub Releases
       #   uses: softprops/action-gh-release@v1
