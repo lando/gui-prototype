@@ -80,7 +80,10 @@ jobs:
         run: yarn build:mac
       - name: Verify Signing
         run: |
-          codesign --verify dist/mac-universal/gui-prototype.app
+          codesign --verify --verbose dist/mac-universal/gui-prototype.app
+      - name: Verify Notarization
+        run: |
+          spctl -a -t exec -vvv dist/mac-universal/gui-prototype.app
       # Upload releases to GitHub Releases
       # - name: Upload releases to GitHub Releases
       #   uses: softprops/action-gh-release@v1
