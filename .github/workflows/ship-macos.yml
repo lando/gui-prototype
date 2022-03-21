@@ -78,9 +78,9 @@ jobs:
       # Build out our release packages
       - name: Build MacOS Releases
         run: yarn build:mac
-      - name: check dist dir
+      - name: check dist mac-universal
         run: |
-          ls -lsa dist
+          ls -lsa dist/mac-universal
       - name: check dist @lando
         run: |
           ls -lsa dist/@lando
