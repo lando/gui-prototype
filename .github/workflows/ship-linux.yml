@@ -26,6 +26,8 @@ jobs:
           - deb
           - pacman
           - rpm
+        arch:
+          - x64
 
     steps:
       # Install deps and cache
@@ -72,10 +74,34 @@ jobs:
       # Build out our release package
       - name: Build Linux Release
         run: yarn build --linux ${{ matrix.flavor }}
+
+      # Create and upload releases
+      - name: Create releases
+        env:
+          SOURCE_BRANCH: ${{ steps.vars.outputs.SOURCE_BRANCH }}
+          SOURCE_TAG: ${{ steps.vars.outputs.SOURCE_TAG }}
+          ARCH: ${{ matrix.arch }}
+        run: |
+          # Create release directories
+          mkdir -p releases 
+
+          # Snapshot release
+          cp -f "dist/@lando/gui-prototype-${{ matrix.arch }}-v0.1.0.${{ matrix.flavor }}" "dev-builds/lando-gui-prototype-build-${{ github.sha }}-$ARCH.${{ matrix.flavor }}"
+          # Branch releases
+          if [ -z "$SOURCE_TAG" ]; then cp -f "dist/@lando/gui-prototype-${{ matrix.arch }}-v0.1.0.${{ matrix.flavor }}" "releases/lando-gui-prototype-$ARCH-$SOURCE_BRANCH-latest.${{ matrix.flavor }}"; fi
+          # Latest dev release
+          if [[ "$SOURCE_BRANCH" == "main" ]]; then cp -f "dist/@lando/gui-prototype-${{ matrix.arch }}-v0.1.0.${{ matrix.flavor }}" "releases/lando-gui-prototype-$ARCH-latest.${{ matrix.flavor }}"; fi
+          # Tag releases
+          if [ ! -z "$SOURCE_TAG" ]; then cp -f "dist/@lando/gui-prototype-${{ matrix.arch }}-v0.1.0.${{ matrix.flavor }}" "releases/lando-gui-prototype-$ARCH-$SOURCE_TAG.${{ matrix.flavor }}"; fi
+          # Latest stable release
+          if [ ! -z "$SOURCE_TAG" ]; then cp -f "dist/@lando/gui-prototype-${{ matrix.arch }}-v0.1.0.${{ matrix.flavor }}" "releases/lando-gui-prototype-$ARCH-stable.${{ matrix.flavor }}"; fi
+          # Print what we end up with
+          ls -lsa releases
+
       # Upload releases to GitHub Releases
       - name: Upload releases to GitHub Releases
         uses: softprops/action-gh-release@v1
         #if: startsWith(github.ref, 'refs/tags/')
         with:
           draft: true
-          files: dist/@lando/*
+          files: dist/@lando/gui-prototype-${{ matrix.arch }}-v0.1.0.${{ matrix.flavor }}

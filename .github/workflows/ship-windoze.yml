@@ -25,6 +25,10 @@ jobs:
           - windows-2019
         node-version:
           - '14'
+        flavor:
+          - exe
+        arch:
+          - x64
 
     steps:
       # Install deps and cache
@@ -76,7 +80,9 @@ jobs:
       # Build out our release packages
       - name: Build Windows Releases
         shell: bash
-        run: yarn build:win
+        run: yarn build:win ${{ matrix.flavor }}
+
+
       # Upload releases to GitHub Releases
       - name: Upload releases to GitHub Releases
         uses: softprops/action-gh-release@v1
