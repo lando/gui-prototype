@@ -1,4 +1,4 @@
-const {app, BrowserWindow, ipcMain} = require('electron');
+const {app, BrowserWindow, ipcMain, shell} = require('electron');
 const Path = require('path');
 
 function createWindow() {
@@ -39,3 +39,7 @@ app.on('window-all-closed', function() {
 ipcMain.on('message', (event, message) => {
   console.log(message);
 });
+
+ipcMain.on('open-external-browser', (event, url) => {
+  shell.openExternal(url);
+})
