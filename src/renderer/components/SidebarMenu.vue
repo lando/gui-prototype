@@ -8,7 +8,7 @@
       <img
         class="lando-logo"
         src="/images/lando-logo.svg"
-      />
+      >
     </el-menu-item>
     <el-menu-item index="/plugins">
       <el-icon><grid /></el-icon>
