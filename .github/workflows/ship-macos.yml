@@ -99,16 +99,16 @@ jobs:
           mkdir -p releases dev-builds
 
           # Snapshot release
-          cp -f "dist/@lando/gui-prototype-v0.1.0.${{ matrix.flavor }}" "dev-builds/lando-gui-prototype-build-${{ github.sha }}-$ARCH.${{ matrix.flavor }}"
+          cp -f "dist/@lando/gui-prototype-$SOURCE_TAG.${{ matrix.flavor }}" "dev-builds/lando-gui-prototype-build-${{ github.sha }}-$ARCH.${{ matrix.flavor }}"
 
           # Branch releases
-          if [ -z "$SOURCE_TAG" ]; then cp -f "dist/@lando/gui-prototype-v0.1.0.${{ matrix.flavor }}" "releases/lando-gui-prototype-$ARCH-$SOURCE_BRANCH-latest.${{ matrix.flavor }}"; fi
+          if [ -z "$SOURCE_TAG" ]; then cp -f "dist/@lando/gui-prototype-$SOURCE_TAG.${{ matrix.flavor }}" "releases/lando-gui-prototype-$ARCH-$SOURCE_BRANCH-latest.${{ matrix.flavor }}"; fi
           # Latest dev release
-          if [[ "$SOURCE_BRANCH" == "main" ]]; then cp -f "dist/@lando/gui-prototype-v0.1.0.${{ matrix.flavor }}" "releases/lando-gui-prototype-$ARCH-latest.${{ matrix.flavor }}"; fi
+          if [[ "$SOURCE_BRANCH" == "main" ]]; then cp -f "dist/@lando/gui-prototype-$SOURCE_TAG.${{ matrix.flavor }}" "releases/lando-gui-prototype-$ARCH-latest.${{ matrix.flavor }}"; fi
           # Tag releases
-          if [ ! -z "$SOURCE_TAG" ]; then cp -f "dist/@lando/gui-prototype-v0.1.0.${{ matrix.flavor }}" "releases/lando-gui-prototype-$ARCH-$SOURCE_TAG.${{ matrix.flavor }}"; fi
+          if [ ! -z "$SOURCE_TAG" ]; then cp -f "dist/@lando/gui-prototype-$SOURCE_TAG.${{ matrix.flavor }}" "releases/lando-gui-prototype-$ARCH-$SOURCE_TAG.${{ matrix.flavor }}"; fi
           # Latest stable release
-          if [ ! -z "$SOURCE_TAG" ]; then cp -f "dist/@lando/gui-prototype-v0.1.0.${{ matrix.flavor }}" "releases/lando-gui-prototype-$ARCH-stable.${{ matrix.flavor }}"; fi
+          if [ ! -z "$SOURCE_TAG" ]; then cp -f "dist/@lando/gui-prototype-$SOURCE_TAG.${{ matrix.flavor }}" "releases/lando-gui-prototype-$ARCH-stable.${{ matrix.flavor }}"; fi
           
           # Print what we end up with
           ls -lsa releases
@@ -133,4 +133,4 @@ jobs:
         #if: startsWith(github.ref, 'refs/tags/')
         with:
           draft: true
-          files: dist/@lando/gui-prototype-v0.1.0.${{ matrix.flavor }}
+          files: dist/@lando/gui-prototype-$SOURCE_TAG.${{ matrix.flavor }}
