@@ -2,7 +2,6 @@
   "appId": "lando.gui-prototype",
   "productName": "gui-prototype",
   "artifactName": "${name}-${arch}-v${version}.${ext}",
-  "publish": "",
   "directories": {
     "output": "dist",
     "buildResources": "src/build-assets"
