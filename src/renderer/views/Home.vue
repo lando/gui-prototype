@@ -5,7 +5,7 @@
         width="200"
         class="lando-logo"
         src="/images/lando-icon.svg"
-      />
+      >
     </el-row>
     <el-row>
       <h1>Welcome Friend.</h1>

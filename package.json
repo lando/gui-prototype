@@ -1,20 +1,20 @@
 {
   "name": "@lando/gui-prototype",
-  "version": "0.1.0",
-  "description": "A minimal Electron + Vue application",
+  "version": "0.0.2",
+  "description": "Lando GUI Prototype",
   "main": "build/main/main.js",
   "scripts": {
     "dev": "node scripts/dev-server.js",
-    "build": "node scripts/build.js && electron-builder -c config/electron-builder.json",
-    "build:win": "node scripts/build.js && electron-builder -c config/electron-builder.json --win",
-    "build:mac": "node scripts/build.js && electron-builder -c config/electron-builder.json --mac",
-    "build:linux": "node scripts/build.js && electron-builder -c config/electron-builder.json --linux",
-    "lint": "eslint . --ext .js,.ts,.vue"
+    "build": "mkdir -p ./dist/@lando && node scripts/build.js && electron-builder -c config/electron-builder.json",
+    "build:win": "mkdir dist\\@lando && node scripts/build.js && electron-builder -c config/electron-builder.json --win",
+    "lint": "eslint . --ext .js,.ts,.vue",
+    "release": "bump --prompt --tag --all --push"
   },
   "repository": "https://github.com/lando/gui-prototype",
   "author": {
-    "name": "Deluze",
-    "url": "https://github.com/Deluze"
+    "name": "Lando Team",
+    "email": "sales@lando.dev",
+    "url": "https://github.com/lando"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.17.0",
@@ -27,11 +27,14 @@
     "chokidar": "^3.5.3",
     "electron": "^17.1.0",
     "electron-builder": "^22.14.13",
+    "electron-builder-notarize": "^1.4.0",
+    "electron-osx-sign": "^0.6.0",
     "eslint": "^8.11.0",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-vue": "^8.5.0",
     "sass": "^1.49.9",
     "typescript": "^4.6.2",
+    "version-bump-prompt": "^4.2.1",
     "vite": "^2.8.6"
   },
   "dependencies": {
