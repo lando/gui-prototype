@@ -2,7 +2,12 @@
   "appId": "lando.gui-prototype",
   "productName": "gui-prototype",
   "artifactName": "${name}-${arch}-v${version}.${ext}",
-  "publish": [],
+  "publish": {
+    "provider": "s3",
+    "bucket": "files.lando.dev",
+    "region": "us-east-1",
+    "path": "/desktop"
+  },
   "directories": {
     "output": "dist",
     "buildResources": "src/build-assets"
