@@ -83,6 +83,7 @@ jobs:
       # Create and upload releases
       - name: Create releases
         env:
+          CURRENT_VERSION: ${{ steps.vars.outputs.CURRENT_VERSION }}
           SOURCE_BRANCH: ${{ steps.vars.outputs.SOURCE_BRANCH }}
           SOURCE_TAG: ${{ steps.vars.outputs.SOURCE_TAG }}
           ARCH: ${{ matrix.arch }}
@@ -91,12 +92,17 @@ jobs:
           mkdir -p releases dev-builds
 
           # Snapshot release
-          cp -f "dist/@lando/gui-prototype-${{ matrix.arch }}-$SOURCE_TAG.${{ matrix.flavor }}" "dev-builds/lando-gui-prototype-build-${{ github.sha }}-$ARCH.${{ matrix.flavor }}"
+          if [ -z "$SOURCE_TAG" ]
+          then
+            cp -f "dist/@lando/gui-prototype-${{ matrix.arch }}-$CURRENT_VERSION.${{ matrix.flavor }}" "dev-builds/lando-gui-prototype-build-${{ github.sha }}-$ARCH.${{ matrix.flavor }}"
+          else
+            cp -f "dist/@lando/gui-prototype-${{ matrix.arch }}-$SOURCE_TAG.${{ matrix.flavor }}" "dev-builds/lando-gui-prototype-build-${{ github.sha }}-$ARCH.${{ matrix.flavor }}"
+          fi
 
           # Branch releases
-          if [ -z "$SOURCE_TAG" ]; then cp -f "dist/@lando/gui-prototype-${{ matrix.arch }}-$SOURCE_TAG.${{ matrix.flavor }}" "releases/lando-gui-prototype-$ARCH-$SOURCE_BRANCH-latest.${{ matrix.flavor }}"; fi
+          if [ -z "$SOURCE_TAG" ]; then cp -f "dist/@lando/gui-prototype-${{ matrix.arch }}-$CURRENT_VERSION.${{ matrix.flavor }}" "releases/lando-gui-prototype-$ARCH-$SOURCE_BRANCH-latest.${{ matrix.flavor }}"; fi
           # Latest dev release
-          if [[ "$SOURCE_BRANCH" == "main" ]]; then cp -f "dist/@lando/gui-prototype-${{ matrix.arch }}-$SOURCE_TAG.${{ matrix.flavor }}" "releases/lando-gui-prototype-$ARCH-latest.${{ matrix.flavor }}"; fi
+          if [[ "$SOURCE_BRANCH" == "main" ]]; then cp -f "dist/@lando/gui-prototype-${{ matrix.arch }}-$CURRENT_VERSION.${{ matrix.flavor }}" "releases/lando-gui-prototype-$ARCH-latest.${{ matrix.flavor }}"; fi
           # Tag releases
           if [ ! -z "$SOURCE_TAG" ]; then cp -f "dist/@lando/gui-prototype-${{ matrix.arch }}-$SOURCE_TAG.${{ matrix.flavor }}" "releases/lando-gui-prototype-$ARCH-$SOURCE_TAG.${{ matrix.flavor }}"; fi
           # Latest stable release
@@ -106,6 +112,14 @@ jobs:
           ls -lsa releases
           ls -lsa dev-builds
 
+      # Upload back to Actions
+      - name: Upload build snapshot as Actions artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: lando-gui-prototype-build-${{ github.sha }}-${{ matrix.arch }}.${{ matrix.flavor }}
+          path: dev-builds/
+          if-no-files-found: error
+          retention-days: 30
       # Upload releases to S3
       - name: Configure S3 Credentials
         uses: aws-actions/configure-aws-credentials@v1
