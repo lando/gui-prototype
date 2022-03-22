@@ -1,5 +1,11 @@
 const {app, BrowserWindow, ipcMain, shell} = require('electron');
 const Path = require('path');
+const log = require('electron-log');
+const {autoUpdater} = require("electron-updater");
+
+autoUpdater.logger = log;
+autoUpdater.logger.transports.file.level = 'info';
+log.info('App starting...');
 
 function createWindow() {
   const mainWindow = new BrowserWindow({
