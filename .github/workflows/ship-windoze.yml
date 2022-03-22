@@ -1,7 +1,6 @@
 name: Ship Windoze Installer
 
 on:
-  pull_request:
   push:
     branches:
       - main
@@ -125,7 +124,7 @@ jobs:
       # Upload releases to GitHub Releases
       - name: Upload releases to GitHub Releases
         uses: softprops/action-gh-release@v1
-        #if: startsWith(github.ref, 'refs/tags/')
+        if: startsWith(github.ref, 'refs/tags/')
         with:
           draft: true
           files: dist/@lando/gui-prototype-${{ matrix.arch }}-$SOURCE_TAG.${{ matrix.flavor }}
