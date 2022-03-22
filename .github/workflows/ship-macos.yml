@@ -18,6 +18,8 @@ jobs:
       APPLE_ID_PASSWORD: ${{ secrets.APPLE_NOTARY_PASSWORD }}
       APPLE_ID: ${{ secrets.APPLE_NOTARY_USER }}
       APPLE_TEAM_ID: FY8GAUX282
+      AWS_ACCESS_KEY_ID: ${{ secrets.S3_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.S3_SECRET_ACCESS_KEY }}
       CSC_KEY_PASSWORD: ${{ secrets.APPLE_CERT_PASSWORD }}
       CSC_LINK: /tmp/certs.p12
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
