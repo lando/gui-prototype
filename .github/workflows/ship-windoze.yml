@@ -93,15 +93,7 @@ jobs:
           ARCH: ${{ matrix.arch }}
         run: |
           # Create release directories
-          mkdir -p releases dev-builds
-
-          # Snapshot release
-          if [ -z "$SOURCE_TAG" ]
-          then
-            cp -f "dist/@lando/gui-prototype-${{ matrix.arch }}-$CURRENT_VERSION.${{ matrix.flavor }}" "dev-builds/lando-gui-prototype-build-${{ github.sha }}-$ARCH.${{ matrix.flavor }}"
-          else
-            cp -f "dist/@lando/gui-prototype-${{ matrix.arch }}-$SOURCE_TAG.${{ matrix.flavor }}" "dev-builds/lando-gui-prototype-build-${{ github.sha }}-$ARCH.${{ matrix.flavor }}"
-          fi
+          mkdir -p releases
 
           # Branch releases
           if [ -z "$SOURCE_TAG" ]; then cp -f "dist/@lando/gui-prototype-${{ matrix.arch }}-$CURRENT_VERSION.${{ matrix.flavor }}" "releases/lando-gui-prototype-$ARCH-$SOURCE_BRANCH-latest.${{ matrix.flavor }}"; fi
@@ -114,16 +106,7 @@ jobs:
          
           # Print what we end up with
           ls -lsa releases
-          ls -lsa dev-builds
 
-      # Upload back to Actions
-      - name: Upload build snapshot as Actions artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: lando-gui-prototype-build-${{ github.sha }}-${{ matrix.arch }}.${{ matrix.flavor }}
-          path: dev-builds/
-          if-no-files-found: error
-          retention-days: 30
       # Upload releases to S3
       - name: Configure S3 Credentials
         uses: aws-actions/configure-aws-credentials@v1
