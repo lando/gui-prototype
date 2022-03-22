@@ -79,6 +79,11 @@ jobs:
       # Build out our release packages
       - name: Build MacOS Releases
         run: yarn build --mac
+
+      - name: check folders
+        shell: bash
+        run: ls -lsa dist/@lando
+
       # Verify Stuffs
       - name: Verify Signing
         run: |
@@ -132,4 +137,4 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         with:
           draft: true
-          files: dist/@lando/gui-prototype-$SOURCE_TAG.${{ matrix.flavor }}
+          files: dist/@lando/gui-prototype-${{ steps.vars.outputs.SOURCE_TAG }}.${{ matrix.flavor }}
