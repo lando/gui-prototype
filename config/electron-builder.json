@@ -6,7 +6,7 @@
     "provider": "s3",
     "bucket": "files.lando.dev",
     "region": "us-east-1",
-    "path": "/desktop"
+    "path": "desktop"
   },
   "directories": {
     "output": "dist",
