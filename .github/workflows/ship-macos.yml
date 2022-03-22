@@ -96,19 +96,18 @@ jobs:
           CURRENT_VERSION: ${{ steps.vars.outputs.CURRENT_VERSION }}
           SOURCE_BRANCH: ${{ steps.vars.outputs.SOURCE_BRANCH }}
           SOURCE_TAG: ${{ steps.vars.outputs.SOURCE_TAG }}
-          ARCH: ${{ matrix.arch }}
         run: |
           # Create release directories
           mkdir -p releases
 
           # Branch releases
-          if [ -z "$SOURCE_TAG" ]; then cp -f "dist/@lando/gui-prototype-$CURRENT_VERSION.${{ matrix.flavor }}" "releases/lando-gui-prototype-$ARCH-$SOURCE_BRANCH-latest.${{ matrix.flavor }}"; fi
+          if [ -z "$SOURCE_TAG" ]; then cp -f "dist/@lando/gui-prototype-$CURRENT_VERSION.${{ matrix.flavor }}" "releases/lando-gui-prototype-$SOURCE_BRANCH-latest.${{ matrix.flavor }}"; fi
           # Latest dev release
-          if [[ "$SOURCE_BRANCH" == "main" ]]; then cp -f "dist/@lando/gui-prototype-$CURRENT_VERSION.${{ matrix.flavor }}" "releases/lando-gui-prototype-$ARCH-latest.${{ matrix.flavor }}"; fi
+          if [[ "$SOURCE_BRANCH" == "main" ]]; then cp -f "dist/@lando/gui-prototype-$CURRENT_VERSION.${{ matrix.flavor }}" "releases/lando-gui-prototype-latest.${{ matrix.flavor }}"; fi
           # Tag releases
-          if [ ! -z "$SOURCE_TAG" ]; then cp -f "dist/@lando/gui-prototype-$SOURCE_TAG.${{ matrix.flavor }}" "releases/lando-gui-prototype-$ARCH-$SOURCE_TAG.${{ matrix.flavor }}"; fi
+          if [ ! -z "$SOURCE_TAG" ]; then cp -f "dist/@lando/gui-prototype-$SOURCE_TAG.${{ matrix.flavor }}" "releases/lando-gui-prototype-$SOURCE_TAG.${{ matrix.flavor }}"; fi
           # Latest stable release
-          if [ ! -z "$SOURCE_TAG" ]; then cp -f "dist/@lando/gui-prototype-$SOURCE_TAG.${{ matrix.flavor }}" "releases/lando-gui-prototype-$ARCH-stable.${{ matrix.flavor }}"; fi
+          if [ ! -z "$SOURCE_TAG" ]; then cp -f "dist/@lando/gui-prototype-$SOURCE_TAG.${{ matrix.flavor }}" "releases/lando-gui-prototype-stable.${{ matrix.flavor }}"; fi
           
           # Print what we end up with
           ls -lsa releases
@@ -122,7 +121,7 @@ jobs:
           aws-region: us-east-1
       - name: Upload releases to S3
         run: |
-          aws s3 sync releases s3://files.lando.dev/installer --acl public-read
+          aws s3 sync releases s3://files.lando.dev/desktop --acl public-read
           # Below is for backwards compatibility
           aws s3 sync releases s3://files.lando.dev --acl public-read
 

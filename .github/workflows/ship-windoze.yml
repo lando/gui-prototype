@@ -116,7 +116,7 @@ jobs:
           aws-region: us-east-1
       - name: Upload releases to S3
         run: |
-          aws s3 sync releases s3://files.lando.dev/installer --acl public-read
+          aws s3 sync releases s3://files.lando.dev/desktop --acl public-read
           # Below is for backwards compatibility
           aws s3 sync releases s3://files.lando.dev --acl public-read
           
