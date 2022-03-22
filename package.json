@@ -5,8 +5,8 @@
   "main": "build/main/main.js",
   "scripts": {
     "dev": "node scripts/dev-server.js",
-    "build": "mkdir -p ./dist/@lando && node scripts/build.js && electron-builder -c config/electron-builder.json",
-    "build:win": "mkdir dist\\@lando && node scripts/build.js && electron-builder -c config/electron-builder.json --win",
+    "build": "mkdir -p ./dist/@lando && node scripts/build.js && electron-builder --publish always -c config/electron-builder.json",
+    "build:win": "mkdir dist\\@lando && node scripts/build.js && electron-builder --publish always -c config/electron-builder.json --win",
     "lint": "eslint . --ext .js,.ts,.vue",
     "release": "bump --prompt --tag --all --push"
   },
