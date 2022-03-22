@@ -82,10 +82,6 @@ jobs:
       - name: Build MacOS Releases
         run: yarn build --mac
 
-      - name: check folders
-        shell: bash
-        run: ls -lsa dist/@lando
-
       # Verify Stuffs
       - name: Verify Signing
         run: |

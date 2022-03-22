@@ -76,10 +76,6 @@ jobs:
       - name: Build Linux Release
         run: yarn build --linux ${{ matrix.flavor }}
 
-      - name: check folders
-        shell: bash
-        run: ls -lsa dist/@lando
-
       # Create and upload releases
       - name: Create releases
         env:

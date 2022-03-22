@@ -83,10 +83,6 @@ jobs:
         shell: bash
         run: yarn build:win
 
-      - name: check folders
-        shell: bash
-        run: ls -lsa dist/@lando
-
       # Create and upload releases
       - name: Create releases
         shell: bash
