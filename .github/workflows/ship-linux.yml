@@ -74,6 +74,10 @@ jobs:
       - name: Build Linux Release
         run: yarn build --linux ${{ matrix.flavor }}
 
+      - name: check folders
+        shell: bash
+        run: ls -lsa dist/@lando
+
       # Create and upload releases
       - name: Create releases
         env:
@@ -119,4 +123,4 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         with:
           draft: true
-          files: dist/@lando/gui-prototype-${{ matrix.arch }}-$SOURCE_TAG.${{ matrix.flavor }}
+          files: dist/@lando/gui-prototype-${{ matrix.arch }}-${{ steps.vars.outputs.SOURCE_TAG }}.${{ matrix.flavor }}
