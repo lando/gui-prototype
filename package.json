@@ -5,8 +5,9 @@
   "main": "build/main/main.js",
   "scripts": {
     "dev": "node scripts/dev-server.js",
-    "build": "mkdir -p ./dist/@lando && node scripts/build.js && electron-builder --publish always -c config/electron-builder.json",
-    "build:win": "mkdir dist\\@lando && node scripts/build.js && electron-builder --publish always -c config/electron-builder.json --win",
+    "build": "mkdir -p ./dist/@lando && node scripts/build.js && electron-builder --publish always",
+    "build:win": "mkdir dist\\@lando && node scripts/build.js && electron-builder --publish always --win",
+    "build:dryrun": "mkdir -p ./dist/@lando && node scripts/build.js && CSC_IDENTITY_AUTO_DISCOVERY=false && electron-builder --publish never",
     "lint": "eslint . --ext .js,.ts,.vue",
     "release": "bump --prompt --tag --all --push"
   },

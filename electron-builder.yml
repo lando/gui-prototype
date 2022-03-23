@@ -1,0 +1,76 @@
+---
+appId: lando.gui-prototype
+productName: gui-prototype
+artifactName: "${name}-${arch}-v${version}.${ext}"
+publish:
+  provider: s3
+  bucket: files.lando.dev
+  region: us-east-1
+  path: desktop/
+directories:
+  output: dist
+  buildResources: src/build-assets
+afterSign: electron-builder-notarize
+nsis:
+  oneClick: false
+  perMachine: false
+  differentialPackage: false
+  allowToChangeInstallationDirectory: true
+  shortcutName: Electron App
+dmg:
+  writeUpdateInfo: false
+win:
+  target:
+    - target: nsis
+      arch:
+        - x64
+  signingHashAlgorithms:
+    - sha256
+  signAndEditExecutable: true
+  verifyUpdateCodeSignature: true
+  publisherName: Lando
+linux:
+  category: Development
+  artifactName: "${name}-x64-v${version}.${ext}"
+  target:
+    - target: deb
+      arch:
+        - x64
+    - target: pacman
+      arch:
+        - x64
+    - target: rpm
+      arch:
+        - x64
+mac:
+  artifactName: "${name}-v${version}.${ext}"
+  category: public.app-category.developer-tools
+  target:
+    - target: dmg
+      arch:
+        - universal
+  darkModeSupport: true
+  hardenedRuntime: true
+  gatekeeperAssess: true
+  entitlements: config/entitlements.mac.plist
+  entitlementsInherit: config/entitlements.mac.plist
+files:
+  - build/main/**/*
+  - "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}"
+  - "!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}"
+  - "!**/node_modules/*.d.ts"
+  - "!**/node_modules/.bin"
+  - "!src"
+  - "!config"
+  - "!README.md"
+  - "!scripts"
+  - "!build/renderer"
+  - "!dist"
+  - from: build/renderer
+    to: renderer
+    filter:
+      - "**/*"
+  - from: src/main/static
+    to: static
+    filter:
+      - "**/*"
