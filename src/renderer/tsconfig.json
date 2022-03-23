@@ -11,6 +11,6 @@
       "esModuleInterop": true,
       "lib": ["esnext", "dom"]
     },
-    "include": ["./**/*.ts", "./**/*.d.ts", "./**/*.tsx", "./**/*.vue", "main.js", "electron.ts"],
+    "include": ["./**/*.ts", "./**/*.d.ts", "./**/*.tsx", "./**/*.vue", "main.js"],
   }
   
