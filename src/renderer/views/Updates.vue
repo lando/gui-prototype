@@ -68,8 +68,16 @@
 <script setup>
 import {ref} from 'vue';
 import {dayjs} from 'dayjs';
+const {ipcRenderer} = window;
+
+ipcRenderer.on('renderer-app-version', (event, arg) => {
+  console.log('hi');
+  console.log(arg.version);
+});
+
 
 const updatePlugins = ref([
+  {name: 'Desktop App', installedVersion: '', newestVersion: 'v3.6.4', releaseNotesUrl: 'someURL'},
   {name: 'Lando CLI', installedVersion: 'v3.6.3', newestVersion: 'v3.6.4', releaseNotesUrl: 'someURL'},
   {name: 'PHP', installedVersion: 'v0.5.2', newestVersion: 'v0.5.3', releaseNotesUrl: 'someURL'},
   {name: 'Drupal', installedVersion: 'v0.5.1', newestVersion: 'v0.5.4', releaseNotesUrl: 'someURL'},
