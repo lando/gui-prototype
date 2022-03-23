@@ -1,7 +1,7 @@
 const {app, BrowserWindow, ipcMain, shell} = require('electron');
 const Path = require('path');
 const log = require('electron-log');
-const {autoUpdater} = require("electron-updater");
+const {autoUpdater} = require('electron-updater');
 
 autoUpdater.logger = log;
 autoUpdater.logger.transports.file.level = 'info';
@@ -14,7 +14,7 @@ function createWindow() {
     webPreferences: {
       preload: Path.join(__dirname, 'preload.js'),
       nodeIntegration: false,
-      contextIsolation: true,
+      contextIsolation: false,
     },
   });
 
@@ -24,9 +24,13 @@ function createWindow() {
   } else {
     mainWindow.loadFile(Path.join(app.getAppPath(), 'renderer', 'index.html'));
   }
+
+  mainWindow.webContents.on('did-finish-load', () => {
+    mainWindow.webContents.send('renderer-app-version', {version: app.getVersion()});
+  });
 }
 
-app.whenReady().then(() => {
+app.on('ready', () => {
   createWindow();
 
   app.on('activate', function() {

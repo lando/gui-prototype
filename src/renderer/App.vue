@@ -7,10 +7,10 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import {defineComponent} from 'vue';
 import SidebarMenu from './components/SidebarMenu.vue';
-import {ipcRenderer} from './electron';
+const {ipcRenderer} = window;
 
 export default defineComponent({
   name: 'App',
