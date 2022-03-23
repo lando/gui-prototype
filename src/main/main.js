@@ -2,6 +2,7 @@ const {app, BrowserWindow, ipcMain, shell} = require('electron');
 const Path = require('path');
 const log = require('electron-log');
 const {autoUpdater} = require('electron-updater');
+const config = require('../../package.json');
 
 autoUpdater.logger = log;
 autoUpdater.logger.transports.file.level = 'info';
@@ -26,7 +27,7 @@ function createWindow() {
   }
 
   mainWindow.webContents.on('did-finish-load', () => {
-    mainWindow.webContents.send('renderer-app-version', {version: app.getVersion()});
+    mainWindow.webContents.send('renderer-app-version', {version: config.version});
   });
 }
 
