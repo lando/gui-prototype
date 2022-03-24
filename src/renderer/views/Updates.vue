@@ -70,11 +70,12 @@ import {ref} from 'vue';
 import {dayjs} from 'dayjs';
 const {ipcRenderer} = window;
 
-ipcRenderer.on('renderer-app-version', (event, arg) => {
-  console.log('hi');
-  console.log(arg.version);
+let appVersion = ref('');
+ipcRenderer.receive('renderer-app-version', data => {
+  appVersion = data.version;
 });
 
+console.log(appVersion);
 
 const updatePlugins = ref([
   {name: 'Desktop App', installedVersion: '', newestVersion: 'v3.6.4', releaseNotesUrl: 'someURL'},

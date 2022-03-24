@@ -15,7 +15,7 @@ function createWindow() {
     webPreferences: {
       preload: Path.join(__dirname, 'preload.js'),
       nodeIntegration: false,
-      contextIsolation: false,
+      contextIsolation: true,
     },
   });
 
@@ -26,7 +26,7 @@ function createWindow() {
     mainWindow.loadFile(Path.join(app.getAppPath(), 'renderer', 'index.html'));
   }
 
-  mainWindow.webContents.on('did-finish-load', () => {
+  mainWindow.webContents.on('did-start-loading', () => {
     mainWindow.webContents.send('renderer-app-version', {version: config.version});
   });
 }
@@ -54,3 +54,4 @@ ipcMain.on('message', (event, message) => {
 ipcMain.on('open-external-browser', (event, url) => {
   shell.openExternal(url);
 });
+

@@ -60,7 +60,6 @@ import {
   Download,
   Setting,
 } from '@element-plus/icons-vue';
-
 </script>
 
 <style lang="scss">
