@@ -70,14 +70,27 @@ import {ref} from 'vue';
 import {dayjs} from 'dayjs';
 const {ipcRenderer} = window;
 
-ipcRenderer.on('renderer-app-version', (event, arg) => {
-  console.log('hi');
-  console.log(arg.version);
+// Set Current App version
+ipcRenderer.receive('renderer-app-version', data => {
+  setAppVersion(data.version);
+});
+const appVersion = ref(null);
+const setAppVersion = version => {
+  appVersion.value = version;
+};
+
+// Check for Updates
+ipcRenderer.send('check-for-updates');
+ipcRenderer.receive('renderer-no-update', () => {
+  console.log('App is up to date.');
+});
+ipcRenderer.receive('renderer-update-available', data => {
+  console.log('Updated needed');
+  console.log(data);
 });
 
-
 const updatePlugins = ref([
-  {name: 'Desktop App', installedVersion: '', newestVersion: 'v3.6.4', releaseNotesUrl: 'someURL'},
+  {name: 'Desktop App', installedVersion: appVersion, newestVersion: 'v3.6.4', releaseNotesUrl: 'someURL'},
   {name: 'Lando CLI', installedVersion: 'v3.6.3', newestVersion: 'v3.6.4', releaseNotesUrl: 'someURL'},
   {name: 'PHP', installedVersion: 'v0.5.2', newestVersion: 'v0.5.3', releaseNotesUrl: 'someURL'},
   {name: 'Drupal', installedVersion: 'v0.5.1', newestVersion: 'v0.5.4', releaseNotesUrl: 'someURL'},
