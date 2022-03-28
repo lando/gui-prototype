@@ -1,2 +1,4 @@
-provider: generic
-url: 'https://s3.amazonaws.com/files.lando.dev/desktop'
+  provider: s3
+  bucket: files.lando.dev
+  region: us-east-1
+  path: desktop/
