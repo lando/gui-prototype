@@ -1,12 +1,12 @@
 {
   "name": "@lando/gui-prototype",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Lando GUI Prototype",
   "main": "build/main/main.js",
   "scripts": {
     "dev": "node scripts/dev-server.js",
-    "build": "mkdir -p ./dist/@lando && node scripts/build.js && electron-builder --publish onTagOrDraft",
-    "build:win": "mkdir dist\\@lando && node scripts/build.js && electron-builder --publish onTagOrDraft --win",
+    "build": "mkdir -p ./dist/@lando && node scripts/build.js && electron-builder",
+    "build:win": "mkdir dist\\@lando && node scripts/build.js && electron-builder",
     "build:dryrun": "mkdir -p ./dist/@lando && node scripts/build.js && CSC_IDENTITY_AUTO_DISCOVERY=false && electron-builder --publish never",
     "lint": "eslint . --ext .js,.ts,.vue",
     "release": "bump --prompt --tag --all --push"
