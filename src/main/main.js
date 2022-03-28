@@ -6,6 +6,14 @@ const config = require('../../package.json');
 // Determine whether we are in production or not
 const isProd = (process.env.NODE_ENV !== 'development');
 
+// Redefine the version so autoUpdater uses the correct version in development
+if (!isProd) {
+  // const version = '0.0.1';
+  // @todo: uncomment above and comment below to force test the autoUpdater
+  const { version } = require('./../../package.json');
+  app.getVersion = () => version;
+}
+
 // Change things up so debugging and developing this features doesnt make
 // us want to gouge our own eyes out
 if (!isProd) {
@@ -13,6 +21,9 @@ if (!isProd) {
   autoUpdater.logger.transports.file.level = 'info';
   autoUpdater.updateConfigPath = Path.resolve(__dirname, '..', '..', 'config', 'dev-app-update.yml');
 }
+
+// Disable auto-download
+autoUpdater.autoDownload = false;
 
 // Set this here
 let mainWindow;

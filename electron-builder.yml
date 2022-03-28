@@ -1,7 +1,8 @@
----
 appId: lando.gui-prototype
 productName: gui-prototype
 artifactName: "${name}-${arch}-v${version}.${ext}"
+detectUpdateChannel: true
+generateUpdatesFilesForAllChannels: true
 publish:
   provider: s3
   bucket: files.lando.dev
