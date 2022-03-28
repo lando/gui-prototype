@@ -2,6 +2,8 @@ name: Ship Linux Installer
 
 on:
   release:
+    types:
+      - published
   push:
     branches:
       - main
