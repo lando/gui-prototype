@@ -2,6 +2,8 @@ name: Ship Windoze Installer
 
 on:
   release:
+    types:
+      - published
   push:
     branches:
       - main
