@@ -1,21 +1,30 @@
 const {app, BrowserWindow, ipcMain, shell} = require('electron');
 const Path = require('path');
-const log = require('electron-log');
 const {autoUpdater} = require('electron-updater');
 const config = require('../../package.json');
 
-autoUpdater.logger = log;
-autoUpdater.logger.transports.file.level = 'info';
-log.info('App starting...');
+// Determine whether we are in production or not
+const isProd = (process.env.NODE_ENV !== 'development');
+
+// Change things up so debugging and developing this features doesnt make
+// us want to gouge our own eyes out
+if (!isProd) {
+  autoUpdater.logger = require('electron-log'); // eslint-disable-line
+  autoUpdater.logger.transports.file.level = 'info';
+  autoUpdater.updateConfigPath = Path.resolve(__dirname, '..', '..', 'config', 'dev-app-update.yml');
+}
+
+// Set this here
+let mainWindow;
 
 function createWindow() {
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
       preload: Path.join(__dirname, 'preload.js'),
       nodeIntegration: false,
-      contextIsolation: false,
+      contextIsolation: true,
     },
   });
 
@@ -26,7 +35,7 @@ function createWindow() {
     mainWindow.loadFile(Path.join(app.getAppPath(), 'renderer', 'index.html'));
   }
 
-  mainWindow.webContents.on('did-finish-load', () => {
+  mainWindow.webContents.on('did-start-loading', () => {
     mainWindow.webContents.send('renderer-app-version', {version: config.version});
   });
 }
@@ -53,4 +62,17 @@ ipcMain.on('message', (event, message) => {
 
 ipcMain.on('open-external-browser', (event, url) => {
   shell.openExternal(url);
+});
+
+// Send update available UX back to the renderer
+autoUpdater.on('update-available', data => {
+  mainWindow.webContents.send('renderer-update-available', data);
+});
+// Send update not available UX back to the renderer
+autoUpdater.on('update-not-available', () => {
+  mainWindow.webContents.send('renderer-no-update');
+});
+// Ipc channel so renderer can trigger an update check
+ipcMain.on('check-for-updates', () => {
+  autoUpdater.checkForUpdates();
 });

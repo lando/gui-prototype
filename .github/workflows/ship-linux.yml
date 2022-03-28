@@ -27,6 +27,7 @@ jobs:
           - deb
           - pacman
           - rpm
+          - AppImage
         arch:
           - x64
 

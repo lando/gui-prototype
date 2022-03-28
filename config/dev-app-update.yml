@@ -1,0 +1,2 @@
+provider: generic
+url: 'https://s3.amazonaws.com/files.lando.dev/desktop'
