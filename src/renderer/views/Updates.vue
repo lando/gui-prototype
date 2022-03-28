@@ -74,19 +74,19 @@ const {ipcRenderer} = window;
 ipcRenderer.receive('renderer-app-version', data => {
   setAppVersion(data.version);
 });
-const appVersion = ref(null)
-const setAppVersion = (version) => {
+const appVersion = ref(null);
+const setAppVersion = version => {
   appVersion.value = version;
-}
+};
 
 // Check for Updates
 ipcRenderer.send('check-for-updates');
 ipcRenderer.receive('renderer-no-update', () => {
-  console.log('App is up to date.')
+  console.log('App is up to date.');
 });
 ipcRenderer.receive('renderer-update-available', data => {
-  console.log('Updated needed')
-  console.log(data)
+  console.log('Updated needed');
+  console.log(data);
 });
 
 const updatePlugins = ref([

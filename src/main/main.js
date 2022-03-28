@@ -14,8 +14,11 @@ if (!isProd) {
   autoUpdater.updateConfigPath = Path.resolve(__dirname, '..', '..', 'config', 'dev-app-update.yml');
 }
 
+// Set this here
+let mainWindow;
+
 function createWindow() {
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
@@ -62,7 +65,7 @@ ipcMain.on('open-external-browser', (event, url) => {
 });
 
 // Send update available UX back to the renderer
-autoUpdater.on('update-available', (data) => {
+autoUpdater.on('update-available', data => {
   mainWindow.webContents.send('renderer-update-available', data);
 });
 // Send update not available UX back to the renderer
