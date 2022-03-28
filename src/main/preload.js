@@ -3,7 +3,12 @@
 import {contextBridge, ipcRenderer} from 'electron';
 
 // Valid event channels
-const validChannels = ['renderer-app-version'];
+const validChannels = [
+  'check-for-updates',
+  'renderer-app-version',
+  'renderer-no-update',
+  'renderer-update-available'
+];
 
 // Expose protected methods that allow the renderer process to use
 // the ipcRenderer without exposing the entire object
