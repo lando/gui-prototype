@@ -1,5 +1,5 @@
 const {app, BrowserWindow, ipcMain, shell} = require('electron');
-const Path = require('path');
+const path = require('path');
 
 // Determine whether we are in production or not
 const isProd = (process.env.NODE_ENV !== 'development');
@@ -10,6 +10,9 @@ if (!isProd) {
   // @todo: uncomment above and comment below to force test the autoUpdater
   const {version} = require('./../../package.json');
   app.getVersion = () => version;
+
+  // Sets our APPIMAGE for updater testing
+  process.env.APPIMAGE = path.join(__dirname, '..', '..', 'dist', '@lando', `gui-prototype-x64-v${app.getVersion()}.AppImage`);
 }
 
 // Load this later because we need the version to be reset
@@ -20,7 +23,7 @@ const {autoUpdater} = require('electron-updater');
 if (!isProd) {
   autoUpdater.logger = require('electron-log'); // eslint-disable-line
   autoUpdater.logger.transports.file.level = 'info';
-  autoUpdater.updateConfigPath = Path.resolve(__dirname, '..', '..', 'config', 'dev-app-update.yml');
+  autoUpdater.updateConfigPath = path.resolve(__dirname, '..', '..', 'config', 'dev-app-update.yml');
 }
 
 // Disable auto-download
@@ -34,7 +37,7 @@ function createWindow() {
     width: 800,
     height: 600,
     webPreferences: {
-      preload: Path.join(__dirname, 'preload.js'),
+      preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: false,
       contextIsolation: true,
     },
@@ -44,7 +47,7 @@ function createWindow() {
     const rendererPort = process.argv[2];
     mainWindow.loadURL(`http://localhost:${rendererPort}`);
   } else {
-    mainWindow.loadFile(Path.join(app.getAppPath(), 'renderer', 'index.html'));
+    mainWindow.loadFile(path.join(app.getAppPath(), 'renderer', 'index.html'));
   }
 
   mainWindow.webContents.on('did-start-loading', () => {
@@ -91,4 +94,11 @@ ipcMain.on('check-for-updates', () => {
 // Apply updates
 ipcMain.on('apply-update', () => {
   autoUpdater.quitAndInstall();
+});
+
+autoUpdater.on('update-downloaded', () => {
+  console.log('Update Downloaded');
+});
+ipcMain.on('download-update', () => {
+  autoUpdater.downloadUpdate();
 });
