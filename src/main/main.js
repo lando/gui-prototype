@@ -1,6 +1,5 @@
 const {app, BrowserWindow, ipcMain, shell} = require('electron');
 const Path = require('path');
-const config = require('../../package.json');
 
 // Determine whether we are in production or not
 const isProd = (process.env.NODE_ENV !== 'development');
@@ -49,7 +48,7 @@ function createWindow() {
   }
 
   mainWindow.webContents.on('did-start-loading', () => {
-    mainWindow.webContents.send('renderer-app-version', {version: config.version});
+    mainWindow.webContents.send('renderer-app-version', {version: app.getVersion()});
   });
 }
 
@@ -88,4 +87,8 @@ autoUpdater.on('update-not-available', () => {
 // Ipc channel so renderer can trigger an update check
 ipcMain.on('check-for-updates', () => {
   autoUpdater.checkForUpdates();
+});
+// Apply updates
+ipcMain.on('apply-update', () => {
+  autoUpdater.quitAndInstall();
 });

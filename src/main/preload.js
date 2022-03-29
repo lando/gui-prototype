@@ -8,6 +8,7 @@ const validChannels = [
   'renderer-app-version',
   'renderer-no-update',
   'renderer-update-available',
+  'apply-update',
 ];
 
 // Expose protected methods that allow the renderer process to use
