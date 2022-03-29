@@ -1,6 +1,5 @@
 const {app, BrowserWindow, ipcMain, shell} = require('electron');
 const Path = require('path');
-const config = require('../../package.json');
 
 // Determine whether we are in production or not
 const isProd = (process.env.NODE_ENV !== 'development');
@@ -9,12 +8,12 @@ const isProd = (process.env.NODE_ENV !== 'development');
 if (!isProd) {
   // const version = '0.0.1';
   // @todo: uncomment above and comment below to force test the autoUpdater
-  const { version } = require('./../../package.json');
+  const {version} = require('./../../package.json');
   app.getVersion = () => version;
 }
 
 // Load this later because we need the version to be reset
-const { autoUpdater } = require('electron-updater');
+const {autoUpdater} = require('electron-updater');
 
 // Change things up so debugging and developing this features doesnt make
 // us want to gouge our own eyes out
@@ -49,7 +48,7 @@ function createWindow() {
   }
 
   mainWindow.webContents.on('did-start-loading', () => {
-    mainWindow.webContents.send('renderer-app-version', {version: config.version});
+    mainWindow.webContents.send('renderer-app-version', {version: app.getVersion()});
   });
 }
 
@@ -88,4 +87,8 @@ autoUpdater.on('update-not-available', () => {
 // Ipc channel so renderer can trigger an update check
 ipcMain.on('check-for-updates', () => {
   autoUpdater.checkForUpdates();
+});
+// Apply updates
+ipcMain.on('apply-update', () => {
+  autoUpdater.quitAndInstall();
 });
