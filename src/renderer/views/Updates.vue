@@ -19,10 +19,20 @@
             {{ plugin.name }}
           </el-link>
           <div class="plugin-version">
-            {{ plugin.installedVersion }} -> {{ plugin.newVersion }}
+            {{ plugin.installedVersion }} -> {{ plugin.newestVersion }}
           </div>
-          <el-button :icon="Upload">
-            Update
+          <el-button
+            v-if="plugin.name == 'Desktop App'"
+            :icon="Upload"
+            @click="applyUpdate"
+          >
+            Update App
+          </el-button>
+          <el-button
+            v-else
+            :icon="Upload"
+          >
+            Update Plugin
           </el-button>
           <el-link
             class="plugin-relate-notes"
@@ -87,10 +97,20 @@ ipcRenderer.receive('renderer-no-update', () => {
 ipcRenderer.receive('renderer-update-available', data => {
   console.log('Updated needed');
   console.log(data);
+  setNewestVersion(data.version);
 });
+const newestVersion = ref(null);
+const setNewestVersion = version => {
+  newestVersion.value = version;
+};
+
+// Apply updates via click
+function applyUpdate() {
+  ipcRenderer.send('apply-update');
+}
 
 const updatePlugins = ref([
-  {name: 'Desktop App', installedVersion: appVersion, newestVersion: 'v3.6.4', releaseNotesUrl: 'someURL'},
+  {name: 'Desktop App', installedVersion: appVersion, newestVersion: newestVersion, releaseNotesUrl: 'someURL'},
   {name: 'Lando CLI', installedVersion: 'v3.6.3', newestVersion: 'v3.6.4', releaseNotesUrl: 'someURL'},
   {name: 'PHP', installedVersion: 'v0.5.2', newestVersion: 'v0.5.3', releaseNotesUrl: 'someURL'},
   {name: 'Drupal', installedVersion: 'v0.5.1', newestVersion: 'v0.5.4', releaseNotesUrl: 'someURL'},
