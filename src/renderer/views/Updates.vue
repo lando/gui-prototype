@@ -21,10 +21,17 @@
           <div class="plugin-version">
             {{ plugin.installedVersion }} -> {{ plugin.newestVersion }}
           </div>
-          <el-button :icon="Upload" @click="applyUpdate" v-if="plugin.name == 'Desktop App'">
+          <el-button
+            v-if="plugin.name == 'Desktop App'"
+            :icon="Upload"
+            @click="applyUpdate"
+          >
             Update App
           </el-button>
-          <el-button :icon="Upload" v-else>
+          <el-button
+            v-else
+            :icon="Upload"
+          >
             Update Plugin
           </el-button>
           <el-link

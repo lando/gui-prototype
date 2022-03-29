@@ -8,12 +8,12 @@ const isProd = (process.env.NODE_ENV !== 'development');
 if (!isProd) {
   // const version = '0.0.1';
   // @todo: uncomment above and comment below to force test the autoUpdater
-  const { version } = require('./../../package.json');
+  const {version} = require('./../../package.json');
   app.getVersion = () => version;
 }
 
 // Load this later because we need the version to be reset
-const { autoUpdater } = require('electron-updater');
+const {autoUpdater} = require('electron-updater');
 
 // Change things up so debugging and developing this features doesnt make
 // us want to gouge our own eyes out
