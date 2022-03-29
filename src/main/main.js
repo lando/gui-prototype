@@ -1,6 +1,5 @@
 const {app, BrowserWindow, ipcMain, shell} = require('electron');
 const Path = require('path');
-const {autoUpdater} = require('electron-updater');
 const config = require('../../package.json');
 
 // Determine whether we are in production or not
@@ -13,6 +12,9 @@ if (!isProd) {
   const { version } = require('./../../package.json');
   app.getVersion = () => version;
 }
+
+// Load this later because we need the version to be reset
+const { autoUpdater } = require('electron-updater');
 
 // Change things up so debugging and developing this features doesnt make
 // us want to gouge our own eyes out
