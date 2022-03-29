@@ -97,6 +97,8 @@ ipcRenderer.receive('renderer-no-update', () => {
 ipcRenderer.receive('renderer-update-available', data => {
   console.log('Updated needed');
   console.log(data);
+
+  ipcRenderer.send('download-update');
   setNewestVersion(data.version);
 });
 const newestVersion = ref(null);

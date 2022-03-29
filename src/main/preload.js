@@ -8,6 +8,7 @@ const validChannels = [
   'renderer-app-version',
   'renderer-no-update',
   'renderer-update-available',
+  'download-update',
   'apply-update',
 ];
 
