@@ -1,6 +1,7 @@
 // Loads the ipcRenderer per:
 // https://nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration
 import {contextBridge, ipcRenderer} from 'electron';
+const sudo = require('sudo-prompt');
 
 // Valid event channels
 const validChannels = [
@@ -27,4 +28,9 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
       ipcRenderer.once(channel, (event, ...args) => func(...args));
     }
   },
+});
+
+// Expose the sudo exec to the front event
+contextBridge.exposeInMainWorld('sudo', {
+  exec: sudo.exec,
 });

@@ -28,11 +28,15 @@
         title="Lando Proxy Running"
       />
     </el-row>
+    <el-button @click="testSudo">
+      Sudo Test
+    </el-button>
   </div>
 </template>
 
 <script setup>
 import {ref} from 'vue';
+const {sudo} = window;
 
 const status = ref({
   docker: 'success',
@@ -41,6 +45,22 @@ const status = ref({
   landoCurrent: 'success',
   landoVersion: '3.6.2',
 });
+
+// Test Sudo
+function testSudo() {
+  const options = {
+    name: 'Lando Gui Prototype',
+    icns: '/tmp/icon.icns',
+  };
+  sudo.exec('echo TRILL', options,
+      function(error, stdout, stderr) {
+        if (error) throw error;
+        // @todo use a bash script here as seen in
+        // https://github.com/pantheon-systems/localdev/blob/9d5635087fc6dce231c3f99c38e9571a8921fd06/src/renderer/localdev/lib/docker.js#L73
+        console.log('stdout: ' + stdout);
+      },
+  );
+}
 </script>
 
 <style lang="scss" scoped>
@@ -60,7 +80,9 @@ const status = ref({
       .el-result__icon {
         height: 1rem;
       }
-
+    }
+    .el-button {
+      margin-top: 1rem;
     }
   }
 </style>
