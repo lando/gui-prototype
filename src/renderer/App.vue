@@ -10,15 +10,11 @@
 <script>
 import {defineComponent} from 'vue';
 import SidebarMenu from './components/SidebarMenu.vue';
-const {ipcRenderer} = window;
 
 export default defineComponent({
   name: 'App',
   components: {
     SidebarMenu,
-  },
-  setup() {
-    ipcRenderer.send('message', 'Hello from App.vue!');
   },
 });
 </script>

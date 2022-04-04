@@ -46,6 +46,7 @@
     "lodash": "^4.17.21",
     "node-sass": "^7.0.1",
     "sass-loader": "^12.6.0",
+    "sudo-prompt": "^9.2.1",
     "vue": "^3.2.31",
     "vue-router": "4"
   }
