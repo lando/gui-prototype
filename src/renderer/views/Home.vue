@@ -49,7 +49,7 @@ const status = ref({
 // Test Sudo
 function testSudo() {
   const options = {
-    name: 'Lando Gui Prototype',
+    name: 'Lando Desktop',
     icns: '/tmp/icon.icns',
   };
   sudo.exec('echo TRILL', options,

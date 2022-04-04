@@ -100,10 +100,10 @@ jobs:
       # Verify Stuffs
       - name: Verify Signing
         run: |
-          codesign --verify --verbose dist/mac-universal/gui-prototype.app
+          codesign --verify --verbose dist/mac-universal/desktop.app
       - name: Verify Notarization
         run: |
-          spctl -a -t exec -vvv dist/mac-universal/gui-prototype.app
+          spctl -a -t exec -vvv dist/mac-universal/desktop.app
 
       # Create and upload releases
       - name: Create releases
@@ -116,13 +116,13 @@ jobs:
           mkdir -p releases
 
           # Branch releases
-          if [ -z "$SOURCE_TAG" ]; then cp -f "dist/@lando/gui-prototype-$CURRENT_VERSION.${{ matrix.flavor }}" "releases/lando-gui-prototype-$SOURCE_BRANCH-latest.${{ matrix.flavor }}"; fi
+          if [ -z "$SOURCE_TAG" ]; then cp -f "dist/@lando/desktop-$CURRENT_VERSION.${{ matrix.flavor }}" "releases/lando-desktop-$SOURCE_BRANCH-latest.${{ matrix.flavor }}"; fi
           # Latest dev release
-          if [[ "$SOURCE_BRANCH" == "main" ]]; then cp -f "dist/@lando/gui-prototype-$CURRENT_VERSION.${{ matrix.flavor }}" "releases/lando-gui-prototype-latest.${{ matrix.flavor }}"; fi
+          if [[ "$SOURCE_BRANCH" == "main" ]]; then cp -f "dist/@lando/desktop-$CURRENT_VERSION.${{ matrix.flavor }}" "releases/lando-desktop-latest.${{ matrix.flavor }}"; fi
           # Tag releases
-          if [ ! -z "$SOURCE_TAG" ]; then cp -f "dist/@lando/gui-prototype-$SOURCE_TAG.${{ matrix.flavor }}" "releases/lando-gui-prototype-$SOURCE_TAG.${{ matrix.flavor }}"; fi
+          if [ ! -z "$SOURCE_TAG" ]; then cp -f "dist/@lando/desktop-$SOURCE_TAG.${{ matrix.flavor }}" "releases/lando-desktop-$SOURCE_TAG.${{ matrix.flavor }}"; fi
           # Latest stable release
-          if [ ! -z "$SOURCE_TAG" ]; then cp -f "dist/@lando/gui-prototype-$SOURCE_TAG.${{ matrix.flavor }}" "releases/lando-gui-prototype-stable.${{ matrix.flavor }}"; fi
+          if [ ! -z "$SOURCE_TAG" ]; then cp -f "dist/@lando/desktop-$SOURCE_TAG.${{ matrix.flavor }}" "releases/lando-desktop-stable.${{ matrix.flavor }}"; fi
           
           # Print what we end up with
           ls -lsa releases
@@ -146,4 +146,4 @@ jobs:
         if: github.event_name == 'release'
         with:
           draft: true
-          files: dist/@lando/gui-prototype-${{ steps.vars.outputs.SOURCE_TAG }}.${{ matrix.flavor }}
+          files: dist/@lando/desktop-${{ steps.vars.outputs.SOURCE_TAG }}.${{ matrix.flavor }}

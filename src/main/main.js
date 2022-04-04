@@ -12,7 +12,7 @@ if (!isProd) {
   app.getVersion = () => version;
 
   // Sets our APPIMAGE for updater testing
-  process.env.APPIMAGE = path.join(__dirname, '..', '..', 'dist', '@lando', `gui-prototype-x64-v${app.getVersion()}.AppImage`);
+  process.env.APPIMAGE = path.join(__dirname, '..', '..', 'dist', '@lando', `desktop-x64-v${app.getVersion()}.AppImage`);
 }
 
 // Load this later because we need the version to be reset

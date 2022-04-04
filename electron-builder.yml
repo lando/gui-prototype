@@ -1,5 +1,5 @@
-appId: lando.gui-prototype
-productName: gui-prototype
+appId: lando.desktop
+productName: desktop
 artifactName: "${name}-${arch}-v${version}.${ext}"
 detectUpdateChannel: true
 generateUpdatesFilesForAllChannels: true
