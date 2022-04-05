@@ -14,18 +14,14 @@
   "extends": [
     "eslint:recommended",
     "google",
-    "plugin:vue/recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:vue/recommended"
   ],
   "plugins": [
-    "vue", 
-    "@typescript-eslint"
+    "vue"
   ],
   "rules": {
     "linebreak-style": 0,
     "require-jsdoc" : 0,
-    "@typescript-eslint/no-var-requires": "off",
     "vue/multi-word-component-names": "off",
     "arrow-parens": ["error",
       "as-needed"

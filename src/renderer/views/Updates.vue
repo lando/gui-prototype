@@ -77,7 +77,6 @@
 
 <script setup>
 import {ref} from 'vue';
-import {dayjs} from 'dayjs';
 const {ipcRenderer} = window;
 
 // Set Current App version

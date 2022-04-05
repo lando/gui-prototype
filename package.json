@@ -8,7 +8,7 @@
     "build": "mkdir -p ./dist/@lando && node scripts/build.js && electron-builder",
     "build:win": "mkdir dist\\@lando && node scripts/build.js && electron-builder",
     "build:dryrun": "mkdir -p ./dist/@lando && node scripts/build.js && CSC_IDENTITY_AUTO_DISCOVERY=false && electron-builder --publish never",
-    "lint": "eslint . --ext .js,.ts,.vue",
+    "lint": "eslint . --ext .js,.vue",
     "release": "bump --prompt --tag --all --push"
   },
   "repository": "https://github.com/lando/desktop",
@@ -19,8 +19,6 @@
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.17.0",
-    "@typescript-eslint/eslint-plugin": "^5.15.0",
-    "@typescript-eslint/parser": "^5.15.0",
     "@vitejs/plugin-vue": "^2.2.4",
     "@vue/cli": "^5.0.1",
     "babel-eslint": "^10.1.0",
@@ -35,7 +33,6 @@
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-vue": "^8.5.0",
     "sass": "^1.49.9",
-    "typescript": "^4.6.2",
     "version-bump-prompt": "^4.2.1",
     "vite": "^2.8.6"
   },
