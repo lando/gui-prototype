@@ -20,8 +20,38 @@
           <el-switch v-model="config.updateNotifications" />
         </div>
       </el-tab-pane>
+      <el-tab-pane
+        label="Logs"
+        name="second"
+      >
+        <el-input
+          v-model="errorLog"
+          :rows="10"
+          type="textarea"
+          disabled="true"
+        />
+
+        <el-button type="danger" @click="showFactoryReset = true">Factory Reset</el-button>
+      </el-tab-pane>
     </el-tabs>
   </div>
+
+  <el-dialog
+    v-model="showFactoryReset"
+    title="Factory Reset"
+    width="70%"
+    :before-close="handleClose"
+  >
+    <span>Are you sure you want to reset Lando to its factory default settings?</span>
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="dialogVisible = false">Cancel</el-button>
+        <el-button type="primary" @click="dialogVisible = false"
+          >Confirm</el-button
+        >
+      </span>
+    </template>
+  </el-dialog>
 </template>
 
 <script setup>
@@ -33,6 +63,10 @@ const config = ref({
 });
 
 const activeName = ref('first');
+
+const errorLog = ref('Stream of console output fed in here.');
+
+const showFactoryReset = ref(false);
 
 // const activeName = ref('first');
 </script>
