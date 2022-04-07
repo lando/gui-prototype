@@ -38,9 +38,14 @@
 import {ref} from 'vue';
 const {sudo} = window;
 
+console.log(navigator.onLine)
+const updateOnlineStatus = () => navigator.onLine ? 'online' : 'offline';
+window.addEventListener('online',  updateOnlineStatus)
+window.addEventListener('offline',  updateOnlineStatus)
+
 const status = ref({
   docker: 'success',
-  internet: 'success',
+  internet: updateOnlineStatus() == 'online' ? 'success' : 'error',
   landoProxy: 'success',
   landoCurrent: 'success',
   landoVersion: '3.6.2',
