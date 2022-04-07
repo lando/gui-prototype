@@ -32,13 +32,20 @@
             disabled="true"
           />
         </el-row>
-        
+
         <el-row>
-          <el-button @click="downloadLog">Download Log</el-button>
+          <el-button @click="downloadLog">
+            Download Log
+          </el-button>
         </el-row>
 
         <el-row>
-          <el-button type="danger" @click="showFactoryReset = true">Factory Reset</el-button>
+          <el-button
+            type="danger"
+            @click="showFactoryReset = true"
+          >
+            Factory Reset
+          </el-button>
         </el-row>
       </el-tab-pane>
     </el-tabs>
@@ -54,9 +61,10 @@
     <template #footer>
       <span class="dialog-footer">
         <el-button @click="dialogVisible = false">Cancel</el-button>
-        <el-button type="primary" @click="dialogVisible = false"
-          >Confirm</el-button
-        >
+        <el-button
+          type="primary"
+          @click="dialogVisible = false"
+        >Confirm</el-button>
       </span>
     </template>
   </el-dialog>
@@ -78,7 +86,7 @@ const errorLog = ref('Stream of console output fed in here.');
 const showFactoryReset = ref(false);
 
 const downloadLog = () => {
-  //Logic to download the Lando log for debugging.
+  // Logic to download the Lando log for debugging.
 };
 
 // const activeName = ref('first');
