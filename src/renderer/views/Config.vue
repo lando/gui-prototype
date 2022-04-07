@@ -49,25 +49,25 @@
         </el-row>
       </el-tab-pane>
     </el-tabs>
+    <el-dialog
+      v-model="showFactoryReset"
+      title="Factory Reset"
+      width="70%"
+      :before-close="handleClose"
+    >
+      <span>Are you sure you want to reset Lando to its factory default settings?</span>
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button @click="dialogVisible = false">Cancel</el-button>
+          <el-button
+            type="primary"
+            @click="dialogVisible = false"
+          >Confirm</el-button>
+        </span>
+      </template>
+    </el-dialog>
   </div>
 
-  <el-dialog
-    v-model="showFactoryReset"
-    title="Factory Reset"
-    width="70%"
-    :before-close="handleClose"
-  >
-    <span>Are you sure you want to reset Lando to its factory default settings?</span>
-    <template #footer>
-      <span class="dialog-footer">
-        <el-button @click="dialogVisible = false">Cancel</el-button>
-        <el-button
-          type="primary"
-          @click="dialogVisible = false"
-        >Confirm</el-button>
-      </span>
-    </template>
-  </el-dialog>
 </template>
 
 <script setup>
