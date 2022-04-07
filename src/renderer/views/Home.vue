@@ -38,10 +38,10 @@
 import {ref} from 'vue';
 const {sudo} = window;
 
-console.log(navigator.onLine)
+// Basic online check
 const updateOnlineStatus = () => navigator.onLine ? 'online' : 'offline';
-window.addEventListener('online',  updateOnlineStatus)
-window.addEventListener('offline',  updateOnlineStatus)
+window.addEventListener('online', updateOnlineStatus);
+window.addEventListener('offline', updateOnlineStatus);
 
 const status = ref({
   docker: 'success',
