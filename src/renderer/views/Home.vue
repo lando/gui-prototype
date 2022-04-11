@@ -31,12 +31,15 @@
     <el-button @click="testSudo">
       Sudo Test
     </el-button>
+    <el-button @click="testLogin">
+      Login Test
+    </el-button>
   </div>
 </template>
 
 <script setup>
 import {ref} from 'vue';
-const {sudo} = window;
+const {sudo, auth} = window;
 
 // Basic online check
 const updateOnlineStatus = () => navigator.onLine ? 'online' : 'offline';
@@ -65,6 +68,15 @@ function testSudo() {
         console.log('stdout: ' + stdout);
       },
   );
+}
+
+// test login
+async function testLogin() {
+  try {
+    await auth.refreshTokens();
+  } catch (err) {
+    auth.createAuthWindow();
+  }
 }
 </script>
 

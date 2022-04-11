@@ -13,6 +13,9 @@ if (!isProd) {
 
   // Sets our APPIMAGE for updater testing
   process.env.APPIMAGE = path.join(__dirname, '..', '..', 'dist', '@lando', `desktop-x64-v${app.getVersion()}.AppImage`);
+
+  // Load .env file
+  require('dotenv-safe').config();
 }
 
 // Load this later because we need the version to be reset
