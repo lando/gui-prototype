@@ -11,7 +11,7 @@ function createAuthWindow() {
     height: 600,
     webPreferences: {
       nodeIntegration: false,
-      enableRemoteModule: true
+      devTools: false
     }
   });
 
