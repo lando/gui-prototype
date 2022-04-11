@@ -1,23 +1,24 @@
 const { BrowserWindow } = require('@electron/remote')
 const authService = require('./auth-service');
 
-let win = null;
+let authWindow = null;
 
 function createAuthWindow() {
   destroyAuthWin();
 
-  win = new BrowserWindow({
+  authWindow = new BrowserWindow({
     width: 1000,
     height: 600,
     webPreferences: {
-      nodeIntegration: false,
-      devTools: false
+      nodeIntegration: false
     }
   });
 
-  win.loadURL(authService.getAuthenticationURL());
+  authWindow.loadURL(authService.getAuthenticationURL());
 
-  const {session: {webRequest}} = win.webContents;
+  //authWindow.setMenuBarVisibility(false);
+
+  const {session: {webRequest}} = authWindow.webContents;
 
   const filter = {
     urls: [
@@ -30,19 +31,19 @@ function createAuthWindow() {
     return destroyAuthWin();
   });
 
-  win.on('authenticated', () => {
+  authWindow.on('authenticated', () => {
     destroyAuthWin();
   });
 
-  win.on('closed', () => {
-    win = null;
+  authWindow.on('closed', () => {
+    authWindow = null;
   });
 }
 
 function destroyAuthWin() {
-  if (!win) return;
-  win.close();
-  win = null;
+  if (!authWindow) return;
+  authWindow.close();
+  authWindow = null;
 }
 
 function createLogoutWindow() {
