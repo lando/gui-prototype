@@ -1,6 +1,7 @@
 const {app, BrowserWindow, ipcMain, shell} = require('electron');
 const path = require('path');
 
+
 // Determine whether we are in production or not
 const isProd = (process.env.NODE_ENV !== 'development');
 
@@ -43,6 +44,7 @@ function createWindow() {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: false,
       contextIsolation: true,
+      enableRemoteModule: true,
     },
   });
 
@@ -56,6 +58,10 @@ function createWindow() {
   mainWindow.webContents.on('did-start-loading', () => {
     mainWindow.webContents.send('renderer-app-version', {version: app.getVersion()});
   });
+
+  // Needed to init the remote module
+  require('@electron/remote/main').initialize();
+  require("@electron/remote/main").enable(mainWindow.webContents);
 }
 
 app.on('ready', () => {

@@ -1,4 +1,4 @@
-const {BrowserWindow} = require('electron');
+const { BrowserWindow } = require('@electron/remote')
 const authService = require('./auth-service');
 
 let win = null;
@@ -11,7 +11,7 @@ function createAuthWindow() {
     height: 600,
     webPreferences: {
       nodeIntegration: false,
-      enableRemoteModule: false
+      enableRemoteModule: true
     }
   });
 

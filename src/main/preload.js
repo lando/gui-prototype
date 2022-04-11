@@ -5,8 +5,6 @@ const sudo = require('sudo-prompt');
 const authProcess = require('../auth/auth-process');
 const authService = require('../auth/auth-service');
 
-console.log(authProcess)
-
 // Valid event channels
 const validChannels = [
   'check-for-updates',
