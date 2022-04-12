@@ -49,8 +49,7 @@ function createWindow() {
   });
 
   if (!isProd) {
-    const rendererPort = process.argv[2];
-    mainWindow.loadURL(`http://localhost:${rendererPort}`);
+    mainWindow.loadURL('http://localhost:8080');
   } else {
     mainWindow.loadFile(path.join(app.getAppPath(), 'renderer', 'index.html'));
   }

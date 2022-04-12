@@ -22,7 +22,9 @@ function createAuthWindow() {
 
   const filter = {
     urls: [
-      'file:///callback*',
+      'file:///loginreg*',
+      'http://localhost/loginreg*',
+      'http://localhost:8080/loginreg*'
     ],
   };
 
