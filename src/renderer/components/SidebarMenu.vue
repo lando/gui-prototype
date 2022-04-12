@@ -2,7 +2,7 @@
   <el-menu
     default-active="/"
     class="el-menu-vertical-demo"
-    router="true"
+    :router="true"
   >
     <el-menu-item index="/">
       <img
@@ -16,10 +16,10 @@
         Plugins
       </template>
     </el-menu-item>
-    <el-menu-item index="2">
+    <el-menu-item index="/install">
       <el-icon><lock /></el-icon>
       <template #title>
-        Secrets
+        Install
       </template>
     </el-menu-item>
     <el-menu-item index="3">
