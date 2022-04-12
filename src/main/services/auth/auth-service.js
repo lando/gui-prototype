@@ -6,7 +6,7 @@ const os = require('os');
 
 const {AUTH0_DOMAIN, AUTH0_CLIENT_ID} = process.env;
 
-const redirectUri = 'http://localhost/callback';
+const redirectUri = 'file:///callback';
 
 const keytarService = 'electron-openid-oauth';
 const keytarAccount = os.userInfo().username;

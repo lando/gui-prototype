@@ -22,7 +22,7 @@ function createAuthWindow() {
 
   const filter = {
     urls: [
-      'http://localhost/callback*',
+      'file:///callback*',
     ],
   };
 
