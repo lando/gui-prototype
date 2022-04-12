@@ -24,7 +24,7 @@ function createAuthWindow() {
     urls: [
       'file:///loginreg*',
       'http://localhost/loginreg*',
-      'http://localhost:8080/loginreg*'
+      'http://localhost:8080/loginreg*',
     ],
   };
 
