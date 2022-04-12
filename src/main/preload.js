@@ -2,6 +2,8 @@
 // https://nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration
 import {contextBridge, ipcRenderer} from 'electron';
 const sudo = require('sudo-prompt');
+const authProcess = require('./services/auth/auth-process');
+const authService = require('./services/auth/auth-service');
 
 // Valid event channels
 const validChannels = [
@@ -33,4 +35,17 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
 // Expose the sudo exec to the front event
 contextBridge.exposeInMainWorld('sudo', {
   exec: sudo.exec,
+});
+
+// Export the auth processes
+contextBridge.exposeInMainWorld('auth', {
+  createAuthWindow: authProcess.createAuthWindow,
+  createLogoutWindow: authProcess.createLogoutWindow,
+  getAccessToken: authService.getAccessToken,
+  getAuthenticationURL: authService.getAuthenticationURL,
+  getLogOutUrl: authService.getLogOutUrl,
+  getProfile: authService.getProfile,
+  loadTokens: authService.loadTokens,
+  logout: authService.logout,
+  refreshTokens: authService.refreshTokens,
 });

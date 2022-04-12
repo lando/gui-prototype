@@ -1,10 +1,13 @@
-import {createWebHistory, createRouter} from 'vue-router';
+import {createWebHashHistory, createRouter} from 'vue-router';
 import Config from './views/Config.vue';
 import Home from './views/Home.vue';
 import Install from './views/Install.vue';
 import Plugin from './views/Plugin.vue';
 import Plugins from './views/Plugins.vue';
 import Updates from './views/Updates.vue';
+import Testing from './views/Testing.vue';
+import LoginReg from './views/LoginReg.vue';
+
 
 const routes = [
   {
@@ -36,10 +39,20 @@ const routes = [
     name: 'Install',
     component: Install,
   },
+  {
+    path: '/testing',
+    name: 'testing',
+    component: Testing,
+  },
+  {
+    path: '/loginreg',
+    name: 'Login / Register',
+    component: LoginReg,
+  },
 ];
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes,
 });
 

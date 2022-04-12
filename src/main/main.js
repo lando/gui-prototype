@@ -1,6 +1,7 @@
 const {app, BrowserWindow, ipcMain, shell} = require('electron');
 const path = require('path');
 
+
 // Determine whether we are in production or not
 const isProd = (process.env.NODE_ENV !== 'development');
 
@@ -13,6 +14,9 @@ if (!isProd) {
 
   // Sets our APPIMAGE for updater testing
   process.env.APPIMAGE = path.join(__dirname, '..', '..', 'dist', '@lando', `desktop-x64-v${app.getVersion()}.AppImage`);
+
+  // Load .env file
+  require('dotenv-safe').config();
 }
 
 // Load this later because we need the version to be reset
@@ -40,12 +44,12 @@ function createWindow() {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: false,
       contextIsolation: true,
+      enableRemoteModule: true,
     },
   });
 
   if (!isProd) {
-    const rendererPort = process.argv[2];
-    mainWindow.loadURL(`http://localhost:${rendererPort}`);
+    mainWindow.loadURL('http://localhost:8080');
   } else {
     mainWindow.loadFile(path.join(app.getAppPath(), 'renderer', 'index.html'));
   }
@@ -53,6 +57,10 @@ function createWindow() {
   mainWindow.webContents.on('did-start-loading', () => {
     mainWindow.webContents.send('renderer-app-version', {version: app.getVersion()});
   });
+
+  // Needed to init the remote module
+  require('@electron/remote/main').initialize();
+  require('@electron/remote/main').enable(mainWindow.webContents);
 }
 
 app.on('ready', () => {
