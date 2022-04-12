@@ -4,6 +4,7 @@ import Home from './views/Home.vue';
 import Plugin from './views/Plugin.vue';
 import Plugins from './views/Plugins.vue';
 import Updates from './views/Updates.vue';
+import Testing from './views/Testing.vue';
 
 const routes = [
   {
@@ -29,6 +30,11 @@ const routes = [
     path: '/config',
     name: 'Config',
     component: Config,
+  },
+  {
+    path: '/testing',
+    name: 'testing',
+    component: Testing,
   },
 ];
 

@@ -34,6 +34,16 @@
         Updates
       </template>
     </el-menu-item>
+
+    <div class="testing">
+      <el-menu-item index="/testing" v-if="!isProd">
+        <el-icon><setting /></el-icon>
+        <template #title>
+          Testing
+        </template>
+      </el-menu-item>
+    </div>
+    
     <div class="bottom-menu">
       <el-menu-item index="4">
         <el-icon><avatar /></el-icon>
@@ -60,6 +70,9 @@ import {
   Download,
   Setting,
 } from '@element-plus/icons-vue';
+
+
+const isProd = (process.env.NODE_ENV !== 'development');
 </script>
 
 <style lang="scss">
@@ -89,5 +102,9 @@ import {
 
 .el-popper {
   font-family: "Lexend";
+}
+
+.testing {
+  padding: 1em 0;
 }
 </style>
