@@ -47,5 +47,5 @@ contextBridge.exposeInMainWorld('auth', {
   getProfile: authService.getProfile,
   loadTokens: authService.loadTokens,
   logout: authService.logout,
-  refreshTokens: authService.refreshTokens
+  refreshTokens: authService.refreshTokens,
 });

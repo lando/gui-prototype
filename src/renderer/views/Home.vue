@@ -28,16 +28,11 @@
         title="Lando Proxy Running"
       />
     </el-row>
-
-    <el-button @click="testLogin">
-      Login Test
-    </el-button>
   </div>
 </template>
 
 <script setup>
 import {ref} from 'vue';
-const {auth} = window;
 
 // Basic online check
 const updateOnlineStatus = () => navigator.onLine ? 'online' : 'offline';
@@ -51,15 +46,6 @@ const status = ref({
   landoCurrent: 'success',
   landoVersion: '3.6.2',
 });
-
-// test login
-async function testLogin() {
-  try {
-    await auth.refreshTokens();
-  } catch (err) {
-    auth.createAuthWindow();
-  }
-}
 </script>
 
 <style lang="scss" scoped>

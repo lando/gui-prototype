@@ -5,6 +5,8 @@ import Plugin from './views/Plugin.vue';
 import Plugins from './views/Plugins.vue';
 import Updates from './views/Updates.vue';
 import Testing from './views/Testing.vue';
+import LoginReg from './views/LoginReg.vue';
+
 
 const routes = [
   {
@@ -35,6 +37,11 @@ const routes = [
     path: '/testing',
     name: 'testing',
     component: Testing,
+  },
+  {
+    path: '/loginreg',
+    name: 'Login / Register',
+    component: LoginReg,
   },
 ];
 

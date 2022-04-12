@@ -36,16 +36,19 @@
     </el-menu-item>
 
     <div class="testing">
-      <el-menu-item index="/testing" v-if="!isProd">
+      <el-menu-item
+        v-if="!isProd"
+        index="/testing"
+      >
         <el-icon><setting /></el-icon>
         <template #title>
           Testing
         </template>
       </el-menu-item>
     </div>
-    
+
     <div class="bottom-menu">
-      <el-menu-item index="4">
+      <el-menu-item index="/loginreg">
         <el-icon><avatar /></el-icon>
         <template #title>
           Login/Register

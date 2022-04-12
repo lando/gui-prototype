@@ -1,4 +1,4 @@
-const { BrowserWindow } = require('@electron/remote')
+const {BrowserWindow} = require('@electron/remote');
 const authService = require('./auth-service');
 
 let authWindow = null;
@@ -10,20 +10,20 @@ function createAuthWindow() {
     width: 1000,
     height: 600,
     webPreferences: {
-      nodeIntegration: false
-    }
+      nodeIntegration: false,
+    },
   });
 
   authWindow.loadURL(authService.getAuthenticationURL());
 
-  //authWindow.setMenuBarVisibility(false);
+  // authWindow.setMenuBarVisibility(false);
 
   const {session: {webRequest}} = authWindow.webContents;
 
   const filter = {
     urls: [
-      'http://localhost/callback*'
-    ]
+      'http://localhost/callback*',
+    ],
   };
 
   webRequest.onBeforeRequest(filter, async ({url}) => {

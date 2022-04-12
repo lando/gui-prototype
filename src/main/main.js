@@ -47,7 +47,7 @@ function createWindow() {
       enableRemoteModule: true,
     },
   });
-  
+
   if (!isProd) {
     const rendererPort = process.argv[2];
     mainWindow.loadURL(`http://localhost:${rendererPort}`);
@@ -61,7 +61,7 @@ function createWindow() {
 
   // Needed to init the remote module
   require('@electron/remote/main').initialize();
-  require("@electron/remote/main").enable(mainWindow.webContents);
+  require('@electron/remote/main').enable(mainWindow.webContents);
 }
 
 app.on('ready', () => {

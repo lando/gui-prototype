@@ -1,14 +1,14 @@
-const jwtDecode = require("jwt-decode");
-const axios = require("axios");
-const url = require("url");
-const keytar = require("keytar");
-const os = require("os");
+const jwtDecode = require('jwt-decode');
+const axios = require('axios');
+const url = require('url');
+const keytar = require('keytar');
+const os = require('os');
 
-const { AUTH0_DOMAIN, AUTH0_CLIENT_ID } = process.env;
+const {AUTH0_DOMAIN, AUTH0_CLIENT_ID} = process.env;
 
-const redirectUri = "http://localhost/callback";
+const redirectUri = 'http://localhost/callback';
 
-const keytarService = "electron-openid-oauth";
+const keytarService = 'electron-openid-oauth';
 const keytarAccount = os.userInfo().username;
 
 let accessToken = null;
@@ -25,15 +25,15 @@ function getProfile() {
 
 function getAuthenticationURL() {
   return (
-    "https://" +
+    'https://' +
     AUTH0_DOMAIN +
-    "/authorize?" +
-    "scope=openid profile offline_access&" +
-    "response_type=code&" +
-    "client_id=" +
+    '/authorize?' +
+    'scope=openid profile offline_access&' +
+    'response_type=code&' +
+    'client_id=' +
     AUTH0_CLIENT_ID +
-    "&" +
-    "redirect_uri=" +
+    '&' +
+    'redirect_uri=' +
     redirectUri
   );
 }
@@ -43,11 +43,11 @@ async function refreshTokens() {
 
   if (refreshToken) {
     const refreshOptions = {
-      method: "POST",
+      method: 'POST',
       url: `https://${AUTH0_DOMAIN}/oauth/token`,
-      headers: { "content-type": "application/json" },
+      headers: {'content-type': 'application/json'},
       data: {
-        grant_type: "refresh_token",
+        grant_type: 'refresh_token',
         client_id: AUTH0_CLIENT_ID,
         refresh_token: refreshToken,
       },
@@ -64,7 +64,7 @@ async function refreshTokens() {
       throw error;
     }
   } else {
-    throw new Error("No available refresh token.");
+    throw new Error('No available refresh token.');
   }
 }
 
@@ -73,17 +73,17 @@ async function loadTokens(callbackURL) {
   const query = urlParts.query;
 
   const exchangeOptions = {
-    grant_type: "authorization_code",
+    grant_type: 'authorization_code',
     client_id: AUTH0_CLIENT_ID,
     code: query.code,
     redirect_uri: redirectUri,
   };
 
   const options = {
-    method: "POST",
+    method: 'POST',
     url: `https://${AUTH0_DOMAIN}/oauth/token`,
     headers: {
-      "content-type": "application/json",
+      'content-type': 'application/json',
     },
     data: JSON.stringify(exchangeOptions),
   };
