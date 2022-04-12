@@ -34,8 +34,21 @@
         Updates
       </template>
     </el-menu-item>
+
+    <div class="testing">
+      <el-menu-item
+        v-if="!isProd"
+        index="/testing"
+      >
+        <el-icon><setting /></el-icon>
+        <template #title>
+          Testing
+        </template>
+      </el-menu-item>
+    </div>
+
     <div class="bottom-menu">
-      <el-menu-item index="4">
+      <el-menu-item index="/loginreg">
         <el-icon><avatar /></el-icon>
         <template #title>
           Login/Register
@@ -60,6 +73,9 @@ import {
   Download,
   Setting,
 } from '@element-plus/icons-vue';
+
+
+const isProd = (process.env.NODE_ENV !== 'development');
 </script>
 
 <style lang="scss">
@@ -89,5 +105,9 @@ import {
 
 .el-popper {
   font-family: "Lexend";
+}
+
+.testing {
+  padding: 1em 0;
 }
 </style>
