@@ -1,5 +1,6 @@
 const {BrowserWindow} = require('@electron/remote');
 const authService = require('./auth-service');
+const {AUTH0_DOMAIN} = process.env;
 
 let authWindow = null;
 
@@ -7,8 +8,8 @@ function createAuthWindow() {
   destroyAuthWin();
 
   authWindow = new BrowserWindow({
-    width: 1000,
-    height: 600,
+    width: 425,
+    height: 750,
     webPreferences: {
       nodeIntegration: false,
     },
@@ -22,9 +23,7 @@ function createAuthWindow() {
 
   const filter = {
     urls: [
-      'file:///loginreg*',
-      'http://localhost/loginreg*',
-      'http://localhost:8080/loginreg*',
+      `https://${AUTH0_DOMAIN}/mobile*`,
     ],
   };
 
@@ -39,14 +38,6 @@ function createAuthWindow() {
 
   authWindow.on('closed', () => {
     authWindow = null;
-  });
-
-  authWindow.webContents.on('will-navigate', function(event, url) {
-    alert('hi2')
-  });
-
-  authWindow.webContents.on('did-get-redirect-request', (event, oldUrl, newUrl) => {
-    alert('hi')
   });
 }
 

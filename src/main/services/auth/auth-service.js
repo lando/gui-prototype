@@ -5,10 +5,8 @@ const keytar = require('keytar');
 const os = require('os');
 
 const {AUTH0_DOMAIN, AUTH0_CLIENT_ID} = process.env;
-const rendererPort = process.argv[2];
 
-const redirectUri = process.env.NODE_ENV !== 'development' ?
-  'file:///loginreg' : `http://localhost:8080/loginreg`;
+const redirectUri = `https://${AUTH0_DOMAIN}/mobile`;
 
 const keytarService = 'electron-openid-oauth';
 const keytarAccount = os.userInfo().username;
