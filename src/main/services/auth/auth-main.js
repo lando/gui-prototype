@@ -40,11 +40,15 @@ function createAuthWindow() {
   authWindow.on('closed', () => {
     authWindow = null;
   });
-}
 
-authWindow.webContents.on('did-get-redirect-request', (event, oldUrl, newUrl) => {
-  console.table(event)
-});
+  authWindow.webContents.on('will-navigate', function(event, url) {
+    alert('hi2')
+  });
+
+  authWindow.webContents.on('did-get-redirect-request', (event, oldUrl, newUrl) => {
+    alert('hi')
+  });
+}
 
 function destroyAuthWin() {
   if (!authWindow) return;
@@ -54,7 +58,11 @@ function destroyAuthWin() {
 
 function createLogoutWindow() {
   const logoutWindow = new BrowserWindow({
-    show: false,
+    width: 300,
+    height: 150,
+    webPreferences: {
+      nodeIntegration: false,
+    },
   });
 
   logoutWindow.loadURL(authService.getLogOutUrl());

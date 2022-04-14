@@ -2,7 +2,7 @@
 // https://nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration
 import {contextBridge, ipcRenderer} from 'electron';
 const sudo = require('sudo-prompt');
-const authMain = require('./services/auth/auth-main');
+const authMain = require('./services/auth/auth-main')
 const authService = require('./services/auth/auth-service');
 
 // Valid event channels
