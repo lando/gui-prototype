@@ -42,6 +42,10 @@ function createAuthWindow() {
   });
 }
 
+authWindow.webContents.on('did-get-redirect-request', (event, oldUrl, newUrl) => {
+  console.table(event)
+});
+
 function destroyAuthWin() {
   if (!authWindow) return;
   authWindow.close();
