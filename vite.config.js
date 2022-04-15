@@ -1,18 +1,14 @@
 import {defineConfig, loadEnv} from 'vite';
 import vuePlugin from '@vitejs/plugin-vue';
 import path from 'path';
-const fs = require('fs');
+
+// Load .env file
+require('dotenv').config();
 
 /**
  * https://vitejs.dev/config
  */
-export default defineConfig(({ command, mode }) => {
-  // Handle our env file need be.
-  const envFile = '.env';
-  if (fs.existsSync(path.join(__dirname, envFile))) {
-    require('dotenv').config({ path:  envFile });
-  }
-  
+export default defineConfig(({ command, mode }) => {  
   return {
     root: path.join(__dirname, 'src', 'renderer'),
     publicDir: 'public',
@@ -40,6 +36,10 @@ export default defineConfig(({ command, mode }) => {
           additionalData: `@import "@/public/styles/index.scss";`,
         },
       },
+    },
+    define: {
+      "process.env.NODE_ENV": `"${process.env.NODE_ENV}"`,
+      VITE_AUTH0_DOMAIN: `"${process.env.VITE_AUTH0_DOMAIN}"`
     },
   }
 });
