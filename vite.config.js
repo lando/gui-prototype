@@ -2,9 +2,6 @@ import {defineConfig} from 'vite';
 import vuePlugin from '@vitejs/plugin-vue';
 import path from 'path';
 
-// Load .env file
-require('dotenv').config();
-
 /**
  * https://vitejs.dev/config
  */

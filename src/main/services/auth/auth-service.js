@@ -7,9 +7,10 @@ const {BrowserWindow} = process.type === 'browser' ?
   require('electron') :
   require('@electron/remote');
 
-const {VITE_AUTH0_DOMAIN, VITE_AUTH0_CLIENT_ID} = process.env;
+const AUTH0_DOMAIN = "dev-58jbozcd.us.auth0.com";
+const AUTH0_CLIENT_ID = "jaFOjJ2mxjUP4eDirSJjWidT1w1eFvW7";
 
-const redirectUri = `https://${VITE_AUTH0_DOMAIN}/mobile`;
+const redirectUri = `https://${AUTH0_DOMAIN}/mobile`;
 
 const keytarService = 'electron-openid-oauth';
 const keytarAccount = os.userInfo().username;
@@ -30,12 +31,12 @@ function getProfile() {
 function getAuthenticationURL() {
   return (
     'https://' +
-    VITE_AUTH0_DOMAIN +
+    AUTH0_DOMAIN +
     '/authorize?' +
     'scope=openid profile offline_access&' +
     'response_type=code&' +
     'client_id=' +
-    VITE_AUTH0_CLIENT_ID +
+    AUTH0_CLIENT_ID +
     '&' +
     'redirect_uri=' +
     redirectUri
@@ -48,11 +49,11 @@ async function refreshTokens() {
   if (refreshToken) {
     const refreshOptions = {
       method: 'POST',
-      url: `https://${VITE_AUTH0_DOMAIN}/oauth/token`,
+      url: `https://${AUTH0_DOMAIN}/oauth/token`,
       headers: {'content-type': 'application/json'},
       data: {
         grant_type: 'refresh_token',
-        client_id: VITE_AUTH0_CLIENT_ID,
+        client_id: AUTH0_CLIENT_ID,
         refresh_token: refreshToken,
       },
     };
@@ -78,14 +79,14 @@ async function loadTokens(callbackURL) {
 
   const exchangeOptions = {
     grant_type: 'authorization_code',
-    client_id: VITE_AUTH0_CLIENT_ID,
+    client_id: AUTH0_CLIENT_ID,
     code: query.code,
     redirect_uri: redirectUri,
   };
 
   const options = {
     method: 'POST',
-    url: `https://${VITE_AUTH0_DOMAIN}/oauth/token`,
+    url: `https://${AUTH0_DOMAIN}/oauth/token`,
     headers: {
       'content-type': 'application/json',
     },
@@ -117,7 +118,7 @@ async function logout() {
 }
 
 function getLogOutUrl() {
-  return `https://${VITE_AUTH0_DOMAIN}/v2/logout`;
+  return `https://${AUTH0_DOMAIN}/v2/logout`;
 }
 
 function createAuthWindow() {
@@ -140,7 +141,7 @@ function createAuthWindow() {
 
   const filter = {
     urls: [
-      `https://${VITE_AUTH0_DOMAIN}/mobile*`,
+      `https://${AUTH0_DOMAIN}/mobile*`,
     ],
   };
 
