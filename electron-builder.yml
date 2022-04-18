@@ -78,3 +78,5 @@ files:
     to: static
     filter:
       - "**/*"
+  extraResources:
+   - "./node_modules/@electron/remote/**"

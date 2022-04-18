@@ -3,7 +3,9 @@ const axios = require('axios');
 const url = require('url');
 const keytar = require('keytar');
 const os = require('os');
-const {BrowserWindow} = require('@electron/remote');
+const {BrowserWindow} = process.type === 'browser' 
+  ? require('electron')
+  : require('@electron/remote');
 
 function init() {
   if (process.env.AUTH0_DOMAIN === undefined) {
@@ -132,6 +134,7 @@ function createAuthWindow() {
     height: 750,
     webPreferences: {
       nodeIntegration: false,
+      enableRemoteModule: true,
     },
   });
 
@@ -173,6 +176,7 @@ function createLogoutWindow() {
     height: 150,
     webPreferences: {
       nodeIntegration: false,
+      enableRemoteModule: true
     },
   });
 

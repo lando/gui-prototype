@@ -1,7 +1,12 @@
 const {app, BrowserWindow, ipcMain, shell} = require('electron');
 const path = require('path');
-const authService = require('./services/auth/auth-service');
 
+// Enables the remote auth window.
+const remote = require('@electron/remote/main');
+remote.initialize();
+
+// Now init auth services
+const authService = require('./services/auth/auth-service');
 authService.init();
 
 // Determine whether we are in production or not
@@ -47,6 +52,9 @@ function createWindow() {
     },
   });
 
+  // Passes the content to the auth window as needed
+  remote.enable(mainWindow.webContents);
+
   if (!isProd) {
     mainWindow.loadURL('http://localhost:8080');
   } else {
@@ -56,10 +64,6 @@ function createWindow() {
   mainWindow.webContents.on('did-start-loading', () => {
     mainWindow.webContents.send('renderer-app-version', {version: app.getVersion()});
   });
-
-  // Needed to init the remote module
-  require('@electron/remote/main').initialize();
-  require('@electron/remote/main').enable(mainWindow.webContents);
 }
 
 app.on('ready', () => {
