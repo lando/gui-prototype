@@ -3,9 +3,9 @@ const axios = require('axios');
 const url = require('url');
 const keytar = require('keytar');
 const os = require('os');
-const {BrowserWindow} = process.type === 'browser' 
-  ? require('electron')
-  : require('@electron/remote');
+const {BrowserWindow} = process.type === 'browser' ?
+  require('electron') :
+  require('@electron/remote');
 
 const {VITE_AUTH0_DOMAIN, VITE_AUTH0_CLIENT_ID} = process.env;
 
@@ -170,7 +170,7 @@ function createLogoutWindow() {
     height: 150,
     webPreferences: {
       nodeIntegration: false,
-      enableRemoteModule: true
+      enableRemoteModule: true,
     },
   });
 

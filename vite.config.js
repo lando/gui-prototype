@@ -1,4 +1,4 @@
-import {defineConfig, loadEnv} from 'vite';
+import {defineConfig} from 'vite';
 import vuePlugin from '@vitejs/plugin-vue';
 import path from 'path';
 
@@ -8,7 +8,7 @@ require('dotenv').config();
 /**
  * https://vitejs.dev/config
  */
-export default defineConfig(({ command, mode }) => {  
+export default defineConfig(({command, mode}) => {
   return {
     root: path.join(__dirname, 'src', 'renderer'),
     publicDir: 'public',
@@ -37,5 +37,5 @@ export default defineConfig(({ command, mode }) => {
         },
       },
     },
-  }
+  };
 });
