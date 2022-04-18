@@ -1,6 +1,9 @@
 const {app, BrowserWindow, ipcMain, shell} = require('electron');
 const path = require('path');
 
+// Enables the remote auth window.
+const remote = require('@electron/remote/main');
+remote.initialize();
 
 // Determine whether we are in production or not
 const isProd = (process.env.NODE_ENV !== 'development');
@@ -14,9 +17,6 @@ if (!isProd) {
 
   // Sets our APPIMAGE for updater testing
   process.env.APPIMAGE = path.join(__dirname, '..', '..', 'dist', '@lando', `desktop-x64-v${app.getVersion()}.AppImage`);
-
-  // Load .env file
-  require('dotenv-safe').config();
 }
 
 // Load this later because we need the version to be reset
@@ -48,6 +48,9 @@ function createWindow() {
     },
   });
 
+  // Passes the content to the auth window as needed
+  remote.enable(mainWindow.webContents);
+
   if (!isProd) {
     mainWindow.loadURL('http://localhost:8080');
   } else {
@@ -57,10 +60,6 @@ function createWindow() {
   mainWindow.webContents.on('did-start-loading', () => {
     mainWindow.webContents.send('renderer-app-version', {version: app.getVersion()});
   });
-
-  // Needed to init the remote module
-  require('@electron/remote/main').initialize();
-  require('@electron/remote/main').enable(mainWindow.webContents);
 }
 
 app.on('ready', () => {
