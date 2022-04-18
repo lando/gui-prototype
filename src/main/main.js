@@ -5,9 +5,6 @@ const path = require('path');
 const remote = require('@electron/remote/main');
 remote.initialize();
 
-// Now init auth services
-const authService = require('./services/auth/auth-service');
-
 // Determine whether we are in production or not
 const isProd = (process.env.NODE_ENV !== 'development');
 

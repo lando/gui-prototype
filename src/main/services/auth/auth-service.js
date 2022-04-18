@@ -7,8 +7,8 @@ const {BrowserWindow} = process.type === 'browser' ?
   require('electron') :
   require('@electron/remote');
 
-const AUTH0_DOMAIN = "dev-58jbozcd.us.auth0.com";
-const AUTH0_CLIENT_ID = "jaFOjJ2mxjUP4eDirSJjWidT1w1eFvW7";
+const AUTH0_DOMAIN = 'dev-58jbozcd.us.auth0.com';
+const AUTH0_CLIENT_ID = 'jaFOjJ2mxjUP4eDirSJjWidT1w1eFvW7';
 
 const redirectUri = `https://${AUTH0_DOMAIN}/mobile`;
 
