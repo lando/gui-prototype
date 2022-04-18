@@ -3,12 +3,14 @@ const axios = require('axios');
 const url = require('url');
 const keytar = require('keytar');
 const os = require('os');
+const {BrowserWindow} = process.type === 'browser' ?
+  require('electron') :
+  require('@electron/remote');
 
-const {AUTH0_DOMAIN, AUTH0_CLIENT_ID} = process.env;
-const rendererPort = process.argv[2];
+const AUTH0_DOMAIN = 'dev-58jbozcd.us.auth0.com';
+const AUTH0_CLIENT_ID = 'jaFOjJ2mxjUP4eDirSJjWidT1w1eFvW7';
 
-const redirectUri = process.env.NODE_ENV !== 'development' ?
-  'file:///loginreg' : `http://localhost:8080/loginreg`;
+const redirectUri = `https://${AUTH0_DOMAIN}/mobile`;
 
 const keytarService = 'electron-openid-oauth';
 const keytarAccount = os.userInfo().username;
@@ -16,6 +18,7 @@ const keytarAccount = os.userInfo().username;
 let accessToken = null;
 let profile = null;
 let refreshToken = null;
+let authWindow = null;
 
 function getAccessToken() {
   return accessToken;
@@ -118,6 +121,68 @@ function getLogOutUrl() {
   return `https://${AUTH0_DOMAIN}/v2/logout`;
 }
 
+function createAuthWindow() {
+  destroyAuthWin();
+
+  authWindow = new BrowserWindow({
+    width: 425,
+    height: 750,
+    webPreferences: {
+      nodeIntegration: false,
+      enableRemoteModule: true,
+    },
+  });
+
+  authWindow.loadURL(getAuthenticationURL());
+
+  // authWindow.setMenuBarVisibility(false);
+
+  const {session: {webRequest}} = authWindow.webContents;
+
+  const filter = {
+    urls: [
+      `https://${AUTH0_DOMAIN}/mobile*`,
+    ],
+  };
+
+  webRequest.onBeforeRequest(filter, async ({url}) => {
+    await loadTokens(url);
+    return destroyAuthWin();
+  });
+
+  authWindow.on('authenticated', () => {
+    destroyAuthWin();
+  });
+
+  authWindow.on('closed', () => {
+    authWindow = null;
+  });
+}
+
+function destroyAuthWin() {
+  if (!authWindow) return;
+  authWindow.close();
+  authWindow = null;
+}
+
+function createLogoutWindow() {
+  const logoutWindow = new BrowserWindow({
+    width: 300,
+    height: 150,
+    webPreferences: {
+      nodeIntegration: false,
+      enableRemoteModule: true,
+    },
+  });
+
+  logoutWindow.loadURL(getLogOutUrl());
+
+  logoutWindow.on('ready-to-show', async () => {
+    logoutWindow.close();
+    await logout();
+  });
+}
+
 module.exports = {
   getAccessToken,
   getAuthenticationURL,
@@ -126,4 +191,6 @@ module.exports = {
   loadTokens,
   logout,
   refreshTokens,
+  createAuthWindow,
+  createLogoutWindow,
 };

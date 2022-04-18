@@ -6,4 +6,6 @@ build
 .idea
 
 .env
+.env.production
+electron-builder.env
 env-variables.json

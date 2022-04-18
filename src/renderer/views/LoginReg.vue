@@ -16,6 +16,14 @@
         </el-button>
       </el-col>
     </el-row>
+    <el-row>
+      <h2>Log Out</h2>
+      <el-col>
+        <el-button @click="logout">
+          Log Out
+        </el-button>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -33,6 +41,11 @@ async function login() {
 
 function register() {
   alert('hello there');
+}
+
+// test logout
+async function logout() {
+  auth.createLogoutWindow();
 }
 </script>
 

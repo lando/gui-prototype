@@ -1,3 +1,5 @@
+process.env.NODE_ENV = 'production';
+
 const Path = require('path');
 const Chalk = require('chalk');
 const FileSystem = require('fs');
