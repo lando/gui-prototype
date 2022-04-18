@@ -1,5 +1,8 @@
 const {app, BrowserWindow, ipcMain, shell} = require('electron');
 const path = require('path');
+const authService = require('./services/auth/auth-service');
+
+authService.init();
 
 // Determine whether we are in production or not
 const isProd = (process.env.NODE_ENV !== 'development');
