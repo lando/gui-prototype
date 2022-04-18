@@ -37,9 +37,5 @@ export default defineConfig(({ command, mode }) => {
         },
       },
     },
-    define: {
-      "process.env.NODE_ENV": `"${process.env.NODE_ENV}"`,
-      VITE_AUTH0_DOMAIN: `"${process.env.VITE_AUTH0_DOMAIN}"`
-    },
   }
 });
