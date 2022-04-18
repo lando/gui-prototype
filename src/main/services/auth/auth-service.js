@@ -7,12 +7,6 @@ const {BrowserWindow} = process.type === 'browser'
   ? require('electron')
   : require('@electron/remote');
 
-function init() {
-  if (process.env.AUTH0_DOMAIN === undefined) {
-    require('dotenv').config();
-  }
-}
-
 const {AUTH0_DOMAIN, AUTH0_CLIENT_ID} = process.env;
 
 const redirectUri = `https://${AUTH0_DOMAIN}/mobile`;

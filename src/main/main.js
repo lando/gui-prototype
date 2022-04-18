@@ -7,7 +7,6 @@ remote.initialize();
 
 // Now init auth services
 const authService = require('./services/auth/auth-service');
-authService.init();
 
 // Determine whether we are in production or not
 const isProd = (process.env.NODE_ENV !== 'development');
