@@ -138,7 +138,7 @@ function createAuthWindow() {
     },
   });
 
-  authWindow.loadURL(authService.getAuthenticationURL());
+  authWindow.loadURL(getAuthenticationURL());
 
   // authWindow.setMenuBarVisibility(false);
 
@@ -151,7 +151,7 @@ function createAuthWindow() {
   };
 
   webRequest.onBeforeRequest(filter, async ({url}) => {
-    await authService.loadTokens(url);
+    await loadTokens(url);
     return destroyAuthWin();
   });
 
@@ -180,11 +180,11 @@ function createLogoutWindow() {
     },
   });
 
-  logoutWindow.loadURL(authService.getLogOutUrl());
+  logoutWindow.loadURL(getLogOutUrl());
 
   logoutWindow.on('ready-to-show', async () => {
     logoutWindow.close();
-    await authService.logout();
+    await logout();
   });
 }
 
