@@ -26,7 +26,6 @@
     "babel-eslint": "^10.1.0",
     "chalk": "^4.1.2",
     "chokidar": "^3.5.3",
-    "dotenv-safe": "^8.2.0",
     "electron": "^17.1.0",
     "electron-builder": "22.11.7",
     "electron-builder-notarize": "^1.4.0",
