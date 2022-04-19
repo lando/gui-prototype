@@ -1,61 +1,60 @@
 <template class="install-step">
-  <div v-if="store.osStatus === 'warning'">
-    <el-alert
-      :title="osHeader"
-      :type="store.osStatus"
-    >
-      <div v-html="osDescription" />
-    </el-alert>
-  </div>
-  <div v-if="store.dockerStatus === 'warning'">
-    <el-alert
-      :title="dockerHeader"
-      :type="store.dockerStatus"
-    >
-      <div v-html="dockerDescription" />
-    </el-alert>
-  </div>
-  <div v-if="store.osStatus === 'success' && store.dockerStatus ==='warning'">
-    <el-button type="primary">Proceed</el-button>
-    <el-button type="danger">Exit</el-button>
+  <div>
+    <div v-if="store.osStatus === 'warning'">
+      <el-alert
+        :title="osHeader"
+        :type="store.osStatus"
+      >
+        <div v-html="osDescription" />
+      </el-alert>
+    </div>
+    <div v-if="store.dockerStatus === 'warning'">
+      <el-alert
+        :title="dockerHeader"
+        :type="store.dockerStatus"
+      >
+        <div v-html="dockerDescription" />
+      </el-alert>
+    </div>
+    <div v-if="store.osStatus === 'success' && store.dockerStatus ==='warning'">
+      <el-button type="primary">Proceed</el-button>
+      <el-button type="danger">Exit</el-button>
+    </div>
   </div>
 </template>
 
 <script setup>
-  import {computed, ref, watch} from 'vue';
-  import {useInstallerStore} from '../stores/installer.js';
-  import {_} from 'lodash';
+import {computed, ref, watch} from 'vue';
+import {useInstallerStore} from '../stores/installer.js';
+import {_} from 'lodash';
 
-  const props = defineProps({
-    stepName: {
-      type: String,
-      default: '',
-    },
-  });
+const props = defineProps({
+  stepName: {
+    type: String,
+    default: '',
+  },
+});
 
-  const store = useInstallerStore();
+const store = useInstallerStore();
 
-  const active = computed(() => {
-    return store.stepName === props.stepName; 
-  });
+const active = computed(() => {
+  return store.stepName === props.stepName;
+});
 
-  // @todo: should we read this from a static file of messaging?
-  const osHeader = ref('Checking OS Compatibility');
-  const osDescription = ref('Your current OS is not compatible with Lando. Please check the <a href="">valid OS versions</a> and reinstall on a compatible OS.')
-  
-  // Check Docker Version Compatibility
-  const dockerHeader = ref('Checking Docker Version Compatibility');
-  const dockerDescription = ref('Your current verson of Docker is not compatible with Lando. This *could* be ok; we recommend reading <a href="">our documentation on Docker compatibility.</a> If you decide to install a compatible Docker version, please exit this installer, uninstall Docker, and restart the Lando installation.');
+// @todo: should we read this from a static file of messaging?
+const osHeader = ref('Checking OS Compatibility');
+const osDescription = ref('Your current OS is not compatible with Lando. Please check the <a href="">valid OS versions</a> and reinstall on a compatible OS.');
 
-  store.$subscribe((mutation, state) => {
-    console.log(mutation, state);
-    if (mutation.osStatus === 'success' && mutation.dockerStatus === 'success') {
-      store.stepName = 'installLando';
-    } 
-  });
+// Check Docker Version Compatibility
+const dockerHeader = ref('Checking Docker Version Compatibility');
+const dockerDescription = ref('Your current verson of Docker is not compatible with Lando. This *could* be ok; we recommend reading <a href="">our documentation on Docker compatibility.</a> If you decide to install a compatible Docker version, please exit this installer, uninstall Docker, and restart the Lando installation.');
 
-  
-
+store.$subscribe((mutation, state) => {
+  console.log(mutation, state);
+  if (mutation.osStatus === 'success' && mutation.dockerStatus === 'success') {
+    store.stepName = 'installLando';
+  }
+});
 </script>
 
 <style lang="scss" scoped>

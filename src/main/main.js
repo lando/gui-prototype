@@ -48,7 +48,7 @@ function createWindow() {
       enableRemoteModule: true,
     },
   });
-  
+
   // Passes the content to the auth window as needed
   remote.enable(mainWindow.webContents);
 

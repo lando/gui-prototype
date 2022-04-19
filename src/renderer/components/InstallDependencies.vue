@@ -3,23 +3,21 @@
 </template>
 
 <script setup>
-  import {computed, ref, watch} from 'vue';
-  import {useInstallerStore} from '../stores/installer.js';
-  import {_} from 'lodash';
+import {computed, ref, watch} from 'vue';
+import {useInstallerStore} from '../stores/installer.js';
 
-  const props = defineProps({
-    stepName: {
-      type: String,
-      default: '',
-    },
-  });
+const props = defineProps({
+  stepName: {
+    type: String,
+    default: '',
+  },
+});
 
-  const store = useInstallerStore();
+const store = useInstallerStore();
 
-  const active = computed(() => {
-    return store.stepName === props.stepName; 
-  }); 
-
+const active = computed(() => {
+  return store.stepName === props.stepName;
+});
 </script>
 
 <style lang="scss" scoped>
