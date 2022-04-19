@@ -1,9 +1,11 @@
 import { defineStore } from 'pinia'
 
-export const useInstaller = defineStore('installer', {
+export const useInstallerStore = defineStore('installer', {
   state: () => {
     return {
-      stepName: 'dependencies',
+      stepName: 'checkDependencies',
+      osStatus: 'warning',
+      dockerStatus: 'warning'
     }
   },
 });

@@ -9,9 +9,9 @@
       </el-col>
       <el-col>
         <h2>Testing Installer</h2>
-        <el-link href="/install">
+        <router-link to="/install">
           Installer Test
-        </el-link>
+        </router-link>
       </el-col>
     </el-row>
   </div>

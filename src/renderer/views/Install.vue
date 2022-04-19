@@ -4,45 +4,30 @@
     <el-step title="Step 2" />
     <el-step title="Step 3" />
   </el-steps>
-  <install-step
-    stepName="dependencies"
-    :statusItems="testStatusItems">
-  </install-step>
-  <install-step
-    stepName="install-dependencies">
-  </install-step>
-  <install-step
-    stepName="catrust">
-  </install-step>
-  <install-step
-    stepName="login-register">
-  </install-step>
+  <install-check-dependencies
+    stepName="checkDependencies">
+  </install-check-dependencies>
+  <install-dependencies
+    stepName="installDependencies">
+  </install-dependencies>
 </template>
 
 <script setup>
-import {ref} from 'vue';
-import InstallStep from '../components/InstallStep.vue';
+import {computed, ref} from 'vue';
+import {useInstallerStore} from '../stores/installer.js';
+import InstallCheckDependencies from '../components/InstallCheckDependencies.vue';
+import InstallDependencies from '../components/InstallDependencies.vue';
 
-const activeStep = ref(0)
 
-const next = () => {
-  if (active.value++ > 2) active.value = 0
-}
-
-const testStatusItems = ref(
-  [
-    {
-      header: 'Checking OS',
-      status: 'error',
-      message: '<p>Your operating system is incompatible with Lando.</p><p>Please read the <a href="">Lando requirements</a> and attempt installation on a computer with a compatible OS.</p>',
-    },
-    {
-      header: 'Checking OS',
-      status: 'error',
-      message: '<p>Your operating system is incompatible with Lando.</p><p>Please read the <a href="">Lando requirements</a> and attempt installation on a computer with a compatible OS.</p>',
-    },
-  ]
-)
+const store = useInstallerStore();
+const stepMap = new Map([
+  ['checkDependencies', 1],
+  ['installDependencies', 2],
+  ['installLando', 3],
+]);
+const activeStep = computed(() => {
+  return stepMap.get(store.stepName);
+});
 
 </script>
 

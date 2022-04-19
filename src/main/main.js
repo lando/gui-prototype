@@ -1,5 +1,6 @@
 const {app, BrowserWindow, ipcMain, shell} = require('electron');
 const path = require('path');
+const checkDependenciesService = require('./services/installer/check-dependencies.js');
 
 // Enables the remote auth window.
 const remote = require('@electron/remote/main');
@@ -47,7 +48,7 @@ function createWindow() {
       enableRemoteModule: true,
     },
   });
-
+  
   // Passes the content to the auth window as needed
   remote.enable(mainWindow.webContents);
 
@@ -64,6 +65,8 @@ function createWindow() {
 
 app.on('ready', () => {
   createWindow();
+  // @todo: conditional to see if installed?
+  checkDependenciesService.checkDependencies();
 
   app.on('activate', function() {
     // On macOS it's common to re-create a window in the app when the

@@ -7112,7 +7112,7 @@ pkg-dir@^5.0.0:
   dependencies:
     find-up "^5.0.0"
 
-plist@^3.0.1, plist@^3.0.4:
+plist@^3.0.1, plist@^3.0.4, plist@^3.0.5:
   version "3.0.5"
   resolved "https://registry.yarnpkg.com/plist/-/plist-3.0.5.tgz#2cbeb52d10e3cdccccf0c11a63a85d830970a987"
   integrity sha512-83vX4eYdQp3vP9SxuYgEM/G/pJQqLUz/V/xzPrzruLs7fz7jxGQ1msZ/mg1nwZxUSuOp4sb+/bEIbRrbzZRxDA==
