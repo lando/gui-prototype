@@ -17,16 +17,19 @@
       </el-alert>
     </div>
     <div v-if="store.osStatus === 'success' && store.dockerStatus ==='warning'">
-      <el-button type="primary">Proceed</el-button>
-      <el-button type="danger">Exit</el-button>
+      <el-button type="primary">
+        Proceed
+      </el-button>
+      <el-button type="danger">
+        Exit
+      </el-button>
     </div>
   </div>
 </template>
 
 <script setup>
-import {computed, ref, watch} from 'vue';
+import {ref} from 'vue';
 import {useInstallerStore} from '../stores/installer.js';
-import {_} from 'lodash';
 
 const props = defineProps({
   stepName: {
@@ -36,10 +39,6 @@ const props = defineProps({
 });
 
 const store = useInstallerStore();
-
-const active = computed(() => {
-  return store.stepName === props.stepName;
-});
 
 // @todo: should we read this from a static file of messaging?
 const osHeader = ref('Checking OS Compatibility');

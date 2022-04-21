@@ -61,7 +61,7 @@ function createWindow() {
 
   mainWindow.webContents.on('did-start-loading', () => {
     mainWindow.webContents.send('renderer-app-version', {version: app.getVersion()});
-  }); 
+  });
 }
 
 app.on('ready', () => {
@@ -75,7 +75,9 @@ app.on('ready', () => {
       createWindow();
     }
   });
-  setTimeout(() => {  mainWindow.webContents.send('update-store', dependencyStatus); }, 2000);
+  setTimeout(() => {
+    mainWindow.webContents.send('update-store', dependencyStatus);
+  }, 2000);
 });
 
 app.on('window-all-closed', function() {
