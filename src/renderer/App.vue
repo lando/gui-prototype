@@ -17,6 +17,7 @@ export default defineComponent({
     SidebarMenu,
   },
 });
+
 </script>
 
 <style lang="scss">

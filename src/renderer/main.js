@@ -5,6 +5,7 @@ import ElementPlus from 'element-plus';
 import 'element-plus/dist/index.css';
 import App from './App.vue';
 import router from './router.js';
+import {useInstallerStore} from './stores/installer.js';
 
 
 const app = createApp(App);
@@ -15,3 +16,14 @@ app.use(createPinia());
 app.use(router);
 
 app.mount('#app');
+
+const {ipcRenderer} = window;
+const store = useInstallerStore();
+import {_} from 'lodash';
+
+ipcRenderer.receive('update-store', values => {
+  _.each(values, (value, key) => {
+    console.log(key, value);
+    store[key] = value;
+  });
+});

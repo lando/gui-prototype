@@ -6,7 +6,6 @@ const plist = require('plist');
 const fs = require('fs');
 const sudo = require('sudo-prompt');
 const authService = require('./services/auth/auth-service');
-console.log('preload');
 
 // Valid event channels
 const validChannels = [
@@ -16,6 +15,7 @@ const validChannels = [
   'renderer-update-available',
   'download-update',
   'apply-update',
+  'update-store',
 ];
 
 // Expose protected methods that allow the renderer process to use
@@ -39,8 +39,6 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
 contextBridge.exposeInMainWorld('sudo', {
   exec: sudo.exec,
 });
-
-contextBridge.exposeInMainWorld('os', os);
 
 // Export the auth processes
 contextBridge.exposeInMainWorld('auth', {

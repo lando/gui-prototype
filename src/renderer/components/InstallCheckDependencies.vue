@@ -55,6 +55,7 @@ store.$subscribe((mutation, state) => {
     store.stepName = 'installLando';
   }
 });
+
 </script>
 
 <style lang="scss" scoped>

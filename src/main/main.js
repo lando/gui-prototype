@@ -36,6 +36,7 @@ autoUpdater.autoDownload = false;
 
 // Set this here
 let mainWindow;
+const dependencyStatus = checkDependenciesService.checkDependencies();
 
 function createWindow() {
   mainWindow = new BrowserWindow({
@@ -60,13 +61,12 @@ function createWindow() {
 
   mainWindow.webContents.on('did-start-loading', () => {
     mainWindow.webContents.send('renderer-app-version', {version: app.getVersion()});
-  });
+  }); 
 }
 
 app.on('ready', () => {
   createWindow();
   // @todo: conditional to see if installed?
-  checkDependenciesService.checkDependencies();
 
   app.on('activate', function() {
     // On macOS it's common to re-create a window in the app when the
@@ -75,6 +75,7 @@ app.on('ready', () => {
       createWindow();
     }
   });
+  setTimeout(() => {  mainWindow.webContents.send('update-store', dependencyStatus); }, 2000);
 });
 
 app.on('window-all-closed', function() {

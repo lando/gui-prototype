@@ -1,5 +1,6 @@
 <template class="install-step">
-  <h2>Install Dependencies</h2>
+  <h2>Installing Docker Desktop...</h2>
+  <el-progress :percentage="store.progress" />
 </template>
 
 <script setup>
@@ -18,6 +19,10 @@ const store = useInstallerStore();
 const active = computed(() => {
   return store.stepName === props.stepName;
 });
+
+// Kick off the installation.
+const {ipcRenderer} = window;
+
 </script>
 
 <style lang="scss" scoped>
