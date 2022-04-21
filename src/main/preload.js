@@ -13,6 +13,7 @@ const validChannels = [
   'download-update',
   'apply-update',
   'update-store',
+  'start-install',
 ];
 
 // Expose protected methods that allow the renderer process to use
@@ -27,7 +28,7 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
   receive: (channel, func) => {
     if (validChannels.includes(channel)) {
       // Deliberately strip event as it includes `sender`
-      ipcRenderer.once(channel, (event, ...args) => func(...args));
+      ipcRenderer.on(channel, (event, ...args) => func(...args));
     }
   },
 });

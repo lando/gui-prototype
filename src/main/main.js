@@ -115,3 +115,20 @@ autoUpdater.on('update-downloaded', () => {
 ipcMain.on('download-update', () => {
   autoUpdater.downloadUpdate();
 });
+
+// Here is where we'd trigger Docker Desktop/Compose/Etc. installations.
+ipcMain.on('start-install', component => {
+  incrementProgress(0);
+  function incrementProgress(progress) {
+    if (progress < 100) {
+      console.log(progress);
+      progress = progress + 10;
+      setTimeout(() => {
+        mainWindow.webContents.send('update-store', {'progress': progress});
+        incrementProgress(progress);
+      }, 2000);
+    } else {
+      mainWindow.webContents.send('update-store', {'progress': progress});
+    }
+  }
+});
