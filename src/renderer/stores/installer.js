@@ -6,6 +6,8 @@ export const useInstallerStore = defineStore('installer', {
       stepName: 'checkDependencies',
       osStatus: 'warning',
       dockerStatus: 'warning',
+      progress: 0,
+      certTrusted: false
     };
   },
 });

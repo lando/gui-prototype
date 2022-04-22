@@ -1,5 +1,5 @@
 <template class="install-step">
-  <div>
+  <div v-if="store.stepName === stepName">
     <div v-if="store.osStatus === 'warning'">
       <el-alert
         :title="osHeader"
@@ -51,7 +51,7 @@ const dockerDescription = ref('Your current verson of Docker is not compatible w
 store.$subscribe((mutation, state) => {
   console.log(mutation, state);
   if (mutation.osStatus === 'success' && mutation.dockerStatus === 'success') {
-    store.stepName = 'installLando';
+    store.stepName = 'trustCert';
   }
 });
 

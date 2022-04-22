@@ -132,3 +132,11 @@ ipcMain.on('start-install', component => {
     }
   }
 });
+
+// Install Lando's cert on the user's computer.
+ipcMain.on('trust-cert', () => {
+  setTimeout(() => {
+    console.log('cert trusted');
+    mainWindow.webContents.send('update-store', {'certTrusted': true});
+  }, 2000);
+});

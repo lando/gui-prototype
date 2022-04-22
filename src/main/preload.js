@@ -14,6 +14,7 @@ const validChannels = [
   'apply-update',
   'update-store',
   'start-install',
+  'trust-cert'
 ];
 
 // Expose protected methods that allow the renderer process to use
