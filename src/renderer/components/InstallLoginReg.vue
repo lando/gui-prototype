@@ -1,20 +1,14 @@
 <template class="install-step">
   <div>
-    <h2>Trust Lando's Certificate</h2>
-    <div v-html="certInfo">
-    </div>
-    <el-button @click="skipStep">
-      Nope.
-    </el-button>
-    <el-button @click="trustCert" type="primary">
-      Trust Lando
-    </el-button>
+    <login-reg />
+    <router-link to="/install">Skip</router-link>
   </div>
 </template>
 
 <script setup>
 import {onMounted} from 'vue';
 import {useInstallerStore} from '../stores/installer.js';
+import LoginReg from '../views/LoginReg.vue';
 
 const props = defineProps({
   stepName: {
@@ -26,10 +20,7 @@ const props = defineProps({
 const store = useInstallerStore();
 const certInfo = "<p>To prevent warnings from your browser that Lando-generated URLs are insecure, Lando can install its CA certificate as a trusted cert on your computer. This does have some <a href=''>security implications</a> that you should understand.</p><p>Can Lando install its certificate on your computer?</p>";
 const trustCert = () => {
-  store.certTrusted = true;
-  // @todo: move this to a function that runs on final input execution.
   ipcRenderer.send('trust-cert');
-  store.stepName = 'login';
 };
 
 const skipStep = () => {

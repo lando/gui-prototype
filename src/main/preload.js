@@ -14,7 +14,9 @@ const validChannels = [
   'apply-update',
   'update-store',
   'start-install',
-  'trust-cert'
+  'trust-cert',
+  'exit-lando',
+  'open-external-browser',
 ];
 
 // Expose protected methods that allow the renderer process to use

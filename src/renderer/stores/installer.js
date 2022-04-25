@@ -4,8 +4,8 @@ export const useInstallerStore = defineStore('installer', {
   state: () => {
     return {
       stepName: 'checkDependencies',
-      osStatus: 'warning',
-      dockerStatus: 'warning',
+      osStatus: 'unknown',
+      dockerStatus: 'unknown',
       progress: 0,
       certTrusted: false
     };

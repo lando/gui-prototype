@@ -1,5 +1,5 @@
 <template class="install-step">
-  <div v-if="store.stepName === stepName">
+  <div>
     <div v-if="store.osStatus === 'warning'">
       <el-alert
         :title="osHeader"

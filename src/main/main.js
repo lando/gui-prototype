@@ -84,6 +84,10 @@ app.on('window-all-closed', function() {
   if (process.platform !== 'darwin') app.quit();
 });
 
+ipcMain.on('exit-lando', (event, message) => {
+  mainWindow.close();
+});
+
 ipcMain.on('message', (event, message) => {
   console.log(message);
 });

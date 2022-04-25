@@ -27,3 +27,18 @@ ipcRenderer.receive('update-store', values => {
     store[key] = value;
   });
 });
+
+// Check dependency status on load and change.
+checkDependencies(store);
+store.$subscribe((mutation, state) => {
+  console.log(mutation.dockerStatus, state.dockerStatus);
+  checkDependencies(state);
+});
+
+function checkDependencies(store) {
+  if (store.osStatus === 'warning') {
+    router.push('/incompatible-os');
+  } else if (store.dockerStatus === 'warning') {
+    router.push('/incompatible-docker');
+  }
+}

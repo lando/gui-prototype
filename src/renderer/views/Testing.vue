@@ -9,7 +9,7 @@
       </el-col>
       <el-col>
         <h2>Testing Installer</h2>
-        <router-link to="/install">
+        <router-link to="/install-input">
           Installer Test
         </router-link>
       </el-col>
