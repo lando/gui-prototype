@@ -17,7 +17,7 @@ function getOsStatus() {
 
 function getDockerStatus() {
   const supportedDocker = ['Docker Desktop 3.3', 'Docker Desktop 4.4', 'Docker Desktop 4.6'];
-  const currentDocker = 'Docker Desktop 4.6';
+  const currentDocker = 'Docker Desktop 4.7';
   return checkVersions(supportedDocker, currentDocker);
 }
 

@@ -7,7 +7,8 @@ export const useInstallerStore = defineStore('installer', {
       osStatus: 'unknown',
       dockerStatus: 'unknown',
       progress: 0,
-      certTrusted: false
+      certTrusted: false,
+      hideSidebar: false,
     };
   },
 });

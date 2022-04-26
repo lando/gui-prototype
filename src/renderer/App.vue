@@ -22,7 +22,6 @@ export default defineComponent({
 
 <style lang="scss">
   #app-inner {
-    margin-left: 14rem;
     padding-top: 2rem;
   }
 </style>

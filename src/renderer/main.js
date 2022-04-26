@@ -37,8 +37,10 @@ store.$subscribe((mutation, state) => {
 
 function checkDependencies(store) {
   if (store.osStatus === 'warning') {
+    store.hideSidebar = true;
     router.push('/incompatible-os');
   } else if (store.dockerStatus === 'warning') {
+    store.hideSidebar = true;
     router.push('/incompatible-docker');
   }
 }
