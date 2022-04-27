@@ -4,7 +4,7 @@
     <h2>Your previously installed version of Docker Desktop is incompatible with Lando.</h2>
     <a @click="openInBrowser(supportedDockerLink)">See Supported Docker Desktop Versions</a>
     <div class="actions">
-      <el-button type="danger" @click="exitLando">Exit Installer</el-button>
+      <el-button type="danger" @click="exitLando">Exit Lando</el-button>
       <el-button @click="proceed">Proceed Anyway</el-button>
     </div>
   </div>
@@ -21,7 +21,11 @@ const supportedDockerLink = 'https://docs.lando.dev/getting-started/installation
 const proceed = () => {
   store.hideSidebar = false;
   store.dockerStatus = 'bypass';
-  router.push('/');
+  if (store.installed) {
+    router.push('/');
+  } else {
+    router.push('/install-trust-cert');
+  }
 };
 </script>
 

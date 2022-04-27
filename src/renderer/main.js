@@ -31,7 +31,6 @@ ipcRenderer.receive('update-store', values => {
 // Check dependency status on load and change.
 checkDependencies(store);
 store.$subscribe((mutation, state) => {
-  console.log(mutation.dockerStatus, state.dockerStatus);
   checkDependencies(state);
 });
 
@@ -42,5 +41,10 @@ function checkDependencies(store) {
   } else if (store.dockerStatus === 'warning') {
     store.hideSidebar = true;
     router.push('/incompatible-docker');
+  } else if (store.installed === false && store.certTrusted === 'unknown') {
+    store.hideSidebar = true;
+    router.push('/install-trust-cert');
+  } else if (store.installed === false && store.certTrusted === true) {
+    router.push('/install');
   }
 }

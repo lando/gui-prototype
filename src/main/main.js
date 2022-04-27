@@ -37,6 +37,8 @@ autoUpdater.autoDownload = false;
 // Set this here
 let mainWindow;
 const dependencyStatus = checkDependenciesService.checkDependencies();
+//@todo: create function to check install status.
+const installed = false;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
@@ -66,7 +68,6 @@ function createWindow() {
 
 app.on('ready', () => {
   createWindow();
-  // @todo: conditional to see if installed?
 
   app.on('activate', function() {
     // On macOS it's common to re-create a window in the app when the
@@ -76,6 +77,7 @@ app.on('ready', () => {
     }
   });
   setTimeout(() => {
+    dependencyStatus.installed = installed;
     mainWindow.webContents.send('update-store', dependencyStatus);
   }, 2000);
 });
@@ -122,11 +124,23 @@ ipcMain.on('download-update', () => {
 
 // Here is where we'd trigger Docker Desktop/Compose/Etc. installations.
 ipcMain.on('start-install', component => {
+  mainWindow.webContents.send('update-store', {'installStatus': 'Installing Docker Desktop'});
   incrementProgress(0);
   function incrementProgress(progress) {
     if (progress < 100) {
       console.log(progress);
       progress = progress + 10;
+      switch (progress) {
+        case 30:
+          mainWindow.webContents.send('update-store', {'installStatus': 'Installing Docker Compose'});
+          break;
+        case 60:
+          mainWindow.webContents.send('update-store', {'installStatus': 'Installing Lando'});
+          break;
+        case 80:
+          mainWindow.webContents.send('update-store', {'installStatus': 'Trusting Lando Cert'});
+          break;
+      }
       setTimeout(() => {
         mainWindow.webContents.send('update-store', {'progress': progress});
         incrementProgress(progress);

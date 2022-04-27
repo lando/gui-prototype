@@ -4,7 +4,8 @@ import Home from './views/Home.vue';
 import IncompatibleDocker from './views/IncompatibleDocker.vue';
 import IncompatibleOs from './views/IncompatibleOs.vue';
 import Install from './views/Install.vue';
-import InstallInput from './views/InstallInput.vue';
+import InstallLoginReg from './views/InstallLoginReg.vue';
+import InstallTrustCert from './views/InstallTrustCert.vue';
 import Plugin from './views/Plugin.vue';
 import Plugins from './views/Plugins.vue';
 import Updates from './views/Updates.vue';
@@ -34,14 +35,19 @@ const routes = [
     component: IncompatibleOs,
   },
   {
-    path: '/install-input',
-    name: 'Install Input',
-    component: InstallInput,
+    path: '/install',
+    name: 'Install Lando',
+    component: Install,
   },
   {
-    path: '/install',
-    name: 'Install',
-    component: Install,
+    path: '/install-login',
+    name: 'Install Login',
+    component: InstallLoginReg,
+  },
+  {
+    path: '/install-trust-cert',
+    name: 'Install Trust Cert',
+    component: InstallTrustCert,
   },
   {
     path: '/loginreg',
