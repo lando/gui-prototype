@@ -1,9 +1,18 @@
 <template>
   <div class="incompatibility-page">
-    <el-icon :size="200"><warning-filled /></el-icon>
+    <el-icon :size="200">
+      <warning-filled />
+    </el-icon>
     <h2>Lando has detected an incompatibility with your operating system.</h2>
-    <el-link @click="openInBrowser(supportedOsLink)">See Supported OS Versions</el-link>
-    <el-button type="danger" @click="exitLando">Exit Installer</el-button>
+    <el-link @click="openInBrowser(supportedOsLink)">
+      See Supported OS Versions
+    </el-link>
+    <el-button
+      type="danger"
+      @click="exitLando"
+    >
+      Exit Installer
+    </el-button>
   </div>
 </template>
 

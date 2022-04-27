@@ -1,7 +1,10 @@
 <template>
   <div class="installer">
-    <div class="progress" v-loading="loading"></div>
-    <h2 v-text="store.installStatus"></h2>
+    <div
+      v-loading="loading"
+      class="progress"
+    />
+    <h2 v-text="store.installStatus" />
   </div>
 </template>
 

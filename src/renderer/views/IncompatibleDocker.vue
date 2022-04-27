@@ -1,11 +1,20 @@
 <template>
   <div class="incompatibility-page">
-    <el-icon :size="200"><warning-filled /></el-icon>
+    <el-icon :size="200">
+      <warning-filled />
+    </el-icon>
     <h2>Your previously installed version of Docker Desktop is incompatible with Lando.</h2>
     <a @click="openInBrowser(supportedDockerLink)">See Supported Docker Desktop Versions</a>
     <div class="actions">
-      <el-button type="danger" @click="exitLando">Exit Lando</el-button>
-      <el-button @click="proceed">Proceed Anyway</el-button>
+      <el-button
+        type="danger"
+        @click="exitLando"
+      >
+        Exit Lando
+      </el-button>
+      <el-button @click="proceed">
+        Proceed Anyway
+      </el-button>
     </div>
   </div>
 </template>

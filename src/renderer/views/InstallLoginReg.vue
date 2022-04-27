@@ -1,10 +1,17 @@
 <template>
   <div class="install-login">
-    <el-icon :size="100"><avatar /></el-icon>
+    <el-icon :size="100">
+      <avatar />
+    </el-icon>
     <h2>Login to or Setup a Lando Cloud Profile</h2>
     <p>A Lando Cloud account saves your Lando preferences for easier sharing among your devices and allows you to share configuration with teammates.</p>
     <login-reg />
-    <router-link class="skip-link" to="/">Skip</router-link>
+    <router-link
+      class="skip-link"
+      to="/"
+    >
+      Skip
+    </router-link>
   </div>
 </template>
 
