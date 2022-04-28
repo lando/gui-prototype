@@ -17,6 +17,7 @@ const validChannels = [
   'trust-cert',
   'exit-lando',
   'open-external-browser',
+  'did-start-loading',
 ];
 
 // Expose protected methods that allow the renderer process to use

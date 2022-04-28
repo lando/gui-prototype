@@ -21,9 +21,10 @@ const {ipcRenderer} = window;
 const store = useInstallerStore();
 import {_} from 'lodash';
 
+ipcRenderer.send('did-start-loading', true);
+
 ipcRenderer.receive('update-store', values => {
   _.each(values, (value, key) => {
-    console.log(key, value);
     store[key] = value;
   });
 });

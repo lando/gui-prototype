@@ -60,10 +60,6 @@ function createWindow() {
   } else {
     mainWindow.loadFile(path.join(app.getAppPath(), 'renderer', 'index.html'));
   }
-
-  mainWindow.webContents.on('did-start-loading', () => {
-    mainWindow.webContents.send('renderer-app-version', {version: app.getVersion()});
-  });
 }
 
 app.on('ready', () => {
@@ -76,14 +72,10 @@ app.on('ready', () => {
       createWindow();
     }
   });
-  setTimeout(() => {
-    dependencyStatus.installed = installed;
-    mainWindow.webContents.send('update-store', dependencyStatus);
-  }, 2000);
 });
 
 app.on('window-all-closed', function() {
-  if (process.platform !== 'darwin') app.quit();
+  app.quit();
 });
 
 ipcMain.on('exit-lando', (event, message) => {
@@ -96,6 +88,12 @@ ipcMain.on('message', (event, message) => {
 
 ipcMain.on('open-external-browser', (event, url) => {
   shell.openExternal(url);
+});
+
+ipcMain.on('did-start-loading', () => {
+  mainWindow.webContents.send('renderer-app-version', {version: app.getVersion()});
+  dependencyStatus.installed = installed;
+  mainWindow.webContents.send('update-store', dependencyStatus);
 });
 
 // Send update available UX back to the renderer
