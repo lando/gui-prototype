@@ -8,6 +8,7 @@ import InstallLoginReg from './views/InstallLoginReg.vue';
 import InstallTrustCert from './views/InstallTrustCert.vue';
 import Plugin from './views/Plugin.vue';
 import Plugins from './views/Plugins.vue';
+import Profile from './views/Profile.vue';
 import Updates from './views/Updates.vue';
 import Testing from './views/Testing.vue';
 import LoginReg from './views/LoginReg.vue';
@@ -62,6 +63,10 @@ const routes = [
   {
     path: '/plugins/:id',
     component: Plugin,
+  },
+  {
+    path: '/profile',
+    component: Profile,
   },
   {
     path: '/testing',

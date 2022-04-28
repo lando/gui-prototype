@@ -51,3 +51,26 @@ html {
     margin: 0px;
   }
 }
+
+.centered {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 500px;
+  margin: auto;
+  align-items: center;
+  h2 {
+    margin: 0;
+    padding: 0;
+  }
+  a {
+    cursor: pointer;
+  }
+}
+
+.el-steps {
+  max-width: 600px;
+  margin: auto;
+  margin-bottom: 1rem;
+}

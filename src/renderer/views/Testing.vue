@@ -8,9 +8,9 @@
         </el-button>
       </el-col>
       <el-col>
-        <h2>Testing Installer</h2>
-        <router-link to="/install-input">
-          Installer Test
+        <h2>Profile Installer</h2>
+        <router-link to="/profile">
+          Profile Test
         </router-link>
       </el-col>
     </el-row>

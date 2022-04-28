@@ -1,16 +1,23 @@
 <template>
   <div class="install-trust-cert">
-    <h2>Trust Lando's Certificate</h2>
-    <div v-html="certInfo" />
-    <el-button
-      type="primary"
-      @click="trustCert"
-    >
-      Trust Lando
-    </el-button>
-    <el-button @click="skipStep">
-      Nope.
-    </el-button>
+    <el-steps active="2" finish-status="success">
+      <el-step title="Docker" />
+      <el-step title="Certs" />
+      <el-step title="Login" />
+    </el-steps>
+    <div class="centered">
+      <h2>Trust Lando's Certificate</h2>
+      <div v-html="certInfo" />
+      <el-button
+        type="primary"
+        @click="trustCert"
+      >
+        Trust Lando
+      </el-button>
+      <el-button @click="skipStep">
+        Nope.
+      </el-button>
+    </div>
   </div>
 </template>
 
@@ -32,31 +39,15 @@ const trustCert = () => {
   store.certTrusted = true;
   // @todo: move this to a function that runs on final input execution.
   window.ipcRenderer.send('trust-cert');
-  router.push('/install');
+  router.push('/install-login');
 };
 
 const skipStep = () => {
   store.certTrusted = false;
-  router.push('/install');
+  router.push('/install-login');
 };
 
 </script>
 
 <style lang="scss" scoped>
-  .install-trust-cert {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    max-width: 500px;
-    margin: auto;
-    align-items: center;
-    h2 {
-      margin: 0;
-      padding: 0;
-    }
-    a {
-      cursor: pointer;
-    }
-  }
 </style>
