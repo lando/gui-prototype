@@ -13,7 +13,7 @@ import SidebarMenu from './components/SidebarMenu.vue';
 
 const fullscreenLoading = ref(true);
 setTimeout(() => {
-  fullscreenLoading.value = false
+  fullscreenLoading.value = false;
 }, 2000);
 
 </script>

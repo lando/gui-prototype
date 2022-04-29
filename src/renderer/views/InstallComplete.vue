@@ -6,7 +6,12 @@
       <li><a @click="openInBrowser(gettingStarted)">Start Your First App</a></li>
       <li><a @click="openInBrowser(landoCloudUrl)">Get a Lando Cloud Account</a></li>
     </ul>
-    <el-button type="primary" @click="goToDashboard">Go to Dashboard</el-button>
+    <el-button
+      type="primary"
+      @click="goToDashboard"
+    >
+      Go to Dashboard
+    </el-button>
   </div>
 </template>
 

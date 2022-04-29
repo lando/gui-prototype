@@ -1,6 +1,9 @@
 <template>
   <div class="incompatibility-page">
-    <el-steps v-if="!store.installed" active="1">
+    <el-steps
+      v-if="!store.installed"
+      active="1"
+    >
       <el-step title="Docker" />
       <el-step title="Certs" />
       <el-step title="Login" />

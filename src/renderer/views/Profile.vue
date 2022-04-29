@@ -25,40 +25,47 @@
     </el-form-item>
     <el-form-item
       prop="firstName"
-      label="First Name">
+      label="First Name"
+    >
       <el-input v-model="dynamicValidateForm.firstName" />
     </el-form-item>
     <el-form-item
       prop="lastName"
-      label="Last Name">
+      label="Last Name"
+    >
       <el-input v-model="dynamicValidateForm.lastName" />
     </el-form-item>
     <el-form-item>
-      <el-button type="primary" @click="submitForm(dynamicValidateForm)">Save</el-button>
+      <el-button
+        type="primary"
+        @click="submitForm(dynamicValidateForm)"
+      >
+        Save
+      </el-button>
     </el-form-item>
   </el-form>
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref } from 'vue'
+import {reactive, ref} from 'vue';
 
 const dynamicValidateForm = ref({
   email: 'default@example.com',
 });
 
-const submitForm = (formEl) => {
-  if (!formEl) return
-  formEl.validate((valid) => {
+const submitForm = formEl => {
+  if (!formEl) return;
+  formEl.validate(valid => {
     if (valid) {
-      console.log('submit!')
+      console.log('submit!');
     } else {
-      console.log('error submit!')
-      return false
+      console.log('error submit!');
+      return false;
     }
-  })
+  });
 };
 
-const resetForm = (formEl) => {
+const resetForm = formEl => {
   if (!formEl) {
     return formEl.resetFields();
   }
