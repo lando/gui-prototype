@@ -33,7 +33,7 @@ onMounted(() => {
 store.$subscribe((mutation, state) => {
   if (state.progress === 100) {
     store.installed = true;
-    router.push('/install-login');
+    router.push('/install-complete');
   }
 });
 

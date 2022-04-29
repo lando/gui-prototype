@@ -1,6 +1,6 @@
 <template>
   <div class="install-login-wrapper">
-    <el-steps active="3" finish-status="success">
+    <el-steps active="3">
       <el-step title="Docker" />
       <el-step title="Certs" />
       <el-step title="Login" />

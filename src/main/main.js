@@ -56,9 +56,11 @@ function createWindow() {
   remote.enable(mainWindow.webContents);
 
   if (!isProd) {
-    mainWindow.loadURL('http://localhost:8080');
+    mainWindow.loadURL('http://localhost:8080/loading.html');
+    setTimeout(() => mainWindow.loadURL('http://localhost:8080'), 2000);
   } else {
-    mainWindow.loadFile(path.join(app.getAppPath(), 'renderer', 'index.html'));
+    mainWindow.loadFile(path.join(app.getAppPath(), 'renderer', 'loading.html'));
+    setTimeout(() => mainWindow.loadFile(path.join(app.getAppPath(), 'renderer', 'index.html')), 2000);
   }
 }
 

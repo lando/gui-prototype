@@ -33,6 +33,7 @@ import {useInstallerStore} from '../stores/installer.js';
 import router from '../router.js';
 
 const store = useInstallerStore();
+store.hideSidebar = true;
 const supportedDockerLink = 'https://docs.lando.dev/getting-started/installation.html#docker-engine-requirements';
 const proceed = () => {
   store.hideSidebar = false;

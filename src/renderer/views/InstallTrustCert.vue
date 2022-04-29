@@ -1,6 +1,6 @@
 <template>
   <div class="install-trust-cert">
-    <el-steps active="2" finish-status="success">
+    <el-steps active="2">
       <el-step title="Docker" />
       <el-step title="Certs" />
       <el-step title="Login" />
@@ -34,6 +34,7 @@ const props = defineProps({
 });
 
 const store = useInstallerStore();
+store.hideSidebar = true;
 const certInfo = '<p>To prevent warnings from your browser that Lando-generated URLs are insecure, Lando can install its CA certificate as a trusted cert on your computer. This does have some <a href=\'\'>security implications</a> that you should understand.</p><p>Can Lando install its certificate on your computer?</p>';
 const trustCert = () => {
   store.certTrusted = true;

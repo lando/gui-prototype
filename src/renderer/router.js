@@ -4,6 +4,7 @@ import Home from './views/Home.vue';
 import IncompatibleDocker from './views/IncompatibleDocker.vue';
 import IncompatibleOs from './views/IncompatibleOs.vue';
 import Install from './views/Install.vue';
+import InstallComplete from './views/InstallComplete.vue';
 import InstallLoginReg from './views/InstallLoginReg.vue';
 import InstallTrustCert from './views/InstallTrustCert.vue';
 import Plugin from './views/Plugin.vue';
@@ -39,6 +40,11 @@ const routes = [
     path: '/install',
     name: 'Install Lando',
     component: Install,
+  },
+  {
+    path: '/install-complete',
+    name: 'Install Complete',
+    component: InstallComplete,
   },
   {
     path: '/install-login',

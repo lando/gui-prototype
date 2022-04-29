@@ -11,6 +11,7 @@ export const useInstallerStore = defineStore('installer', {
       hideSidebar: false,
       installed: true,
       installStatus: 'unknown',
+      fullscreenLoading: true,
     };
   },
 });

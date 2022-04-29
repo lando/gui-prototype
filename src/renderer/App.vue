@@ -7,16 +7,14 @@
   </div>
 </template>
 
-<script>
-import {defineComponent} from 'vue';
+<script setup>
+import {ref} from 'vue';
 import SidebarMenu from './components/SidebarMenu.vue';
 
-export default defineComponent({
-  name: 'App',
-  components: {
-    SidebarMenu,
-  },
-});
+const fullscreenLoading = ref(true);
+setTimeout(() => {
+  fullscreenLoading.value = false
+}, 2000);
 
 </script>
 
