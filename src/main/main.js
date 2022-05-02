@@ -38,7 +38,7 @@ autoUpdater.autoDownload = false;
 let mainWindow;
 const dependencyStatus = checkDependenciesService.checkDependencies();
 // @todo: create function to check install status.
-const installed = false;
+const installed = true;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
