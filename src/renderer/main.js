@@ -36,9 +36,10 @@ store.$subscribe((mutation, state) => {
 });
 
 function checkDependencies(store) {
-  if (store.osStatus === 'warning') {
+  console.log(store.dockerStatus);
+  if (store.osStatus === 'incompatible') {
     router.push('/incompatible-os');
-  } else if (store.dockerStatus === 'warning') {
+  } else if (store.dockerStatus === 'incompatible' || store.dockerStatus === 'uninstalled') {
     router.push('/incompatible-docker');
   } else if (store.installed === false && store.certTrusted === 'unknown') {
     router.push('/install-trust-cert');

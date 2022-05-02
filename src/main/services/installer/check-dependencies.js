@@ -4,7 +4,6 @@ const os = require('os');
 function checkDependencies() {
   const osStatus = getOsStatus();
   const dockerStatus = getDockerStatus();
-  console.log(osStatus, dockerStatus);
   return {osStatus: osStatus, dockerStatus: dockerStatus};
 }
 
@@ -25,10 +24,9 @@ function getDockerStatus() {
 // exact match would be success, extended compatibility is warning,
 // explicit incompatibility is error.
 function checkVersions(supportedVersions, currentVersion) {
-  console.log(supportedVersions, currentVersion);
   return _.chain(supportedVersions).find(supportedVersion => {
     return currentVersion.indexOf(supportedVersion) > -1;
-  }).isString().value() ? 'success' : 'warning';
+  }).isString().value() ? 'supported' : 'incompatible';
 }
 
 
