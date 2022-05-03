@@ -1,10 +1,16 @@
-const {app, BrowserWindow, ipcMain, shell} = require('electron');
+const {app, BrowserWindow, ipcMain, shell, protocol} = require('electron');
 const path = require('path');
 const checkDependenciesService = require('./services/installer/check-dependencies.js');
 
 // Enables the remote auth window.
 const remote = require('@electron/remote/main');
 remote.initialize();
+
+// Prevent private URI scheme notifications on Windows + Linux from creating a new instance of the application
+const primaryInstance = app.requestSingleInstanceLock();
+if (!primaryInstance) {
+  app.quit();
+}
 
 if (process.defaultApp) {
   if (process.argv.length >= 2) {
@@ -74,9 +80,18 @@ function createWindow() {
   }
 }
 
+app.on('second-instance', () => {
+  // Someone tried to run a second instance, we should focus our window.
+  if (mainWindow) {
+    if (mainWindow.isMinimized()) {
+      mainWindow.restore();
+    }
+    mainWindow.focus();
+  }
+})
+
 app.on('ready', () => {
   createWindow();
-
 
   app.on('activate', () => {
     // On macOS it's common to re-create a window in the app when the
