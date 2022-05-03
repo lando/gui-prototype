@@ -7,10 +7,11 @@ const {BrowserWindow} = process.type === 'browser' ?
   require('electron') :
   require('@electron/remote');
 
+
 const AUTH0_DOMAIN = 'dev-58jbozcd.us.auth0.com';
 const AUTH0_CLIENT_ID = 'jaFOjJ2mxjUP4eDirSJjWidT1w1eFvW7';
 
-const redirectUri = `https://${AUTH0_DOMAIN}/mobile`;
+const redirectUri = 'lando:///callback';
 
 const keytarService = 'electron-openid-oauth';
 const keytarAccount = os.userInfo().username;
@@ -141,7 +142,7 @@ function createAuthWindow() {
 
   const filter = {
     urls: [
-      `https://${AUTH0_DOMAIN}/mobile*`,
+      'lando:///callback*',
     ],
   };
 

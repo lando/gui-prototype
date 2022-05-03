@@ -29,13 +29,14 @@
 
 <script setup>
 const {auth} = window;
+import {openInBrowser} from '../composables/electron-actions';
 
 // test Login
 async function login() {
   try {
     await auth.refreshTokens();
   } catch (err) {
-    auth.createAuthWindow();
+    openInBrowser(auth.getAuthenticationURL());
   }
 }
 

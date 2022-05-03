@@ -13,7 +13,7 @@ import Profile from './views/Profile.vue';
 import Updates from './views/Updates.vue';
 import Testing from './views/Testing.vue';
 import LoginReg from './views/LoginReg.vue';
-
+import Callback from './views/Callback.vue';
 
 const routes = [
   {
@@ -83,6 +83,10 @@ const routes = [
     path: '/updates',
     name: 'Updates',
     component: Updates,
+  },
+  {
+    path: '/callback',
+    component: Callback,
   },
 ];
 

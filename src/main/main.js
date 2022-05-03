@@ -6,6 +6,14 @@ const checkDependenciesService = require('./services/installer/check-dependencie
 const remote = require('@electron/remote/main');
 remote.initialize();
 
+if (process.defaultApp) {
+  if (process.argv.length >= 2) {
+    app.setAsDefaultProtocolClient('lando', process.execPath, [path.resolve(process.argv[1])]);
+  }
+} else {
+  app.setAsDefaultProtocolClient('lando');
+}
+
 // Determine whether we are in production or not
 const isProd = (process.env.NODE_ENV !== 'development');
 
@@ -55,6 +63,8 @@ function createWindow() {
   // Passes the content to the auth window as needed
   remote.enable(mainWindow.webContents);
 
+  0;
+
   if (!isProd) {
     mainWindow.loadURL('http://localhost:8080/loading.html');
     setTimeout(() => mainWindow.loadURL('http://localhost:8080'), 2000);
@@ -67,7 +77,8 @@ function createWindow() {
 app.on('ready', () => {
   createWindow();
 
-  app.on('activate', function() {
+
+  app.on('activate', () => {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
     if (BrowserWindow.getAllWindows().length === 0) {
@@ -76,7 +87,11 @@ app.on('ready', () => {
   });
 });
 
-app.on('window-all-closed', function() {
+app.on('open-url', (event, url) => {
+  console.log(`You arrived from: ${url}`);
+});
+
+app.on('window-all-closed', () => {
   app.quit();
 });
 
