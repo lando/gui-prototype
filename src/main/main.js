@@ -12,6 +12,16 @@ if (!primaryInstance) {
   app.quit();
 }
 
+app.on('second-instance', () => {
+  // Someone tried to run a second instance, we should focus our window.
+  if (mainWindow) {
+    if (mainWindow.isMinimized()) {
+      mainWindow.restore();
+    }
+    mainWindow.focus();
+  }
+});
+
 if (process.defaultApp) {
   if (process.argv.length >= 2) {
     app.setAsDefaultProtocolClient('lando', process.execPath, [path.resolve(process.argv[1])]);
@@ -69,8 +79,6 @@ function createWindow() {
   // Passes the content to the auth window as needed
   remote.enable(mainWindow.webContents);
 
-  0;
-
   if (!isProd) {
     mainWindow.loadURL('http://localhost:8080/loading.html');
     setTimeout(() => mainWindow.loadURL('http://localhost:8080'), 2000);
@@ -79,16 +87,6 @@ function createWindow() {
     setTimeout(() => mainWindow.loadFile(path.join(app.getAppPath(), 'renderer', 'index.html')), 2000);
   }
 }
-
-app.on('second-instance', () => {
-  // Someone tried to run a second instance, we should focus our window.
-  if (mainWindow) {
-    if (mainWindow.isMinimized()) {
-      mainWindow.restore();
-    }
-    mainWindow.focus();
-  }
-})
 
 app.on('ready', () => {
   createWindow();
