@@ -25,15 +25,21 @@
     </el-form-item>
     <el-form-item
       prop="firstName"
-      label="First Name"
+      label="Name"
     >
-      <el-input v-model="dynamicValidateForm.firstName" />
-    </el-form-item>
-    <el-form-item
-      prop="lastName"
-      label="Last Name"
-    >
-      <el-input v-model="dynamicValidateForm.lastName" />
+      <el-col :span="11">
+        <el-input
+          v-model="dynamicValidateForm.firstName"
+          placeholder="First Name"
+        />
+      </el-col>
+      <el-col :span="2"></el-col>
+      <el-col :span="11">
+        <el-input
+          v-model="dynamicValidateForm.lastName"
+          placeholder="Last Name"
+        />
+      </el-col>
     </el-form-item>
     <el-form-item>
       <el-button
@@ -46,7 +52,7 @@
   </el-form>
 </template>
 
-<script lang="ts" setup>
+<script setup>
 import {reactive, ref} from 'vue';
 
 const dynamicValidateForm = ref({
