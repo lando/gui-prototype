@@ -4,7 +4,7 @@ artifactName: "${name}-${arch}-v${version}.${ext}"
 detectUpdateChannel: true
 generateUpdatesFilesForAllChannels: true
 protocols:
-  name: finaldesktopapp
+  name: lando.desktop
   schemes:
     - lando
 publish:

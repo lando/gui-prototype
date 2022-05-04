@@ -6,12 +6,9 @@ const checkDependenciesService = require('./services/installer/check-dependencie
 const remote = require('@electron/remote/main');
 remote.initialize();
 
-// Prevent private URI scheme notifications on Windows + Linux from creating a new instance of the application
-const primaryInstance = app.requestSingleInstanceLock();
-if (!primaryInstance) {
-  app.quit();
-}
+let mainWindow;
 
+// Prevent private URI scheme notifications on Windows + Linux from creating a new instance of the application
 app.on('second-instance', () => {
   // Someone tried to run a second instance, we should focus our window.
   if (mainWindow) {
@@ -21,7 +18,11 @@ app.on('second-instance', () => {
     mainWindow.focus();
   }
 });
+if (!app.requestSingleInstanceLock()) {
+  app.quit();
+}
 
+// Handle custom protocol
 if (process.defaultApp) {
   if (process.argv.length >= 2) {
     app.setAsDefaultProtocolClient('lando', process.execPath, [path.resolve(process.argv[1])]);
@@ -59,7 +60,6 @@ if (!isProd) {
 autoUpdater.autoDownload = false;
 
 // Set this here
-let mainWindow;
 const dependencyStatus = checkDependenciesService.checkDependencies();
 // @todo: create function to check install status.
 const installed = true;
