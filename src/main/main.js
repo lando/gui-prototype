@@ -1,41 +1,27 @@
-const {app, BrowserWindow, ipcMain, shell, protocol} = require('electron');
+const {app, BrowserWindow, ipcMain, shell} = require('electron');
 const path = require('path');
+const {Deeplink} = require('electron-deeplink');
 const checkDependenciesService = require('./services/installer/check-dependencies.js');
+
+// Determine whether we are in production or not
+const isDev = (process.env.NODE_ENV === 'development');
 
 // Enables the remote auth window.
 const remote = require('@electron/remote/main');
 remote.initialize();
 
+// Set our mainWindow here.
 let mainWindow;
 
-// Prevent private URI scheme notifications on Windows + Linux from creating a new instance of the application
-app.on('second-instance', () => {
-  // Someone tried to run a second instance, we should focus our window.
-  if (mainWindow) {
-    if (mainWindow.isMinimized()) {
-      mainWindow.restore();
-    }
-    mainWindow.focus();
-  }
+// Deep link handler
+const protocol = 'lando';
+const deeplink = new Deeplink({ app, mainWindow, protocol, isDev, debugLogging: true });
+deeplink.on('received', (link) => {
+  mainWindow.webContents.send('received-link', link);
 });
-if (!app.requestSingleInstanceLock()) {
-  app.quit();
-}
-
-// Handle custom protocol
-if (process.defaultApp) {
-  if (process.argv.length >= 2) {
-    app.setAsDefaultProtocolClient('lando', process.execPath, [path.resolve(process.argv[1])]);
-  }
-} else {
-  app.setAsDefaultProtocolClient('lando');
-}
-
-// Determine whether we are in production or not
-const isProd = (process.env.NODE_ENV !== 'development');
 
 // Redefine the version so autoUpdater uses the correct version in development
-if (!isProd) {
+if (isDev) {
   // const version = '0.0.1';
   // @todo: uncomment above and comment below to force test the autoUpdater
   const {version} = require('./../../package.json');
@@ -50,7 +36,7 @@ const {autoUpdater} = require('electron-updater');
 
 // Change things up so debugging and developing this features doesnt make
 // us want to gouge our own eyes out
-if (!isProd) {
+if (isDev) {
   autoUpdater.logger = require('electron-log'); // eslint-disable-line
   autoUpdater.logger.transports.file.level = 'info';
   autoUpdater.updateConfigPath = path.resolve(__dirname, '..', '..', 'config', 'dev-app-update.yml');
@@ -79,7 +65,7 @@ function createWindow() {
   // Passes the content to the auth window as needed
   remote.enable(mainWindow.webContents);
 
-  if (!isProd) {
+  if (isDev) {
     mainWindow.loadURL('http://localhost:8080/loading.html');
     setTimeout(() => mainWindow.loadURL('http://localhost:8080'), 2000);
   } else {

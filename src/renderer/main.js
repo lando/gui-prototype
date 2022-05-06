@@ -21,6 +21,10 @@ const {ipcRenderer} = window;
 const store = useInstallerStore();
 import {_} from 'lodash';
 
+ipcRenderer.receive('received-link', (event, link) => {
+  console.log(link);
+});
+
 ipcRenderer.send('did-start-loading', true);
 
 ipcRenderer.receive('update-store', values => {
