@@ -21,7 +21,7 @@ const {ipcRenderer} = window;
 const store = useInstallerStore();
 import {_} from 'lodash';
 
-ipcRenderer.receive('received-link', (event, link) => {
+ipcRenderer.receive('received-link', (link) => {
   console.log(link);
 });
 

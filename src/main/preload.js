@@ -18,6 +18,7 @@ const validChannels = [
   'exit-lando',
   'open-external-browser',
   'did-start-loading',
+  'received-link',
 ];
 
 // Expose protected methods that allow the renderer process to use
@@ -28,11 +29,17 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
     if (validChannels.includes(channel)) {
       ipcRenderer.send(channel, data);
     }
+    else {
+      console.log(`${channel} not a valid channel`);
+    }
   },
   receive: (channel, func) => {
     if (validChannels.includes(channel)) {
       // Deliberately strip event as it includes `sender`
       ipcRenderer.on(channel, (event, ...args) => func(...args));
+    }
+    else {
+      console.log(`${channel} not a valid channel`);
     }
   },
 });
