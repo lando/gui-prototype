@@ -13,6 +13,16 @@ remote.initialize();
 // Set our mainWindow here.
 let mainWindow;
 
+// Addresses when the app is called twice on logout.
+app.on('second-instance', () => {
+  if (mainWindow) {
+    if (mainWindow.isMinimized()) {
+      mainWindow.restore();
+    }
+    mainWindow.focus();
+  }
+});
+
 // Deep link handler
 const protocol = 'lando';
 const deeplink = new Deeplink({app, mainWindow, protocol, isDev, debugLogging: true});
@@ -51,6 +61,11 @@ const dependencyStatus = checkDependenciesService.checkDependencies();
 const installed = true;
 
 function createWindow() {
+  // Prevents 2nd window from popping up during callback.
+  if (!app.requestSingleInstanceLock()) {
+    return;
+  }
+
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
