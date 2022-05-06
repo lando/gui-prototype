@@ -21,5 +21,6 @@ setTimeout(() => {
 <style lang="scss">
   #app-inner {
     padding-top: 2rem;
+    display: flex;
   }
 </style>
