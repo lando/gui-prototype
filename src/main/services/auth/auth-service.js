@@ -119,7 +119,7 @@ async function logout() {
 }
 
 function getLogOutUrl() {
-  return `https://${AUTH0_DOMAIN}/v2/logout`;
+  return `https://${AUTH0_DOMAIN}/v2/logout?returnTo=lando%3A%2F%2F%2Floginreg`;
 }
 
 function createAuthWindow() {

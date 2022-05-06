@@ -48,7 +48,8 @@ function register() {
 
 // test logout
 async function logout() {
-  auth.createLogoutWindow();
+  openInBrowser(auth.getLogOutUrl());
+  await auth.logout();
 }
 </script>
 
