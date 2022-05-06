@@ -33,7 +33,7 @@
           placeholder="First Name"
         />
       </el-col>
-      <el-col :span="2"></el-col>
+      <el-col :span="2" />
       <el-col :span="11">
         <el-input
           v-model="dynamicValidateForm.lastName"

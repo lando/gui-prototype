@@ -31,7 +31,7 @@
 const {auth} = window;
 import {openInBrowser} from '../composables/electron-actions';
 
-console.log()
+console.log();
 
 // test Login
 async function login() {

@@ -15,8 +15,8 @@ let mainWindow;
 
 // Deep link handler
 const protocol = 'lando';
-const deeplink = new Deeplink({ app, mainWindow, protocol, isDev, debugLogging: true });
-deeplink.on('received', (link) => {
+const deeplink = new Deeplink({app, mainWindow, protocol, isDev, debugLogging: true});
+deeplink.on('received', link => {
   mainWindow.webContents.send('received-link', link);
 });
 

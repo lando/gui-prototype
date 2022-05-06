@@ -21,16 +21,19 @@ const {ipcRenderer} = window;
 const store = useInstallerStore();
 import {_} from 'lodash';
 
-ipcRenderer.receive('received-link', (link) => {
-  console.log(link);
-});
-
 ipcRenderer.send('did-start-loading', true);
 
 ipcRenderer.receive('update-store', values => {
   _.each(values, (value, key) => {
     store[key] = value;
   });
+});
+
+// Deep link callback to push to router.
+ipcRenderer.receive('received-link', link => {
+  if (link.includes('lando://')) {
+    router.push(link.replace(/^lando?:\/\//, ''));
+  }
 });
 
 // Check dependency status on load and change.

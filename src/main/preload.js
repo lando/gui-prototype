@@ -28,8 +28,7 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
     // whitelist channels
     if (validChannels.includes(channel)) {
       ipcRenderer.send(channel, data);
-    }
-    else {
+    } else {
       console.log(`${channel} not a valid channel`);
     }
   },
@@ -37,8 +36,7 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
     if (validChannels.includes(channel)) {
       // Deliberately strip event as it includes `sender`
       ipcRenderer.on(channel, (event, ...args) => func(...args));
-    }
-    else {
+    } else {
       console.log(`${channel} not a valid channel`);
     }
   },
