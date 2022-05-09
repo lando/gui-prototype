@@ -1,23 +1,28 @@
 <template>
   <div>
-    <h1>Code</h1>
-    <small>{{ code }}</small>
+    <div v-if="error">
+      An error has occured
+    </div>
+    <Suspense>
+      <template #default>
+        <CallbackResponse />
+      </template>
+      <template #fallback>
+        Awaiting auth0...
+      </template>
+    </Suspense>
   </div>
 </template>
 
+
 <script setup>
-import {ref, onMounted} from 'vue';
-import {useRoute} from 'vue-router';
-const route = useRoute();
-const {auth} = window;
+import {ref, onErrorCaptured} from 'vue';
+import CallbackResponse from './CallbackResponse.vue';
 
-const code = ref(null);
-if (route.query !== 'undefined' && route.query.code !== 'undefined') {
-  code.value = route.query.code;
-  //await auth.loadTokens(code.value);
-}
+const error = ref();
+
+onErrorCaptured(e => {
+  error.value = e;
+  return true;
+});
 </script>
-
-<style lang="scss" scoped>
-
-</style>

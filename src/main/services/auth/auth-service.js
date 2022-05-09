@@ -74,14 +74,11 @@ async function refreshTokens() {
   }
 }
 
-async function loadTokens(callbackURL) {
-  const urlParts = url.parse(callbackURL, true);
-  const query = urlParts.query;
-
+async function loadTokens(code) {
   const exchangeOptions = {
     grant_type: 'authorization_code',
     client_id: AUTH0_CLIENT_ID,
-    code: query.code,
+    code: code,
     redirect_uri: redirectUri,
   };
 
