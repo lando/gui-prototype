@@ -19,7 +19,7 @@ const keytarAccount = os.userInfo().username;
 let accessToken = null;
 let profile = null;
 let refreshToken = null;
-let authWindow = null;
+const authWindow = null;
 
 function getAccessToken() {
   return accessToken;
@@ -119,68 +119,6 @@ function getLogOutUrl() {
   return `https://${AUTH0_DOMAIN}/v2/logout?returnTo=lando%3A%2F%2F%2Floginreg`;
 }
 
-function createAuthWindow() {
-  destroyAuthWin();
-
-  authWindow = new BrowserWindow({
-    width: 425,
-    height: 750,
-    webPreferences: {
-      nodeIntegration: false,
-      enableRemoteModule: true,
-    },
-  });
-
-  authWindow.loadURL(getAuthenticationURL());
-
-  // authWindow.setMenuBarVisibility(false);
-
-  const {session: {webRequest}} = authWindow.webContents;
-
-  const filter = {
-    urls: [
-      'lando:///callback*',
-    ],
-  };
-
-  webRequest.onBeforeRequest(filter, async ({url}) => {
-    await loadTokens(url);
-    return destroyAuthWin();
-  });
-
-  authWindow.on('authenticated', () => {
-    destroyAuthWin();
-  });
-
-  authWindow.on('closed', () => {
-    authWindow = null;
-  });
-}
-
-function destroyAuthWin() {
-  if (!authWindow) return;
-  authWindow.close();
-  authWindow = null;
-}
-
-function createLogoutWindow() {
-  const logoutWindow = new BrowserWindow({
-    width: 300,
-    height: 150,
-    webPreferences: {
-      nodeIntegration: false,
-      enableRemoteModule: true,
-    },
-  });
-
-  logoutWindow.loadURL(getLogOutUrl());
-
-  logoutWindow.on('ready-to-show', async () => {
-    logoutWindow.close();
-    await logout();
-  });
-}
-
 module.exports = {
   getAccessToken,
   getAuthenticationURL,
@@ -189,6 +127,4 @@ module.exports = {
   loadTokens,
   logout,
   refreshTokens,
-  createAuthWindow,
-  createLogoutWindow,
 };
