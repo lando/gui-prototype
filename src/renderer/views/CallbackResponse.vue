@@ -3,24 +3,26 @@
 </template>
 
 <script setup>
-import {ref, onMounted} from 'vue';
+import {onMounted} from 'vue';
 import {useRoute} from 'vue-router';
 const route = useRoute();
 const {auth} = window;
 import router from '../router.js';
 
-const code = ref(null);
 if (route.query !== 'undefined' && route.query.code !== 'undefined') {
-  code.value = route.query.code;
-  await auth.loadTokens(code.value);
+  await auth.handleRedirect();
 }
 
 onMounted(() => {
-  if (auth.getAccessToken()) {
+  // async function checkAuth() {
+  //   return await auth.isAuthenticated();
+  // }
+
+  // console.log(checkAuth())
+  if (auth.isAuthenticated()) {
     router.push('/loginreg');
   } else {
-    // @todo throw an error here.
-    console.log('hi');
+    throw new Error('Unable to get access token');
   }
 });
 </script>

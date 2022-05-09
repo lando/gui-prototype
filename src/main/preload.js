@@ -49,11 +49,8 @@ contextBridge.exposeInMainWorld('sudo', {
 
 // Export the auth processes
 contextBridge.exposeInMainWorld('auth', {
-  getAccessToken: authService.getAccessToken,
-  getAuthenticationURL: authService.getAuthenticationURL,
+  getLoginUrl: authService.getLoginUrl,
   getLogOutUrl: authService.getLogOutUrl,
-  getProfile: authService.getProfile,
-  loadTokens: authService.loadTokens,
-  logout: authService.logout,
-  refreshTokens: authService.refreshTokens,
+  handleRedirect: authService.handleRedirect,
+  isAuthenticated: authService.isAuthenticated,
 });

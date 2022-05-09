@@ -33,11 +33,8 @@ import {openInBrowser} from '../composables/electron-actions';
 
 // test Login
 async function login() {
-  try {
-    await auth.refreshTokens();
-  } catch (err) {
-    openInBrowser(auth.getAuthenticationURL());
-  }
+  const url = await auth.getLoginUrl();
+  openInBrowser(url);
 }
 
 function register() {
@@ -46,8 +43,8 @@ function register() {
 
 // test logout
 async function logout() {
-  openInBrowser(auth.getLogOutUrl());
-  await auth.logout();
+  const url = await auth.getLogOutUrl();
+  openInBrowser(url);
 }
 </script>
 
