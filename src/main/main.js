@@ -27,7 +27,6 @@ app.on('second-instance', () => {
 const protocol = 'lando';
 const deeplink = new Deeplink({app, mainWindow, protocol, isDev, debugLogging: true});
 deeplink.on('received', link => {
-  console.log(link);
   mainWindow.webContents.send('received-link', link);
 });
 
