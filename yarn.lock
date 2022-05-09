@@ -3669,21 +3669,16 @@ electron-builder@22.11.7:
     yargs "^17.0.1"
 
 electron-deeplink@^1.0.9:
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/electron-deeplink/-/electron-deeplink-1.0.9.tgz#1385fe09d2d689e52b9ea8e2833fc7d0e0107689"
-  integrity sha512-JEXf1cvVn6VHcoDnsAAPUDnwCoes0TMf0ok2kZyg32TOv2ngeAIusJ+ONbZACyH8j5lF6nJL1wjOrIiaBN9Qvw==
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/electron-deeplink/-/electron-deeplink-1.0.10.tgz#0ad827cc84f890d4f7712b38055e92fabfc2cc8b"
+  integrity sha512-kyvjPdOtPfzNfdJYymIMPsC3N+eLv0SIobx6XYVX3j5zgwQ6XKz0P9qOCBwdlK8DhY3MX6l/jhx3gKSecOyWoA==
   dependencies:
     "@types/electron" "^1.6.10"
     bindings "^1.5.0"
     electron-log "^4.2.3"
     node-addon-api "^2.0.0"
 
-electron-log@^4.2.3:
-  version "4.4.7"
-  resolved "https://registry.yarnpkg.com/electron-log/-/electron-log-4.4.7.tgz#d55b7232c019521694c3503d2109e5a49cb49dd0"
-  integrity sha512-uFZQdgevOp9Fn5lDOrJMU/bmmYxDLZitbIHJM7VXN+cpB59ZnPt1FQL4bOf/Dl2gaIMPYJEfXx38GvJma5iV6A==
-
-electron-log@^4.4.6:
+electron-log@^4.2.3, electron-log@^4.4.6:
   version "4.4.7"
   resolved "https://registry.yarnpkg.com/electron-log/-/electron-log-4.4.7.tgz#d55b7232c019521694c3503d2109e5a49cb49dd0"
   integrity sha512-uFZQdgevOp9Fn5lDOrJMU/bmmYxDLZitbIHJM7VXN+cpB59ZnPt1FQL4bOf/Dl2gaIMPYJEfXx38GvJma5iV6A==
@@ -4956,9 +4951,9 @@ globals@^13.6.0, globals@^13.9.0:
     type-fest "^0.20.2"
 
 globalthis@^1.0.1:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/globalthis/-/globalthis-1.0.2.tgz#2a235d34f4d8036219f7e34929b5de9e18166b8b"
-  integrity sha512-ZQnSFO1la8P7auIOQECnm0sSuoMeaSq0EEdXMBFF2QJO4uNcwbyhSgG3MruWNbFTqCLmxVwGOl7LZ9kASvHdeQ==
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/globalthis/-/globalthis-1.0.3.tgz#5852882a52b80dc301b0660273e1ed082f0b6ccf"
+  integrity sha512-sFdI5LyBiNTHjRd7cGPWapiHWMOXKyuBNX/cWJ3NfzrZQVa8GI/8cofCl74AOVqq9W5kNmguTIzJ/1s2gyI9wA==
   dependencies:
     define-properties "^1.1.3"
 
