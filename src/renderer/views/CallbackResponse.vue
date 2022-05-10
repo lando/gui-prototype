@@ -14,15 +14,11 @@ if (route.query !== 'undefined' && route.query.code !== 'undefined') {
 }
 
 onMounted(() => {
-  // async function checkAuth() {
-  //   return await auth.isAuthenticated();
-  // }
-
-  // console.log(checkAuth())
   if (auth.isAuthenticated()) {
+    auth.setAccessToken();
     router.push('/loginreg');
   } else {
-    throw new Error('Unable to get access token');
+    throw new Error('Is not authenticated');
   }
 });
 </script>
