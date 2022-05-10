@@ -1,5 +1,5 @@
 <template>
-  <div></div>
+  <div />
 </template>
 
 <script setup>
@@ -7,7 +7,7 @@ import {useRoute} from 'vue-router';
 const route = useRoute();
 const {auth} = window;
 import router from '../router.js';
-import {useAuthStore} from '../stores/auth.js'
+import {useAuthStore} from '../stores/auth.js';
 const store = useAuthStore();
 
 // Checks to see if the authorization_code was returned.
@@ -23,8 +23,7 @@ if (route.query !== 'undefined' && route.query.code !== 'undefined') {
   } else {
     throw new Error('Is not authenticated');
   }
-}
-else {
+} else {
   throw new Error('authorization_code not returned');
 }
 </script>

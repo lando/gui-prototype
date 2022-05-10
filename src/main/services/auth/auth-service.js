@@ -1,5 +1,5 @@
 import createAuth0Client from '@auth0/auth0-spa-js';
-import { Auth0Client } from '@auth0/auth0-spa-js';
+import {Auth0Client} from '@auth0/auth0-spa-js';
 
 const AUTH0_DOMAIN = 'dev-58jbozcd.us.auth0.com';
 const AUTH0_CLIENT_ID = 'jaFOjJ2mxjUP4eDirSJjWidT1w1eFvW7';
@@ -37,7 +37,7 @@ async function getLoginUrl() {
 async function getLogOutUrl() {
   return await auth0.buildLogoutUrl({
     client_id: AUTH0_CLIENT_ID,
-    returnTo: 'lando:///loginreg'
+    returnTo: 'lando:///loginreg',
   });
 }
 
@@ -59,4 +59,4 @@ module.exports = {
   handleRedirect,
   isAuthenticated,
   getAccessToken,
-}
+};
