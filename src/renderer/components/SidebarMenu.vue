@@ -1,8 +1,9 @@
 <template>
   <el-menu
+    v-if="!store.hideSidebar"
     default-active="/"
     class="el-menu-vertical-demo"
-    router="true"
+    :router="true"
   >
     <el-menu-item index="/">
       <img
@@ -14,12 +15,6 @@
       <el-icon><grid /></el-icon>
       <template #title>
         Plugins
-      </template>
-    </el-menu-item>
-    <el-menu-item index="2">
-      <el-icon><lock /></el-icon>
-      <template #title>
-        Secrets
       </template>
     </el-menu-item>
     <el-menu-item index="3">
@@ -73,15 +68,20 @@ import {
   Download,
   Setting,
 } from '@element-plus/icons-vue';
+import {useInstallerStore} from '../stores/installer.js';
 
+const store = useInstallerStore();
 
 const isProd = (process.env.NODE_ENV !== 'development');
 </script>
 
 <style lang="scss">
+
 .el-menu-vertical-demo:not(.el-menu--collapse) {
-  width: 200px;
+  width: 14rem;
   min-height: 400px;
+  position: initial;
+  margin-right: 2rem;
 }
 
 .el-menu {

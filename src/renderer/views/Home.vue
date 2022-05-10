@@ -33,6 +33,10 @@
 
 <script setup>
 import {ref} from 'vue';
+import {useInstallerStore} from '../stores/installer.js';
+
+const store = useInstallerStore();
+store.hideSidebar = false;
 
 // Basic online check
 const updateOnlineStatus = () => navigator.onLine ? 'online' : 'offline';

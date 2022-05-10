@@ -1,7 +1,8 @@
 {
   "env": {
     "node": true,
-    "es6": true
+    "es6": true,
+    "vue/setup-compiler-macros": true
   },
   "parser": "vue-eslint-parser",
   "parserOptions": {
@@ -27,6 +28,7 @@
     "require-jsdoc" : 0,
     "@typescript-eslint/no-var-requires": "off",
     "vue/multi-word-component-names": "off",
+    "vue/script-setup-uses-vars": "error",
     "arrow-parens": ["error",
       "as-needed"
     ],

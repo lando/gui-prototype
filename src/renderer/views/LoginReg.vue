@@ -29,14 +29,12 @@
 
 <script setup>
 const {auth} = window;
+import {openInBrowser} from '../composables/electron-actions';
 
 // test Login
 async function login() {
-  try {
-    await auth.refreshTokens();
-  } catch (err) {
-    auth.createAuthWindow();
-  }
+  const url = await auth.getLoginUrl();
+  openInBrowser(url);
 }
 
 function register() {
@@ -45,7 +43,8 @@ function register() {
 
 // test logout
 async function logout() {
-  auth.createLogoutWindow();
+  const url = await auth.getLogOutUrl();
+  openInBrowser(url);
 }
 </script>
 

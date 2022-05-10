@@ -60,6 +60,7 @@
 import {_} from 'lodash';
 import {computed} from 'vue';
 import {useRoute} from 'vue-router';
+import {openInBrowser} from '../composables/electron-actions';
 
 const route = useRoute();
 
@@ -99,10 +100,6 @@ const fetchPlugin = id => {
 const contributors = computed(() => {
   return _.join(plugin.value.contributors, ', ');
 });
-
-const openInBrowser = url => {
-  window.electron.ipcRenderer.send('open-external-browser', url);
-};
 
 </script>
 
