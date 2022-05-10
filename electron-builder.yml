@@ -3,6 +3,10 @@ productName: desktop
 artifactName: "${name}-${arch}-v${version}.${ext}"
 detectUpdateChannel: true
 generateUpdatesFilesForAllChannels: true
+protocols:
+  name: lando.desktop
+  schemes:
+    - lando
 publish:
   provider: s3
   bucket: files.lando.dev
@@ -33,6 +37,12 @@ win:
 linux:
   category: Development
   artifactName: "${name}-x64-v${version}.${ext}"
+  desktop:
+    Type: "Application"
+    Encoding: "UTF-8"
+    Name: "Lando Desktop"
+    Terminal: "false"
+    MimeType: "text/html;x-scheme-handler/lando"
   target:
     - target: deb
       arch:

@@ -29,6 +29,13 @@ ipcRenderer.receive('update-store', values => {
   });
 });
 
+// Deep link callback to push to router.
+ipcRenderer.receive('received-link', link => {
+  if (link.includes('lando://')) {
+    router.push(link.replace(/^lando?:\/\//, ''));
+  }
+});
+
 // Check dependency status on load and change.
 checkDependencies(store);
 store.$subscribe((mutation, state) => {

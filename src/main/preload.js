@@ -18,6 +18,7 @@ const validChannels = [
   'exit-lando',
   'open-external-browser',
   'did-start-loading',
+  'received-link',
 ];
 
 // Expose protected methods that allow the renderer process to use
@@ -27,12 +28,16 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
     // whitelist channels
     if (validChannels.includes(channel)) {
       ipcRenderer.send(channel, data);
+    } else {
+      console.log(`${channel} not a valid channel`);
     }
   },
   receive: (channel, func) => {
     if (validChannels.includes(channel)) {
       // Deliberately strip event as it includes `sender`
       ipcRenderer.on(channel, (event, ...args) => func(...args));
+    } else {
+      console.log(`${channel} not a valid channel`);
     }
   },
 });
@@ -44,13 +49,9 @@ contextBridge.exposeInMainWorld('sudo', {
 
 // Export the auth processes
 contextBridge.exposeInMainWorld('auth', {
-  createAuthWindow: authService.createAuthWindow,
-  createLogoutWindow: authService.createLogoutWindow,
-  getAccessToken: authService.getAccessToken,
-  getAuthenticationURL: authService.getAuthenticationURL,
+  getLoginUrl: authService.getLoginUrl,
   getLogOutUrl: authService.getLogOutUrl,
-  getProfile: authService.getProfile,
-  loadTokens: authService.loadTokens,
-  logout: authService.logout,
-  refreshTokens: authService.refreshTokens,
+  handleRedirect: authService.handleRedirect,
+  isAuthenticated: authService.isAuthenticated,
+  getAccessToken: authService.getAccessToken,
 });
