@@ -1,9 +1,6 @@
 import createAuth0Client from '@auth0/auth0-spa-js';
 import { Auth0Client } from '@auth0/auth0-spa-js';
 
-import {useAuthStore} from '../../../renderer/stores/auth.js'
-const store = useAuthStore();
-
 const AUTH0_DOMAIN = 'dev-58jbozcd.us.auth0.com';
 const AUTH0_CLIENT_ID = 'jaFOjJ2mxjUP4eDirSJjWidT1w1eFvW7';
 const REDIRECT_URI = 'lando:///callback';
@@ -35,16 +32,14 @@ if (auth0 === null) {
 }
 
 async function getLoginUrl() {
-  const url = await auth0.buildAuthorizeUrl();
-  return url;
+  return await auth0.buildAuthorizeUrl();
 }
 
 async function getLogOutUrl() {
-  const url = await auth0.buildLogoutUrl({
+  return await auth0.buildLogoutUrl({
     client_id: AUTH0_CLIENT_ID,
     returnTo: 'lando:///loginreg'
   });
-  return url;
 }
 
 async function handleRedirect() {
@@ -55,11 +50,8 @@ async function isAuthenticated() {
   return await auth0.isAuthenticated();
 }
 
-async function setAccessToken() {
-  const token = await auth0.getTokenSilently();
-  console.log(store.accessToken)
-  store.accessToken = token;
-  console.log(store.accessToken)
+async function getAccessToken() {
+  return await auth0.getTokenSilently();
 }
 
 module.exports = {
@@ -67,5 +59,5 @@ module.exports = {
   getLogOutUrl,
   handleRedirect,
   isAuthenticated,
-  setAccessToken,
+  getAccessToken,
 }

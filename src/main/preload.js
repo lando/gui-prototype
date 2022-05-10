@@ -53,5 +53,5 @@ contextBridge.exposeInMainWorld('auth', {
   getLogOutUrl: authService.getLogOutUrl,
   handleRedirect: authService.handleRedirect,
   isAuthenticated: authService.isAuthenticated,
-  setAccessToken: authService.setAccessToken,
+  getAccessToken: authService.getAccessToken,
 });
