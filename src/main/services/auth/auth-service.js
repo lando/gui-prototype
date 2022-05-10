@@ -20,12 +20,11 @@ async function auth() {
   //     throw error;
   //   }
   // }
-  // await createAuth0Client({
+  // auth0 = await createAuth0Client({
   //   domain: AUTH0_DOMAIN,
   //   client_id: AUTH0_CLIENT_ID,
   //   redirect_uri: REDIRECT_URI,
   // });
-
 }
 if (auth0 === null) {
   auth();
