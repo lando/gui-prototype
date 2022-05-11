@@ -3,6 +3,7 @@
 import {contextBridge, ipcRenderer} from 'electron';
 const sudo = require('sudo-prompt');
 const authService = require('./services/auth/auth-service');
+const authApi = require('./services/auth/auth-api');
 
 // Valid event channels
 const validChannels = [
@@ -54,4 +55,6 @@ contextBridge.exposeInMainWorld('auth', {
   handleRedirect: authService.handleRedirect,
   isAuthenticated: authService.isAuthenticated,
   getAccessToken: authService.getAccessToken,
+  getClient: authService.getClient,
+  getUser: authApi.getUser,
 });

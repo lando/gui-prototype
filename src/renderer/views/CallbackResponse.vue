@@ -19,7 +19,7 @@ if (route.query !== 'undefined' && route.query.code !== 'undefined') {
   if (authenticated) {
     const token = await auth.getAccessToken();
     store.accessToken = token;
-    router.push('/loginreg');
+    router.push('/profile');
   } else {
     throw new Error('Is not authenticated');
   }
