@@ -5,6 +5,7 @@ const AUTH0_DOMAIN = 'dev-58jbozcd.us.auth0.com';
 const AUTH0_CLIENT_ID = 'jaFOjJ2mxjUP4eDirSJjWidT1w1eFvW7';
 const REDIRECT_URI = 'lando:///callback';
 const AUDIENCE = `https://${AUTH0_DOMAIN}/api/v2/`;
+const SCOPE = 'openid profile email offline_access read:current_user update:users';
 
 let auth0 = null;
 
@@ -14,7 +15,7 @@ async function auth() {
     client_id: AUTH0_CLIENT_ID,
     redirect_uri: REDIRECT_URI,
     audience: AUDIENCE,
-    scope: 'openid profile offline_access read:current_user',
+    scope: SCOPE,
     advancedOptions: {
       defaultScope: null,
     },
@@ -56,11 +57,9 @@ async function isAuthenticated() {
 }
 
 async function getAccessToken() {
-  // const id = await auth0.getIdTokenClaims();
-  // console.log(id);
   return await auth0.getTokenSilently({
     audience: AUDIENCE,
-    scope: 'openid profile offline_access read:current_user',
+    scope: SCOPE,
     advancedOptions: {
       defaultScope: null,
     },

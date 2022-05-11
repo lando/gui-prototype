@@ -57,4 +57,5 @@ contextBridge.exposeInMainWorld('auth', {
   getAccessToken: authService.getAccessToken,
   getClient: authService.getClient,
   getUser: authApi.getUser,
+  updateUser: authApi.updateUser,
 });
