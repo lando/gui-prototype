@@ -92,12 +92,12 @@ const submitForm = async formEl => {
   await formEl.validate((valid, fields) => {
     if (valid) {
       // Fpormat data to send to main process.
-      const final = {
-        email: formValues.email,
-        firstName: formValues.firstName,
-        lastName: formValues.lastName,
-      };
-      auth.updateUser(store.accessToken, final);
+      // const final = {
+      //   email: formValues.email,
+      //   firstName: formValues.firstName,
+      //   lastName: formValues.lastName,
+      // };
+      // auth.updateUser(store.accessToken, final);
     } else {
       // @todo need to add rules and magix with this.
       console.log('error submit!', fields);
