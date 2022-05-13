@@ -1,0 +1,59 @@
+<template>
+  <div>
+    <el-row :gutter="20">
+      <el-col :span="10">
+        {{ profileValues.firstName }}
+      </el-col>
+      <el-col :span="10">
+        {{ profileValues.lastName }}
+      </el-col>
+    </el-row>
+    <el-row :gutter="20">
+      <el-col>
+        {{ profileValues.email }}
+      </el-col>
+    </el-row>
+    <el-row :gutter="20">
+      <el-col>
+        <el-button @click="updateProfile">
+          Update Profile
+        </el-button>
+      </el-col>
+    </el-row>
+  </div>
+</template>
+
+<script setup>
+import {reactive, ref} from 'vue';
+const {auth} = window;
+import {openInBrowser} from '../composables/electron-actions';
+import {useAuthStore} from '../stores/auth.js';
+const store = useAuthStore();
+
+const profileValues = reactive({
+  email: '',
+  firstName: '',
+  lastName: '',
+});
+
+// If we don't have the access token in storage, something is sad.
+if (store.accessToken === undefined || store.accessToken === null) {
+  throw new Error('No Access Token');
+}
+
+// Grab user and if it fails, then let them know.
+const user = await auth.getUser(store.accessToken);
+if (user === undefined || user === null) {
+  throw new Error('Unable to get user');
+}
+
+// Set our form values after we get the user.
+profileValues.email = user.email;
+profileValues.firstName = user.given_name;
+profileValues.lastName = user.family_name;
+
+function updateProfile() {
+  const url = 'https://lando-webapp.netlify.app/profile?data=' + user.user_id;
+  openInBrowser(url);
+}
+</script>

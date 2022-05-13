@@ -5,7 +5,7 @@
     </div>
     <Suspense>
       <template #default>
-        <ProfileForm />
+        <ProfilePage />
       </template>
       <template #fallback>
         Loading ...
@@ -17,7 +17,7 @@
 
 <script setup>
 import {ref, onErrorCaptured} from 'vue';
-import ProfileForm from './ProfileForm.vue';
+import ProfilePage from './ProfilePage.vue';
 
 const error = ref();
 

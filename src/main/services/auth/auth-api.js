@@ -36,35 +36,6 @@ async function getUser(token) {
   return response.data;
 }
 
-async function updateUser(token, data) {
-  if (token === undefined || token === null) {
-    throw new Error('No token passed to function');
-  }
-  if (data === undefined || data === null) {
-    throw new Error('No data passed to function');
-  }
-
-  const id = await getUserId();
-  const options = {
-    method: 'PATCH',
-    url: `https://${AUTH0_DOMAIN}/api/v2/users/${id}`,
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + token,
-    },
-    data: {
-      email: data.email,
-      given_name: data.firstName,
-      family_name: data.lastName,
-    },
-  };
-
-  const response = await axios(options);
-
-  console.log(response);
-}
-
 module.exports = {
   getUser,
-  updateUser,
 };
