@@ -47,8 +47,6 @@ if (user === undefined || user === null) {
   throw new Error('Unable to get user');
 }
 
-console.log(user)
-
 // Set our form values after we get the user.
 profileValues.email = user.email;
 profileValues.firstName = user.given_name;
