@@ -62,7 +62,7 @@ profileValues.firstName = user.given_name;
 profileValues.lastName = user.family_name;
 
 function updateProfile() {
-  const url = 'https://lando-webapp.netlify.app/profile?data=' + user.user_id;
+  const url = 'https://https://api.lando.dev/profile?data=' + user.user_id;
   openInBrowser(url);
 }
 </script>
