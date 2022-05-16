@@ -62,7 +62,7 @@ profileValues.firstName = user.given_name;
 profileValues.lastName = user.family_name;
 
 function updateProfile() {
-  const url = 'https://https://api.lando.dev/profile?data=' + user.user_id;
+  const url = 'https://https://app.lando.dev/profile?data=' + user.user_id;
   openInBrowser(url);
 }
 </script>
