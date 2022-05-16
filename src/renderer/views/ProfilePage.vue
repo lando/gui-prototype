@@ -1,15 +1,24 @@
 <template>
-  <div>
+  <div class="page-wrapper">
     <el-row :gutter="20">
       <el-col :span="10">
+        <p class="label">
+          First Name
+        </p>
         {{ profileValues.firstName }}
       </el-col>
       <el-col :span="10">
+        <p class="label">
+          Last Name
+        </p>
         {{ profileValues.lastName }}
       </el-col>
     </el-row>
     <el-row :gutter="20">
       <el-col>
+        <p class="label">
+          Email
+        </p>
         {{ profileValues.email }}
       </el-col>
     </el-row>
@@ -57,3 +66,12 @@ function updateProfile() {
   openInBrowser(url);
 }
 </script>
+
+<style lang="scss" scoped>
+  p {
+    &.label {
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+  }
+</style>
