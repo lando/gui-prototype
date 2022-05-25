@@ -54,7 +54,7 @@ if (store.accessToken === undefined || store.accessToken === null) {
 const user = await auth.getUser(store.accessToken);
 if (user === undefined || user === null) {
   throw new Error('Unable to get user');
-} 
+}
 
 // Set our form values after we get the user.
 profileValues.email = user.email;
