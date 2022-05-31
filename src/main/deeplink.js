@@ -1,7 +1,6 @@
 import path from 'path';
 import fs from 'fs';
 import os from 'os';
-import {App, BrowserWindow} from 'electron';
 import {EventEmitter} from 'events';
 import process from 'node:process';
 
@@ -47,7 +46,7 @@ class Deeplink extends EventEmitter {
     app.on('second-instance', this.#secondInstanceEvent);
   }
 
-  #checkConfig = (config) => {
+  #checkConfig = config => {
     const expectedKeys = ['app', 'mainWindow', 'protocol'];
     const configKeys = Object.keys(config);
 
@@ -58,7 +57,7 @@ class Deeplink extends EventEmitter {
     if (missingKeys.length > 0) {
       throw new Error(`electron-deeplink: missing config attributes: ${missingKeys.join(', ')}`);
     }
-  }
+  };
 
   #secondInstanceEvent = (event, argv) =>{
     const {debugLogging} = this.config;
@@ -81,7 +80,7 @@ class Deeplink extends EventEmitter {
       }
       this.mainWindow.focus();
     }
-  }
+  };
 
   #darwinOpenEvent = (event, url, eventName) => {
     event.preventDefault();
@@ -92,7 +91,7 @@ class Deeplink extends EventEmitter {
     }
 
     this.emit('received', url);
-  }
+  };
 
   restoreInfoPlist = () => {
     const {debugLogging, isDev} = this.config;

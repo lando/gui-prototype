@@ -5,7 +5,7 @@ import path from 'path';
 /**
  * https://vitejs.dev/config
  */
-export default defineConfig(({command, mode}) => {
+export default defineConfig(() => {
   return {
     root: path.join(__dirname, 'src', 'renderer'),
     publicDir: 'public',
