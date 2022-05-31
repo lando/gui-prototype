@@ -47,7 +47,7 @@ class Deeplink extends EventEmitter {
     app.on('second-instance', this.#secondInstanceEvent);
   }
 
-  #checkConfig(config) {
+  #checkConfig = (config) => {
     const expectedKeys = ['app', 'mainWindow', 'protocol'];
     const configKeys = Object.keys(config);
 
@@ -60,7 +60,7 @@ class Deeplink extends EventEmitter {
     }
   }
 
-  #secondInstanceEvent(event, argv) {
+  #secondInstanceEvent = (event, argv) =>{
     const {debugLogging} = this.config;
     if (os.platform() === 'darwin' && debugLogging) {
       this.logger.error(
@@ -83,7 +83,7 @@ class Deeplink extends EventEmitter {
     }
   }
 
-  #darwinOpenEvent(event, url, eventName) {
+  #darwinOpenEvent = (event, url, eventName) => {
     event.preventDefault();
     const {debugLogging} = this.config;
 
