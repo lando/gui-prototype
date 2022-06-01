@@ -1,4 +1,4 @@
-import {_} from 'lodash';
+const {_} = require('lodash');
 const os = require('os');
 
 function checkDependencies() {

@@ -1,6 +1,6 @@
 const {app, BrowserWindow, ipcMain, shell} = require('electron');
 const path = require('path');
-const {Deeplink} = require('electron-deeplink');
+const {Deeplink} = require('./deeplink');
 const checkDependenciesService = require('./services/installer/check-dependencies.js');
 
 // Determine whether we are in production or not
