@@ -3,9 +3,9 @@ process.env.NODE_ENV = 'production';
 const Path = require('path');
 const Chalk = require('chalk');
 const FileSystem = require('fs');
-const compileTs = require('./private/tsc');
+const copyMain = require('./private/copy');
 
-function buildRenderer() {
+async function buildRenderer() {
   const Vite = require('vite');
 
   return Vite.build({
@@ -14,9 +14,8 @@ function buildRenderer() {
   });
 }
 
-function buildMain() {
-  const mainPath = Path.join(__dirname, '..', 'src', 'main');
-  return compileTs(mainPath);
+async function buildMain() {
+  await copyMain();
 }
 
 FileSystem.rmSync(Path.join(__dirname, '..', 'build'), {
@@ -26,9 +25,10 @@ FileSystem.rmSync(Path.join(__dirname, '..', 'build'), {
 
 console.log(Chalk.blueBright('Transpiling renderer & main...'));
 
-Promise.allSettled([
-  buildRenderer(),
-  buildMain(),
-]).then(() => {
+async function start() {
+  buildRenderer();
+  buildMain();
   console.log(Chalk.greenBright('Renderer & main successfully transpiled! (ready to be built with electron-builder)'));
-});
+}
+
+start();

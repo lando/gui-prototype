@@ -1,9 +1,7 @@
-import authService from './auth-service.js';
+const authService = require('./auth-service.js');
 const axios = require('axios');
 
 const AUTH0_DOMAIN = 'dev-58jbozcd.us.auth0.com';
-const AUTH0_CLIENT_ID = 'jaFOjJ2mxjUP4eDirSJjWidT1w1eFvW7';
-const REDIRECT_URI = 'lando:///callback';
 
 let auth0 = null;
 

@@ -1,6 +1,6 @@
 // Loads the ipcRenderer per:
 // https://nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration
-import {contextBridge, ipcRenderer} from 'electron';
+const {contextBridge, ipcRenderer} = require('electron');
 const sudo = require('sudo-prompt');
 const authService = require('./services/auth/auth-service');
 const authApi = require('./services/auth/auth-api');

@@ -28,7 +28,7 @@ jobs:
         os:
           - windows-2019
         node-version:
-          - '14'
+          - '16'
         flavor:
           - exe
         arch:

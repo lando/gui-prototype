@@ -1,14 +1,14 @@
-import path from 'path';
-import fs from 'fs';
-import os from 'os';
-import {EventEmitter} from 'events';
-import process from 'node:process';
+const path = require('path');
+const fs = require('fs');
+const os = require('os');
+const {EventEmitter} = require('events');
+const process = require('node:process');
 
 class Deeplink extends EventEmitter {
   constructor(config) {
     super();
     const {app, mainWindow, protocol, isDev = false, debugLogging = false, electronPath = '/node_modules/electron/dist/Electron.app'} = config;
-    this.#checkConfig(config);
+    this.checkConfig(config);
 
     this.config = {protocol, debugLogging, isDev, electronPath};
     this.app = app;
@@ -34,8 +34,8 @@ class Deeplink extends EventEmitter {
       app.setAsDefaultProtocolClient(protocol);
 
       app.on('will-finish-launching', () => {
-        app.on('open-url', (event, url) => this.#darwinOpenEvent(event, url, 'open-url'));
-        app.on('open-file', (event, url) => this.#darwinOpenEvent(event, url, 'open-file'));
+        app.on('open-url', (event, url) => this.darwinOpenEvent(event, url, 'open-url'));
+        app.on('open-file', (event, url) => this.darwinOpenEvent(event, url, 'open-file'));
       });
     } else {
       const args = process.argv[1] ? [path.resolve(process.argv[1])] : [];
@@ -43,10 +43,10 @@ class Deeplink extends EventEmitter {
       app.setAsDefaultProtocolClient(protocol, process.execPath, args);
     }
 
-    app.on('second-instance', this.#secondInstanceEvent);
+    app.on('second-instance', (event, argv) => this.secondInstanceEvent(event, argv));
   }
 
-  #checkConfig = config => {
+  checkConfig(config) {
     const expectedKeys = ['app', 'mainWindow', 'protocol'];
     const configKeys = Object.keys(config);
 
@@ -57,9 +57,9 @@ class Deeplink extends EventEmitter {
     if (missingKeys.length > 0) {
       throw new Error(`electron-deeplink: missing config attributes: ${missingKeys.join(', ')}`);
     }
-  };
+  }
 
-  #secondInstanceEvent = (event, argv) =>{
+  secondInstanceEvent(event, argv) {
     const {debugLogging} = this.config;
     if (os.platform() === 'darwin' && debugLogging) {
       this.logger.error(
@@ -80,9 +80,9 @@ class Deeplink extends EventEmitter {
       }
       this.mainWindow.focus();
     }
-  };
+  }
 
-  #darwinOpenEvent = (event, url, eventName) => {
+  darwinOpenEvent(event, url, eventName) {
     event.preventDefault();
     const {debugLogging} = this.config;
 
@@ -91,9 +91,9 @@ class Deeplink extends EventEmitter {
     }
 
     this.emit('received', url);
-  };
+  }
 
-  restoreInfoPlist = () => {
+  restoreInfoPlist() {
     const {debugLogging, isDev} = this.config;
 
     if (!isDev || os.platform() !== 'darwin') {
@@ -109,12 +109,14 @@ class Deeplink extends EventEmitter {
 
       fs.writeFileSync(this.infoPlistFile, infoPlist);
     }
-  };
+  }
 
-  getProtocol = () => this.config.protocol;
-  getLogfile = () => {
+  getProtocol() {
+    return this.config.protocol;
+  }
+  getLogfile() {
     return this.logger ? this.logger.transports.file.getFile().path : 'debugLogging is disabled';
-  };
+  }
 }
 
-export {Deeplink};
+module.exports.Deeplink = Deeplink;

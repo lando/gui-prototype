@@ -2,4 +2,3 @@ dist
 build
 node_modules
 .eslintrc.js
-/src/renderer/**/*.ts

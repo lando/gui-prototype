@@ -1,5 +1,4 @@
-import createAuth0Client from '@auth0/auth0-spa-js';
-import {Auth0Client} from '@auth0/auth0-spa-js';
+const {Auth0Client} = require('@auth0/auth0-spa-js');
 
 const AUTH0_DOMAIN = 'dev-58jbozcd.us.auth0.com';
 const AUTH0_CLIENT_ID = 'jaFOjJ2mxjUP4eDirSJjWidT1w1eFvW7';
@@ -20,18 +19,6 @@ async function auth() {
       defaultScope: null,
     },
   });
-  // try {
-  //   await auth0.getTokenSilently();
-  // } catch (error) {
-  //   if (error.error !== 'login_required') {
-  //     throw error;
-  //   }
-  // }
-  // auth0 = await createAuth0Client({
-  //   domain: AUTH0_DOMAIN,
-  //   client_id: AUTH0_CLIENT_ID,
-  //   redirect_uri: REDIRECT_URI,
-  // });
 }
 if (auth0 === null) {
   auth();
