@@ -43,7 +43,7 @@ class Deeplink extends EventEmitter {
       app.setAsDefaultProtocolClient(protocol, process.execPath, args);
     }
 
-    app.on('second-instance', this.secondInstanceEvent);
+    app.on('second-instance', (event, argv) => this.secondInstanceEvent(event, argv));
   }
 
   checkConfig(config) {
