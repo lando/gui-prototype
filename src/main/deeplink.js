@@ -57,7 +57,7 @@ class Deeplink extends EventEmitter {
     if (missingKeys.length > 0) {
       throw new Error(`electron-deeplink: missing config attributes: ${missingKeys.join(', ')}`);
     }
-  };
+  }
 
   secondInstanceEvent(event, argv) {
     const {debugLogging} = this.config;
@@ -80,7 +80,7 @@ class Deeplink extends EventEmitter {
       }
       this.mainWindow.focus();
     }
-  };
+  }
 
   darwinOpenEvent(event, url, eventName) {
     event.preventDefault();
@@ -91,7 +91,7 @@ class Deeplink extends EventEmitter {
     }
 
     this.emit('received', url);
-  };
+  }
 
   restoreInfoPlist() {
     const {debugLogging, isDev} = this.config;
@@ -109,14 +109,14 @@ class Deeplink extends EventEmitter {
 
       fs.writeFileSync(this.infoPlistFile, infoPlist);
     }
-  };
+  }
 
   getProtocol() {
     return this.config.protocol;
-  };
+  }
   getLogfile() {
     return this.logger ? this.logger.transports.file.getFile().path : 'debugLogging is disabled';
-  };
+  }
 }
 
 module.exports.Deeplink = Deeplink;

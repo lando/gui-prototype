@@ -6,8 +6,7 @@ const Path = require('path');
 const Chalk = require('chalk');
 const Chokidar = require('chokidar');
 const Electron = require('electron');
-const compileTs = require('./private/tsc');
-const FileSystem = require('fs');
+const copyMain = require('./private/copy');
 
 let electronProcess = null;
 let rendererPort = 0;
@@ -20,28 +19,19 @@ async function startRenderer() {
   return server.listen();
 }
 
-function copyMain() {
-  FileSystem.cpSync(
-      Path.join(__dirname, '..', 'src', 'main'),
-      Path.join(__dirname, '..', 'build', 'main'),
-      {
-        recursive: true,
-      },
-  );
-}
 
 async function startElectron() {
   if (electronProcess) { // single instance lock
     return;
   }
 
-  // try {
-  //   await compileTs(Path.join(__dirname, '..', 'src', 'main'));
-  // } catch {
-  //   console.log(Chalk.redBright('Could not start Electron because of the above typescript error(s).'));
+  try {
+    await copyMain();
+  } catch {
+    console.log(Chalk.redBright('Could not start Electron because of the following errors.'));
 
-  //   return;
-  // }
+    return;
+  }
 
   const args = [
     Path.join(__dirname, '..', 'build', 'main', 'main.js'),
@@ -75,7 +65,6 @@ async function start() {
   const devServer = await startRenderer();
   rendererPort = devServer.config.server.port;
 
-  copyMain();
   startElectron();
 
   Chokidar.watch(Path.join(__dirname, '..', 'src', 'main')).on('change', () => {
