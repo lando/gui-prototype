@@ -32,7 +32,7 @@ jobs:
         os:
           - macos-10.15
         node-version:
-          - '14'
+          - '16'
         flavor:
           - dmg
 
