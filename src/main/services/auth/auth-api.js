@@ -1,4 +1,4 @@
-import authService from './auth-service.js';
+const authService = require('./auth-service.js');
 const axios = require('axios');
 
 const AUTH0_DOMAIN = 'dev-58jbozcd.us.auth0.com';

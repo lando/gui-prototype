@@ -17,6 +17,9 @@
     "email": "sales@lando.dev",
     "url": "https://github.com/lando"
   },
+  "engines": {
+    "node": ">=16.7.0"
+  },
   "devDependencies": {
     "@babel/eslint-parser": "^7.17.0",
     "@typescript-eslint/eslint-plugin": "^5.15.0",
