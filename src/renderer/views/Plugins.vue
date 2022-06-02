@@ -1,24 +1,66 @@
 <template>
   <div class="plugins">
     <h1>Plugins</h1>
-    <el-row
-      v-for="(row, index) in rows"
-      :key="index"
+    <el-tabs
+      v-model="activeName"
+      class="plugin-tabs"
+      @tab-click="handleClick"
     >
-      <el-col
-        v-for="plugin in row"
-        :key="plugin.name"
-        :span="12"
-        class="plugin"
-        @click="goToPlugin(plugin)"
+      <el-tab-pane
+        label="Installed"
+        name="first"
       >
-        <img :src="plugin.image">
-        <h3>{{ plugin.name }}</h3>
-        <div class="plugin-last-updated">
-          Last Updated: {{ plugin.lastUpdated }}
-        </div>
-      </el-col>
-    </el-row>
+        <el-row
+          v-for="(row, index) in installedRows"
+          :key="index"
+        >
+          <el-col
+            v-for="plugin in row"
+            :key="plugin.name"
+            :span="12"
+            class="plugin"
+            @click="goToPlugin(plugin)"
+          >
+            <img :src="plugin.image">
+            <h3>{{ plugin.name }}</h3>
+            <div class="plugin-last-updated">
+              Last Updated: {{ plugin.lastUpdated }}
+            </div>
+          </el-col>
+        </el-row>
+      </el-tab-pane>
+      <el-tab-pane
+        label="Marketplace"
+        name="second"
+      >
+        <el-autocomplete
+          v-model="state2"
+          :fetch-suggestions="querySearch"
+          :trigger-on-focus="false"
+          clearable
+          class="inline-input w-50"
+          placeholder="Please Input"
+        />
+        <el-row
+            v-for="(row, index) in availableRows"
+            :key="index"
+          >
+          <el-col
+            v-for="plugin in row"
+            :key="plugin.name"
+            :span="12"
+            class="plugin"
+            @click="goToPlugin(plugin)"
+          >
+            <img :src="plugin.image">
+            <h3>{{ plugin.name }}</h3>
+            <div class="plugin-last-updated">
+              Last Updated: {{ plugin.lastUpdated }}
+            </div>
+          </el-col>
+        </el-row>
+      </el-tab-pane>
+    </el-tabs>
   </div>
 </template>
 
@@ -27,51 +69,8 @@ import {ref, computed} from 'vue';
 import {_} from 'lodash';
 import router from '../router.js';
 
-const plugins = ref([
-  {
-    // MVP plugin.yml
-    name: 'PHP',
-    image: 'https://www.php.net/images/logos/new-php-logo.svg',
-    description: '##THIS IS MARKDOWN. PHP is a popular scripting language that is especially suited for web development. It is often served by either apache or nginx. You can easily add it to your Lando app by adding an entry to the services top-level config in your Landofile.',
-    releaseNotesUrl: 'https://URL/to/CHANGELOG.yml',
-    // MVP package.json
-    installedVersion: '0.5.2',
-    repositoryUrl: 'https://github.com/lando/php',
-    teaser: 'Runs PHP for your web applications.',
-    author: 'Lando System, Inc.',
-    contributors: [],
-    // MVP Local User Data
-    lastUpdated: '2022-01-23T18:25:43.511Z',
-    // MVP Remote Sources (NPM)
-    newestVersion: '0.5.2',
-    // Future
-    githubStars: 304, // Ability to start the project from dashboard? Auth-ed with GitHub?
-    totalInstalls: 20303, // Get from NPM?
-    sponsors: [],
-    tags: ['Services', 'PHP'],
-  },
-  {
-    // MVP plugin.yml
-    name: 'PHP',
-    image: 'https://www.php.net/images/logos/new-php-logo.svg',
-    description: '##THIS IS MARKDOWN. PHP is a popular scripting language that is especially suited for web development. It is often served by either apache or nginx. You can easily add it to your Lando app by adding an entry to the services top-level config in your Landofile.',
-    releaseNotesUrl: 'https://URL/to/CHANGELOG.yml',
-    // MVP package.json
-    installedVersion: '0.5.2',
-    repositoryUrl: 'https://github.com/lando/php',
-    teaser: 'Runs PHP for your web applications.',
-    author: 'Lando System, Inc.',
-    contributors: [],
-    // MVP Local User Data
-    lastUpdated: '2022-01-23T18:25:43.511Z',
-    // MVP Remote Sources (NPM)
-    newestVersion: '0.5.2',
-    // Future
-    githubStars: 304, // Ability to start the project from dashboard? Auth-ed with GitHub?
-    totalInstalls: 20303, // Get from NPM?
-    sponsors: [],
-    tags: ['Services', 'PHP'],
-  },
+const activeName = ref('first');
+const installedPlugins = ref([
   {
     // MVP plugin.yml
     name: 'PHP',
@@ -96,10 +95,96 @@ const plugins = ref([
   },
 ]);
 
+const availablePlugins = ref([
+  {
+    // MVP plugin.yml
+    name: 'PHP',
+    image: 'https://www.php.net/images/logos/new-php-logo.svg',
+    description: '##THIS IS MARKDOWN. PHP is a popular scripting language that is especially suited for web development. It is often served by either apache or nginx. You can easily add it to your Lando app by adding an entry to the services top-level config in your Landofile.',
+    releaseNotesUrl: 'https://URL/to/CHANGELOG.yml',
+    // MVP package.json
+    installedVersion: '0.5.2',
+    repositoryUrl: 'https://github.com/lando/php',
+    teaser: 'Runs PHP for your web applications.',
+    author: 'Lando System, Inc.',
+    contributors: [],
+    // MVP Local User Data
+    lastUpdated: '2022-01-23T18:25:43.511Z',
+    // MVP Remote Sources (NPM)
+    newestVersion: '0.5.2',
+    // Future
+    githubStars: 304, // Ability to start the project from dashboard? Auth-ed with GitHub?
+    totalInstalls: 20303, // Get from NPM?
+    sponsors: [],
+    tags: ['Services', 'PHP'],
+  },
+  {
+    // MVP plugin.yml
+    name: 'Apache',
+    image: 'https://www.apache.org/logos/res/httpd/default.png',
+    description: '##THIS IS MARKDOWN. PHP is a popular scripting language that is especially suited for web development. It is often served by either apache or nginx. You can easily add it to your Lando app by adding an entry to the services top-level config in your Landofile.',
+    releaseNotesUrl: 'https://URL/to/CHANGELOG.yml',
+    // MVP package.json
+    installedVersion: '0.5.2',
+    repositoryUrl: 'https://github.com/lando/php',
+    teaser: 'Runs PHP for your web applications.',
+    author: 'Lando System, Inc.',
+    contributors: [],
+    // MVP Local User Data
+    lastUpdated: '2022-01-23T18:25:43.511Z',
+    // MVP Remote Sources (NPM)
+    newestVersion: '0.5.2',
+    // Future
+    githubStars: 304, // Ability to start the project from dashboard? Auth-ed with GitHub?
+    totalInstalls: 20303, // Get from NPM?
+    sponsors: [],
+    tags: ['Services', 'PHP'],
+  },
+  {
+    // MVP plugin.yml
+    name: 'Drupal',
+    image: 'https://www.drupal.org/files/drupal-wordmark.png',
+    description: '##THIS IS MARKDOWN. PHP is a popular scripting language that is especially suited for web development. It is often served by either apache or nginx. You can easily add it to your Lando app by adding an entry to the services top-level config in your Landofile.',
+    releaseNotesUrl: 'https://URL/to/CHANGELOG.yml',
+    // MVP package.json
+    installedVersion: '0.5.2',
+    repositoryUrl: 'https://github.com/lando/php',
+    teaser: 'Runs PHP for your web applications.',
+    author: 'Lando System, Inc.',
+    contributors: [],
+    // MVP Local User Data
+    lastUpdated: '2022-01-23T18:25:43.511Z',
+    // MVP Remote Sources (NPM)
+    newestVersion: '0.5.2',
+    // Future
+    githubStars: 304, // Ability to start the project from dashboard? Auth-ed with GitHub?
+    totalInstalls: 20303, // Get from NPM?
+    sponsors: [],
+    tags: ['Services', 'PHP'],
+  },
+]);
+
 // Chunk plugins into rows.
-const rows = computed(() => {
-  return _.chunk(plugins.value, 2);
+const availableRows = computed(() => {
+  return _.chunk(availablePlugins.value, 2);
 });
+const installedRows = computed(() => {
+  return _.chunk(installedPlugins.value, 2);
+});
+
+const querySearch = (queryString) => {
+  console.log(queryString);
+  const results = queryString
+    ? availablePlugins.value.filter((plugin) => plugin.name.toLowerCase().indexOf(queryString.toLowerCase()) === 0)
+    : availablePlugins.value;
+  console.log(results);
+  // call callback function to return suggestions
+  updatePluginList(results);
+}
+
+const updatePluginList = (results) => {
+
+}
 
 const goToPlugin = plugin => {
   const url = '/plugins/' + _.camelCase(plugin.name);
