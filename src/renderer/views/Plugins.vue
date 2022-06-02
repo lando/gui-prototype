@@ -17,7 +17,6 @@
           <el-col
             v-for="plugin in row"
             :key="plugin.name"
-            :span="12"
             class="plugin"
             @click="goToPlugin(plugin)"
           >
@@ -45,11 +44,13 @@
           <el-col
             v-for="plugin in row"
             :key="plugin.name"
-            :span="12"
             class="plugin"
             @click="goToPlugin(plugin)"
           >
-            <img :src="plugin.image">
+            <el-row>
+              <img :src="plugin.image">
+              <el-button>Install</el-button>
+            </el-row>
             <h3>{{ plugin.name }}</h3>
             <div class="plugin-last-updated">
               Last Updated: {{ plugin.lastUpdated }}
@@ -196,13 +197,20 @@ const goToPlugin = plugin => {
 </script>
 
 <style lang="scss" scoped>
+.plugins {
+  width: 100%;
+  max-width: 1000px;
+  margin-right: 2rem;
+  .el-input {
+    max-width: 20rem;
+  }
   .plugin {
     font-size: 1rem;
     border: 1px solid var(--el-border-color);
     border-radius: 10px;
     padding: 1rem;
     margin: 1rem 1rem 0 0;
-    max-width: calc(50% - 2rem);
+    max-width: 300px;
     cursor: pointer;
     img {
       width: 100px;
@@ -214,5 +222,13 @@ const goToPlugin = plugin => {
     .plugin-last-updated {
       font-size: .8rem;
     }
+    .el-row {
+      gap: 3rem;
+      align-items: center;
+    }
   }
+  .el-tab-pane {
+    min-width: 500px;
+  }
+}
 </style>
