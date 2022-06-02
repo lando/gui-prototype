@@ -33,13 +33,10 @@
         label="Marketplace"
         name="second"
       >
-        <el-autocomplete
-          v-model="state2"
-          :fetch-suggestions="querySearch"
-          :trigger-on-focus="false"
-          clearable
-          class="inline-input w-50"
-          placeholder="Please Input"
+        <el-input
+          v-model="marketsearch"
+          v-on:input="querySearch"
+          placeholder="Search"
         />
         <el-row
             v-for="(row, index) in availableRows"
@@ -70,6 +67,7 @@ import {_} from 'lodash';
 import router from '../router.js';
 
 const activeName = ref('first');
+const marketsearch = ref('');
 const installedPlugins = ref([
   {
     // MVP plugin.yml
@@ -163,10 +161,15 @@ const availablePlugins = ref([
     tags: ['Services', 'PHP'],
   },
 ]);
+const filteredPlugins = ref([]);
 
 // Chunk plugins into rows.
 const availableRows = computed(() => {
-  return _.chunk(availablePlugins.value, 2);
+  if (filteredPlugins.value.length > 0) {
+    return _.chunk(filteredPlugins.value, 2);
+  } else {
+    return _.chunk(availablePlugins.value, 2);
+  }
 });
 const installedRows = computed(() => {
   return _.chunk(installedPlugins.value, 2);
@@ -177,9 +180,8 @@ const querySearch = (queryString) => {
   const results = queryString
     ? availablePlugins.value.filter((plugin) => plugin.name.toLowerCase().indexOf(queryString.toLowerCase()) === 0)
     : availablePlugins.value;
-  console.log(results);
   // call callback function to return suggestions
-  updatePluginList(results);
+  filteredPlugins.value = results;
 }
 
 const updatePluginList = (results) => {
