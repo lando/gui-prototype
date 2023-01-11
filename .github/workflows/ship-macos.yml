@@ -123,7 +123,7 @@ jobs:
           if [ ! -z "$SOURCE_TAG" ]; then cp -f "dist/@lando/desktop-$SOURCE_TAG.${{ matrix.flavor }}" "releases/lando-desktop-$SOURCE_TAG.${{ matrix.flavor }}"; fi
           # Latest stable release
           if [ ! -z "$SOURCE_TAG" ]; then cp -f "dist/@lando/desktop-$SOURCE_TAG.${{ matrix.flavor }}" "releases/lando-desktop-stable.${{ matrix.flavor }}"; fi
-          
+
           # Print what we end up with
           ls -lsa releases
 
@@ -136,9 +136,9 @@ jobs:
           aws-region: us-east-1
       - name: Upload releases to S3
         run: |
-          aws s3 sync releases s3://files.lando.dev/desktop --acl public-read
+          aws s3 sync releases s3://files.lando.dev/desktop
           # Below is for backwards compatibility
-          aws s3 sync releases s3://files.lando.dev --acl public-read
+          aws s3 sync releases s3://files.lando.dev
 
       # Upload releases to GitHub Releases
       - name: Upload releases to GitHub Releases
